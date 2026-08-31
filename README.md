@@ -61,10 +61,8 @@ Run pytest:
 uv run pytest -q
 ```
 
-## Future work
+## Backlog
 
-- Improve schema context: provide relevant tables, foreign-key relationships, column descriptions, and representative values.
-- Add deterministic SQL validation: enforce read-only single-statement queries with timeouts and result limits before execution.
-- Add execution-guided repair: revise invalid or unhelpful queries using database errors and bounded retry attempts.
-- Add structured query planning: identify tables, joins, filters, and aggregations before generating SQL.
-- Build an evaluation harness: measure execution accuracy, SQL validity, answer correctness, retries, latency, and cost across categorized questions.
+- Build openevals harness: trajectory, outcome, SQL validity, and run metrics
+- Improve workflow: (1) better schema context, (2) deterministic SQL validation, (3) structured query planning
+- Compare deterministic workflow vs. ReAct style loop
