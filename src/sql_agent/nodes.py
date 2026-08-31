@@ -16,8 +16,7 @@ def list_tables(state: MessagesState):
     }
     tool_call_message = AIMessage(content="", tool_calls=[tool_call])
     tool_message = tools.sql_db_list_tables.invoke(tool_call)
-    response = AIMessage(f"Available tables: {tool_message.content}")
-    return {"messages": [tool_call_message, tool_message, response]}
+    return {"messages": [tool_call_message, tool_message]}
 
 
 def make_get_schema_node(model):
@@ -41,7 +40,9 @@ examples in the database. Never query for all the columns from a specific table,
 only ask for the relevant columns given the question.
 
 DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.
-""".format(dialect="sqlite", top_k=5)
+""".format(
+    dialect="sqlite", top_k=5
+)
 
 
 def make_generate_query_node(model):
@@ -72,7 +73,9 @@ Double check the {dialect} query for common mistakes, including:
 If there are any of the above mistakes, rewrite the query. If there are no mistakes,
 just reproduce the original query.
 You will call the appropriate tool to execute the query after running this check.
-""".format(dialect="sqlite")
+""".format(
+    dialect="sqlite"
+)
 
 
 def make_check_query_node(model):
