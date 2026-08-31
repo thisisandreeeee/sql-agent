@@ -18,7 +18,7 @@ class ToolCall(BaseModel):
     args: dict[str, Any] = Field(default_factory=dict)
 
 
-class EvaluationMetrics(BaseModel):
+class RunMetrics(BaseModel):
     latency_sec: float
     sql_attempt_count: int
     retry_count: int
@@ -36,7 +36,7 @@ class EvaluationResult(BaseModel):
     answer: str | None = None
     sql_attempts: list[SqlAttempt] = Field(default_factory=list)
     tool_trace: list[ToolCall] = Field(default_factory=list)
-    metrics: EvaluationMetrics
+    run_metrics: RunMetrics
     error: EvaluationError | None = None
 
 
@@ -93,7 +93,7 @@ def structured_result(
         answer=answer,
         sql_attempts=sql_attempts,
         tool_trace=tool_trace,
-        metrics=EvaluationMetrics(
+        run_metrics=RunMetrics(
             latency_sec=round(latency_sec, 3),
             sql_attempt_count=len(sql_attempts),
             retry_count=max(len(sql_attempts) - 1, 0),
@@ -108,7 +108,7 @@ def error_result(
     return EvaluationResult(
         status="error",
         question=question,
-        metrics=EvaluationMetrics(
+        run_metrics=RunMetrics(
             latency_sec=round(latency_sec, 3),
             sql_attempt_count=0,
             retry_count=0,

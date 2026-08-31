@@ -34,8 +34,8 @@ class StructuredResultTests(unittest.TestCase):
         self.assertEqual(result.answer, "The answer is 1.")
         self.assertEqual(result.sql_attempts[0].query, "SELECT 1")
         self.assertTrue(result.sql_attempts[0].succeeded)
-        self.assertEqual(result.metrics.retry_count, 0)
-        self.assertEqual(result.metrics.latency_sec, 1.235)
+        self.assertEqual(result.run_metrics.retry_count, 0)
+        self.assertEqual(result.run_metrics.latency_sec, 1.235)
         self.assertEqual(result.model_dump()["schema_version"], "1")
 
 
