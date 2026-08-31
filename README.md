@@ -53,6 +53,14 @@ and has SHA-256:
 fb6dad97c0a4da22f01bdf817a77fe8f6b6559554661ff0120b40cb81b8c3b68
 ```
 
+## Unit tests
+
+Run pytest:
+
+```bash
+uv run pytest -q
+```
+
 ## Future work
 
 - Improve schema context: provide relevant tables, foreign-key relationships, column descriptions, and representative values.
