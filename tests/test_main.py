@@ -24,11 +24,20 @@ class StructuredResultTests(unittest.TestCase):
                     content="[(1,)]",
                     tool_calls=[],
                 ),
-                SimpleNamespace(type="ai", tool_calls=[], content="The answer is 1."),
+                SimpleNamespace(
+                    type="ai",
+                    tool_calls=[],
+                    content="The answer is 1.",
+                    usage_metadata={
+                        "input_tokens": 10,
+                        "output_tokens": 4,
+                        "total_tokens": 14,
+                    },
+                ),
             ]
         }
 
-        result = structured_result("How many?", state, 1.23456)
+        result = structured_result("How many?", state, 1.23456, model_time_sec=0.25)
 
         self.assertEqual(result.status, "success")
         self.assertEqual(result.answer, "The answer is 1.")
@@ -36,6 +45,10 @@ class StructuredResultTests(unittest.TestCase):
         self.assertTrue(result.sql_attempts[0].succeeded)
         self.assertEqual(result.run_metrics.retry_count, 0)
         self.assertEqual(result.run_metrics.latency_sec, 1.235)
+        self.assertEqual(result.run_metrics.input_tokens, 10)
+        self.assertEqual(result.run_metrics.output_tokens, 4)
+        self.assertEqual(result.run_metrics.total_tokens, 14)
+        self.assertEqual(result.run_metrics.output_tokens_per_sec, 16.0)
         self.assertEqual(result.model_dump()["schema_version"], "1")
 
 

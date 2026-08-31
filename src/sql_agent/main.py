@@ -8,7 +8,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 
-from .evaluation import error_result, structured_result
+from .evaluation import ModelTimingCallback, error_result, structured_result
 from .graph import build_graph
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -40,19 +40,29 @@ def main() -> int:
     args = parser.parse_args()
 
     started_at = time.perf_counter()
+    model_timing = ModelTimingCallback()
     try:
         model = build_model()
         graph = build_graph(model)
         final_state = graph.compile().invoke(
-            {"messages": [{"role": "user", "content": args.query}]}
+            {"messages": [{"role": "user", "content": args.query}]},
+            config={"callbacks": [model_timing]},
         )
         result = structured_result(
-            args.query, final_state, time.perf_counter() - started_at
+            args.query,
+            final_state,
+            time.perf_counter() - started_at,
+            model_time_sec=model_timing.elapsed_sec,
         )
         print(result.answer or "")
         exit_code = 0
     except Exception as error:
-        result = error_result(args.query, error, time.perf_counter() - started_at)
+        result = error_result(
+            args.query,
+            error,
+            time.perf_counter() - started_at,
+            model_time_sec=model_timing.elapsed_sec,
+        )
         print(f"Error: {error}")
         exit_code = 1
 
