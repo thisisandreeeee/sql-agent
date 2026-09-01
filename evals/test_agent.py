@@ -1,7 +1,9 @@
 import time
+from pathlib import Path
 from uuid import uuid4
 
 import pytest
+import yaml
 
 from sql_agent.run_result import ModelTimingCallback, error_result, structured_result
 from sql_agent.graph import build_graph
@@ -15,26 +17,8 @@ from evals.evaluators import (
 )
 
 
-CASES = [
-    {
-        "name": "race_count",
-        "question": "How many races are in the database?",
-        "expected_answer_contains": ["997"],
-        "expected_tools": ["sql_db_list_tables", "sql_db_schema", "sql_db_query"],
-    },
-    {
-        "name": "driver_wins",
-        "question": "Which driver has the most race wins, and how many wins do they have?",
-        "expected_answer_contains": ["Michael Schumacher", "91"],
-        "expected_tools": ["sql_db_list_tables", "sql_db_schema", "sql_db_query"],
-    },
-    {
-        "name": "constructor_wins",
-        "question": "Which constructor has the most race wins, and how many wins does it have?",
-        "expected_answer_contains": ["Ferrari", "230"],
-        "expected_tools": ["sql_db_list_tables", "sql_db_schema", "sql_db_query"],
-    },
-]
+with (Path(__file__).parent / "cases.yaml").open() as cases_file:
+    CASES = yaml.safe_load(cases_file)
 
 
 @pytest.fixture(scope="session")
