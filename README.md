@@ -1,68 +1,102 @@
 # SQL Agent
 
-Minimal project scaffold for a SQL agent built with [LangGraph](https://langchain-ai.github.io/langgraph/).
+A minimal SQL agent built with [LangGraph](https://langchain-ai.github.io/langgraph/).
 
 ## Setup
 
-Install `uv` if it is not already installed:
+Install [`uv`](https://docs.astral.sh/uv/) if needed:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Create the environment and install dependencies:
+Install the project dependencies:
 
 ```bash
 uv sync
 ```
 
-## DeepSeek configuration
-
-Copy the environment template and set your API key:
+Copy `.env.example` to `.env` and set `DEEPSEEK_API_KEY`:
 
 ```bash
 cp .env.example .env
 ```
 
-Set `DEEPSEEK_API_KEY` in `.env`. The application initializes
-`deepseek-v4-pro` with thinking disabled. To send a query with the registered
-tools available, run:
+To run the agent:
 
 ```bash
 uv run python -m sql_agent.main "What tables are in the database?"
 ```
 
-## Local database
+## Database
 
-The starter database is Spider's `formula_1` SQLite database. The checked-in
-fixture is 2.9 MB, so it is stored directly in Git rather than Git LFS.
+The checked-in fixture is Spider's `formula_1` SQLite database. It contains 13
+tables covering races, drivers, constructors, results, standings, qualifying,
+pit stops, and lap times. Fixtures in `data/` are immutable; the seed script
+creates the disposable runtime copy at `var/sql-agent.sqlite`.
 
-Seed the runtime copy and run the smoke query with:
+Create or refresh the runtime database and run the smoke query:
 
 ```bash
 uv run python scripts/seed_db.py
 uv run python scripts/smoke_query.py
 ```
 
-The source fixture is [Spider](https://yale-lily.github.io/spider), released
-under CC BY-SA 4.0. It was downloaded from the pinned
-[dataset mirror revision](https://huggingface.co/datasets/prem-research/spider/tree/2abe051bece3132d964271f79dc8589a84e63d06)
-and has SHA-256:
+For manual exploration:
 
-```text
-fb6dad97c0a4da22f01bdf817a77fe8f6b6559554661ff0120b40cb81b8c3b68
+```bash
+sqlite3 -readonly var/sql-agent.sqlite
 ```
 
-## Unit tests
+The current fixture was downloaded from [Spider](https://yale-lily.github.io/spider),
+which is released under CC BY-SA 4.0. It is pinned to this
+[dataset mirror revision](https://huggingface.co/datasets/prem-research/spider/tree/2abe051bece3132d964271f79dc8589a84e63d06).
 
-Run pytest:
+- Download URL: `https://huggingface.co/datasets/prem-research/spider/resolve/2abe051bece3132d964271f79dc8589a84e63d06/database/formula_1/formula_1.sqlite`
+- File size: 2,940,928 bytes
+- SHA-256: `fb6dad97c0a4da22f01bdf817a77fe8f6b6559554661ff0120b40cb81b8c3b68`
+
+Verify the fixture with:
+
+```bash
+shasum -a 256 data/formula_1.sqlite
+```
+
+### Adding a dataset
+
+For each additional database:
+
+1. Store it as `data/<database_id>.sqlite`, or in a dedicated subdirectory if
+   it needs multiple files.
+2. Pin and record the source URL or release revision, license, file size, and
+   SHA-256 checksum.
+3. Validate it before committing:
+
+   ```bash
+   sqlite3 -readonly data/<database_id>.sqlite 'PRAGMA quick_check;'
+   sqlite3 -readonly data/<database_id>.sqlite '.tables'
+   ```
+
+4. Update the seed script and add a smoke query for its main joins.
+
+Keep unrelated databases separate. When multiple databases are supported, the
+agent should select a `database_id` before inspecting that database's schema.
+
+## Tests
+
+Run the unit tests:
 
 ```bash
 uv run pytest -q
 ```
 
+Evaluation cases call the live model and are separate from the unit-test run:
+
+```bash
+uv run pytest -q evals
+```
+
 ## Backlog
 
-- Build openevals harness: trajectory, outcome, SQL validity, and run metrics
-- Improve workflow: (1) better schema context, (2) deterministic SQL validation, (3) structured query planning
-- Compare deterministic workflow vs. ReAct style loop
+- Improve schema context, deterministic SQL validation, and structured query planning.
+- Compare a deterministic workflow with a ReAct-style loop.
