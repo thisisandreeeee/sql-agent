@@ -38,8 +38,8 @@ creates the disposable runtime copy at `var/sql-agent.sqlite`.
 Create or refresh the runtime database and run the smoke query:
 
 ```bash
-uv run python scripts/seed_db.py
-uv run python scripts/smoke_query.py
+uv run python data/seed_db.py
+uv run python data/smoke_query.py
 ```
 
 For manual exploration:
