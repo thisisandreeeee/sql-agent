@@ -14,9 +14,14 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "agentevals>=0.0.9",
+    "openevals>=0.2.0",
     "pytest>=8.0",
 ]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
+markers = [
+    "eval: runs the agent against the live model and costs API credits",
+]
