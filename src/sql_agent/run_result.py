@@ -1,4 +1,4 @@
-"""Structured evaluation results for the SQL agent."""
+"""Structured run results for the SQL agent."""
 
 import time
 from typing import Any, Literal

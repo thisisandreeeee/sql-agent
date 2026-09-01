@@ -1,7 +1,7 @@
 import unittest
 from types import SimpleNamespace
 
-from sql_agent.evaluation import structured_result
+from sql_agent.run_result import structured_result
 
 
 class StructuredResultTests(unittest.TestCase):
