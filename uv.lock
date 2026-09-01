@@ -1132,6 +1132,7 @@ dev = [
     { name = "agentevals" },
     { name = "openevals" },
     { name = "pytest" },
+    { name = "pyyaml" },
 ]
 
 [package.metadata]
@@ -1148,6 +1149,7 @@ dev = [
     { name = "agentevals", specifier = ">=0.0.9" },
     { name = "openevals", specifier = ">=0.2.0" },
     { name = "pytest", specifier = ">=8.0" },
+    { name = "pyyaml", specifier = ">=6.0" },
 ]
 
 [[package]]
