@@ -82,7 +82,9 @@ def make_check_query_node(model):
     def check_query(state: MessagesState):
         tool_call = state["messages"][-1].tool_calls[0]
         user_message = {"role": "user", "content": tool_call["args"]["query"]}
-        llm_with_tools = model.bind_tools([tools.sql_db_query], tool_choice="any")
+        llm_with_tools = model.bind_tools(
+            [tools.sql_db_query], tool_choice="any", strict=True
+        )
         response = llm_with_tools.invoke(
             [{"role": "system", "content": CHECK_QUERY_SYSTEM_PROMPT}, user_message]
         )
