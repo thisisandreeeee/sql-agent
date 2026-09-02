@@ -1,79 +1,39 @@
-"""Small, deterministic evaluators used by the agent eval suite."""
+"""Evaluators used by the agent eval suite."""
 
-import json
-from typing import Any
+import os
+from pathlib import Path
 
-from agentevals.trajectory.match import create_trajectory_match_evaluator
+from dotenv import load_dotenv
+from langchain.chat_models import init_chat_model
+from openevals.llm import create_llm_as_judge
+from openevals.prompts import CORRECTNESS_PROMPT
 from openevals.types import EvaluatorResult
 
+from sql_agent.run_result import RunResult
+from evals.types import EvalCase
 
-def _as_dict(outputs: Any) -> dict[str, Any]:
-    if hasattr(outputs, "model_dump"):
-        return outputs.model_dump()
-    return outputs
+MODEL = "deepseek-v4-pro"
 
 
-def outcome_evaluator(
-    *, outputs: Any, reference_outputs: dict[str, Any], **kwargs: Any
-) -> EvaluatorResult:
-    """Pass when the answer contains every case-defined expected value."""
-    result = _as_dict(outputs)
-    answer = str(result.get("answer") or "").casefold()
-    expected = reference_outputs.get("expected_answer_contains", [])
-    missing = [value for value in expected if str(value).casefold() not in answer]
-    score = not missing and result.get("status") == "success"
-    comment = (
-        None if score else f"Missing expected values: {', '.join(map(str, missing))}"
+def build_model():
+    load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+    api_key = os.getenv("DEEPSEEK_API_KEY")
+    if not api_key:
+        raise RuntimeError("DEEPSEEK_API_KEY is required; copy .env.example to .env")
+    return init_chat_model(
+        model=MODEL,
+        model_provider="deepseek",
+        api_key=api_key,
+        extra_body={"thinking": {"type": "disabled"}},
     )
 
-    return {"key": "outcome", "score": score, "comment": comment}
 
-
-def sql_validity_evaluator(*, outputs: Any, **kwargs: Any) -> EvaluatorResult:
-    """Pass when the agent made a SQL attempt and every attempt executed cleanly."""
-    result = _as_dict(outputs)
-    attempts = result.get("sql_attempts", [])
-    invalid = [attempt for attempt in attempts if not attempt.get("succeeded", False)]
-    score = bool(attempts) and not invalid
-    comment = None if score else "At least one SQL attempt failed or no SQL was run."
-
-    return {"key": "sql_validity", "score": score, "comment": comment}
-
-
-def run_metrics_evaluator(
-    *, outputs: Any, reference_outputs: dict[str, Any], **kwargs: Any
-) -> EvaluatorResult:
-    """Pass when the run stays within the case's retry budget."""
-    result = _as_dict(outputs)
-    metrics = result.get("run_metrics", {})
-    retry_count = metrics.get("retry_count", 0)
-    max_retries = reference_outputs.get("max_retries", 2)
-    score = retry_count <= max_retries
-    comment = None if score else f"retry_count={retry_count} exceeds {max_retries}"
-
-    return {"key": "run_metrics", "score": score, "comment": comment}
-
-
-def trajectory_evaluator(
-    *, outputs: Any, reference_outputs: dict[str, Any], **kwargs: Any
-) -> EvaluatorResult:
-    """Pass when the trajectory contains each tool required by a case."""
-    reference = [
-        {
-            "role": "assistant",
-            "content": "",
-            "tool_calls": [
-                {
-                    "function": {
-                        "name": tool_name,
-                        "arguments": json.dumps({}),
-                    }
-                }
-            ],
-        }
-        for tool_name in reference_outputs.get("expected_tools", [])
-    ]
-    evaluator = create_trajectory_match_evaluator(
-        trajectory_match_mode="superset", tool_args_match_mode="ignore"
+def correctness_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
+    evaluator = create_llm_as_judge(
+        prompt=CORRECTNESS_PROMPT, feedback_key="correctness", judge=build_model()
     )
-    return evaluator(outputs=outputs, reference_outputs=reference, **kwargs)
+    return evaluator(
+        inputs=result.question,
+        outputs=result.answer,
+        reference_outputs=case.reference_answer,
+    )
