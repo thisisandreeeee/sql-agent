@@ -41,6 +41,7 @@ class RunResult(BaseModel):
     status: Literal["success", "incomplete", "error"]
     question: str
     answer: str | None = None
+    messages: list[Any] = Field(default_factory=list)
     sql_attempts: list[SqlAttempt] = Field(default_factory=list)
     tool_trace: list[ToolCall] = Field(default_factory=list)
     run_metrics: RunMetrics
@@ -124,7 +125,7 @@ def structured_result(
     model_time_sec: float | None = None,
 ) -> RunResult:
     """Convert the graph state into a JSON-serializable evaluation result."""
-    messages = state.get("messages", [])
+    messages = state["messages"]
     tool_trace: list[ToolCall] = []
     sql_attempts: list[SqlAttempt] = []
     attempts_by_id = {}
@@ -171,6 +172,7 @@ def structured_result(
         status="success" if answer else "incomplete",
         question=question,
         answer=answer,
+        messages=messages,
         sql_attempts=sql_attempts,
         tool_trace=tool_trace,
         run_metrics=RunMetrics(

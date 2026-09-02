@@ -1,7 +1,7 @@
 import unittest
 from types import SimpleNamespace
 
-from sql_agent.run_result import structured_result
+from sql_agent.types import structured_result
 
 
 class StructuredResultTests(unittest.TestCase):
@@ -41,6 +41,7 @@ class StructuredResultTests(unittest.TestCase):
 
         self.assertEqual(result.status, "success")
         self.assertEqual(result.answer, "The answer is 1.")
+        self.assertEqual(result.messages, state["messages"])
         self.assertEqual(result.sql_attempts[0].query, "SELECT 1")
         self.assertTrue(result.sql_attempts[0].succeeded)
         self.assertEqual(result.run_metrics.retry_count, 0)
