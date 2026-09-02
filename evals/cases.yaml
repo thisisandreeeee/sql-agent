@@ -1,27 +1,22 @@
-- name: race_count
+- name: 001_race_count
   question: How many races are in the database?
-  expected_answer_contains:
-    - '997'
+  reference_answer: There are 997 races.
   expected_tools:
     - sql_db_list_tables
     - sql_db_schema
     - sql_db_query
 
-- name: driver_wins
+- name: 002_driver_wins
   question: Which driver has the most race wins, and how many wins do they have?
-  expected_answer_contains:
-    - Michael Schumacher
-    - '91'
+  reference_answer: Michael Schumacher has the most race wins with 91.
   expected_tools:
     - sql_db_list_tables
     - sql_db_schema
     - sql_db_query
 
-- name: constructor_wins
+- name: 003_constructor_wins
   question: Which constructor has the most race wins, and how many wins does it have?
-  expected_answer_contains:
-    - Ferrari
-    - '230'
+  reference_answer: Ferrari has the most race wins with 230.
   expected_tools:
     - sql_db_list_tables
     - sql_db_schema
