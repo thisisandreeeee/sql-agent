@@ -12,6 +12,7 @@ from .run_result import ModelTimingCallback, error_result, structured_result
 from .graph import build_graph
 
 ROOT = Path(__file__).resolve().parents[2]
+MODEL = "deepseek-v4-flash"
 
 
 def build_model():
@@ -22,7 +23,7 @@ def build_model():
         raise RuntimeError("DEEPSEEK_API_KEY is required; copy .env.example to .env")
 
     return init_chat_model(
-        model="deepseek-v4-flash",
+        model=MODEL,
         model_provider="deepseek",
         api_key=api_key,
         extra_body={"thinking": {"type": "disabled"}},
@@ -68,7 +69,9 @@ def main() -> int:
 
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(result.model_dump_json(indent=2) + "\n", encoding="utf-8")
+        args.output.write_text(
+            result.model_dump_json(indent=2) + "\n", encoding="utf-8"
+        )
 
     return exit_code
 
