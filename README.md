@@ -93,7 +93,7 @@ uv run pytest -q
 Evaluation cases call the live model and are separate from the unit-test run:
 
 ```bash
-uv run pytest -q evals
+uv run python -m evals.runner
 ```
 
 ## Backlog
