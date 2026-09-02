@@ -21,7 +21,9 @@ def list_tables(state: MessagesState):
 
 def make_get_schema_node(model):
     def get_schema(state: MessagesState):
-        llm_with_tools = model.bind_tools([tools.sql_db_schema], tool_choice="any")
+        llm_with_tools = model.bind_tools(
+            [tools.sql_db_schema], tool_choice="any", strict=True
+        )
         response = llm_with_tools.invoke(state["messages"])
         return {"messages": [response]}
 
@@ -51,7 +53,7 @@ def make_generate_query_node(model):
             "role": "system",
             "content": GENERATE_QUERY_SYSTEM_PROMPT,
         }
-        llm_with_tools = model.bind_tools([tools.sql_db_query])
+        llm_with_tools = model.bind_tools([tools.sql_db_query], strict=True)
         response = llm_with_tools.invoke([system_message] + state["messages"])
         return {"messages": [response]}
 
