@@ -59,7 +59,8 @@ def groundedness_evaluator(result: RunResult) -> EvaluatorResult:
         prompt=RAG_GROUNDEDNESS_PROMPT, feedback_key="groundedness", judge=build_model()
     )
     latest_attempt = result.sql_attempts[-1]
-    return evaluator(context=latest_attempt.result, outputs=result.answer)
+    context = f"Question: {result.question}\nSQL: {latest_attempt.query}\nResult: {latest_attempt.result}"
+    return evaluator(context=context, outputs=result.answer)
 
 
 def sql_validity_evaluator(result: RunResult) -> EvaluatorResult:
