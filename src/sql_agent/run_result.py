@@ -36,7 +36,7 @@ class EvaluationError(BaseModel):
     message: str
 
 
-class EvaluationResult(BaseModel):
+class RunResult(BaseModel):
     schema_version: str = "1"
     status: Literal["success", "incomplete", "error"]
     question: str
@@ -122,7 +122,7 @@ def structured_result(
     state: dict,
     latency_sec: float,
     model_time_sec: float | None = None,
-) -> EvaluationResult:
+) -> RunResult:
     """Convert the graph state into a JSON-serializable evaluation result."""
     messages = state.get("messages", [])
     tool_trace: list[ToolCall] = []
@@ -167,7 +167,7 @@ def structured_result(
             token_counts["output_tokens"] / model_time_sec, 3
         )
 
-    return EvaluationResult(
+    return RunResult(
         status="success" if answer else "incomplete",
         question=question,
         answer=answer,
@@ -191,9 +191,9 @@ def error_result(
     error: Exception,
     latency_sec: float,
     model_time_sec: float | None = None,
-) -> EvaluationResult:
+) -> RunResult:
     """Create a structured result for a failed agent run."""
-    return EvaluationResult(
+    return RunResult(
         status="error",
         question=question,
         run_metrics=RunMetrics(
