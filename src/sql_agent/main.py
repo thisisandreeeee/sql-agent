@@ -8,7 +8,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 
-from .run_result import ModelTimingCallback, error_result, structured_result
+from .types import ModelTimingCallback, error_result, structured_result
 from .graph import build_graph
 
 ROOT = Path(__file__).resolve().parents[2]
