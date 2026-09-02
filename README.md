@@ -98,5 +98,7 @@ uv run python -m evals.runner
 
 ## Backlog
 
-- Improve schema context, deterministic SQL validation, and structured query planning.
+- Improve evaluation harness: add sql validity, run metrics, and other P0 evaluators.
+- Create comprehensive benchmark dataset.
+- Improve workflow harness: e.g. schema context, deterministic SQL validation, and structured query planning.
 - Compare a deterministic workflow with a ReAct-style loop.
