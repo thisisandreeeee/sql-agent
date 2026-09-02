@@ -8,7 +8,13 @@ from sql_agent.graph import build_graph
 from sql_agent.main import build_model
 from sql_agent.types import ModelTimingCallback, structured_result
 
-from evals.evaluators import correctness_evaluator, trajectory_evaluator
+from evals.evaluators import (
+    correctness_evaluator,
+    relevance_evaluator,
+    groundedness_evaluator,
+    sql_validity_evaluator,
+    trajectory_evaluator,
+)
 from evals.types import EvalCase
 
 
@@ -49,7 +55,17 @@ def run_case(case: EvalCase, graph) -> list[EvaluatorResult]:
         time.perf_counter() - started_at,
         model_time_sec=timing.elapsed_sec,
     )
-    return [correctness_evaluator(result, case), trajectory_evaluator(result)]
+    evaluations = [
+        correctness_evaluator(result, case),
+        relevance_evaluator(result),
+        trajectory_evaluator(result),
+    ]
+    if result.sql_attempts:
+        evaluations.extend(
+            [groundedness_evaluator(result), sql_validity_evaluator(result)]
+        )
+
+    return evaluations
 
 
 if __name__ == "__main__":

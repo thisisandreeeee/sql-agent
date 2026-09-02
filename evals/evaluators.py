@@ -10,7 +10,11 @@ from agentevals.trajectory.llm import (
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from openevals.llm import create_llm_as_judge
-from openevals.prompts import CORRECTNESS_PROMPT
+from openevals.prompts import (
+    CORRECTNESS_PROMPT,
+    ANSWER_RELEVANCE_PROMPT,
+    RAG_GROUNDEDNESS_PROMPT,
+)
 from openevals.types import EvaluatorResult
 
 from sql_agent.types import RunResult
@@ -41,6 +45,28 @@ def correctness_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
         outputs=result.answer,
         reference_outputs=case.reference_answer,
     )
+
+
+def relevance_evaluator(result: RunResult) -> EvaluatorResult:
+    evaluator = create_llm_as_judge(
+        prompt=ANSWER_RELEVANCE_PROMPT, feedback_key="relevance", judge=build_model()
+    )
+    return evaluator(inputs=result.question, outputs=result.answer)
+
+
+def groundedness_evaluator(result: RunResult) -> EvaluatorResult:
+    evaluator = create_llm_as_judge(
+        prompt=RAG_GROUNDEDNESS_PROMPT, feedback_key="groundedness", judge=build_model()
+    )
+    latest_attempt = result.sql_attempts[-1]
+    return evaluator(context=latest_attempt.result, outputs=result.answer)
+
+
+def sql_validity_evaluator(result: RunResult) -> EvaluatorResult:
+    invalid = [attempt for attempt in result.sql_attempts if not attempt.succeeded]
+    score = bool(result.sql_attempts) and not invalid
+    comment = None if score else f"Failed SQL queries: {invalid}"
+    return EvaluatorResult(key="sql_validity", score=score, comment=comment)
 
 
 def trajectory_evaluator(result: RunResult) -> EvaluatorResult:
