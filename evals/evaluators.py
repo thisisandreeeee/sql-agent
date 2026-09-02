@@ -3,13 +3,17 @@
 import os
 from pathlib import Path
 
+from agentevals.trajectory.llm import (
+    create_trajectory_llm_as_judge,
+    TRAJECTORY_ACCURACY_PROMPT,
+)
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 from openevals.llm import create_llm_as_judge
 from openevals.prompts import CORRECTNESS_PROMPT
 from openevals.types import EvaluatorResult
 
-from sql_agent.run_result import RunResult
+from sql_agent.types import RunResult
 from evals.types import EvalCase
 
 MODEL = "deepseek-v4-pro"
@@ -37,3 +41,12 @@ def correctness_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
         outputs=result.answer,
         reference_outputs=case.reference_answer,
     )
+
+
+def trajectory_evaluator(result: RunResult) -> EvaluatorResult:
+    evaluator = create_trajectory_llm_as_judge(
+        prompt=TRAJECTORY_ACCURACY_PROMPT,
+        feedback_key="trajectory",
+        judge=build_model(),
+    )
+    return evaluator(outputs=result.messages)

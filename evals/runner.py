@@ -3,13 +3,12 @@ from pathlib import Path
 
 import yaml
 from openevals.types import EvaluatorResult
-from pydantic import BaseModel, Field
 
 from sql_agent.graph import build_graph
 from sql_agent.main import build_model
-from sql_agent.run_result import ModelTimingCallback, structured_result
+from sql_agent.types import ModelTimingCallback, structured_result
 
-from evals.evaluators import correctness_evaluator
+from evals.evaluators import correctness_evaluator, trajectory_evaluator
 from evals.types import EvalCase
 
 
@@ -24,6 +23,9 @@ def main() -> int:
             scores = run_case(case, graph)
             passed = all(score["score"] for score in scores)
             print(f"{'PASS' if passed else 'FAIL'} {case.name}")
+            for score in scores:
+                print(f"  {score['key']}: {score['score']}")
+
             if not passed:
                 print(scores)
                 failed += 1
@@ -47,7 +49,7 @@ def run_case(case: EvalCase, graph) -> list[EvaluatorResult]:
         time.perf_counter() - started_at,
         model_time_sec=timing.elapsed_sec,
     )
-    return [correctness_evaluator(result, case)]
+    return [correctness_evaluator(result, case), trajectory_evaluator(result)]
 
 
 if __name__ == "__main__":
