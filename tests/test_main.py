@@ -1,6 +1,7 @@
 import unittest
 from types import SimpleNamespace
 
+from sql_agent.nodes import should_continue
 from sql_agent.types import structured_result
 
 
@@ -51,6 +52,17 @@ class StructuredResultTests(unittest.TestCase):
         self.assertEqual(result.run_metrics.total_tokens, 14)
         self.assertEqual(result.run_metrics.output_tokens_per_sec, 16.0)
         self.assertEqual(result.model_dump()["schema_version"], "1")
+
+    def test_routes_missing_query_to_tool_validation(self):
+        state = {
+            "messages": [
+                SimpleNamespace(
+                    tool_calls=[{"name": "sql_db_query", "args": {}, "id": "bad"}]
+                )
+            ]
+        }
+
+        self.assertEqual(should_continue(state), "run_query")
 
 
 if __name__ == "__main__":
