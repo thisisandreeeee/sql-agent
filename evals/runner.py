@@ -78,7 +78,7 @@ def _run_case(
         timing = ModelTimingCallback()
         state = graph.invoke(
             {"messages": [{"role": "user", "content": case.question}]},
-            config={"callbacks": [timing]},
+            config={"callbacks": [timing], "recursion_limit": 50},
         )
         result = structured_result(
             case.question,
@@ -135,9 +135,7 @@ def next_run_path(runs_dir: Path) -> Path:
     return path
 
 
-def _metric_summary(
-    metrics: list[dict], field: str
-) -> dict[str, float | int | None]:
+def _metric_summary(metrics: list[dict], field: str) -> dict[str, float | int | None]:
     values = [metric[field] for metric in metrics if metric.get(field) is not None]
     return (
         {"total": round(sum(values), 3), "mean": round(sum(values) / len(values), 3)}
@@ -148,9 +146,7 @@ def _metric_summary(
 
 def summarize(cases: list[dict]) -> dict:
     metrics = [
-        case["result"]["run_metrics"]
-        for case in cases
-        if case["result"] is not None
+        case["result"]["run_metrics"] for case in cases if case["result"] is not None
     ]
     passed_cases = sum(
         case["error"] is None

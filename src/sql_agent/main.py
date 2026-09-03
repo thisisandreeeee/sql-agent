@@ -47,7 +47,7 @@ def main() -> int:
         graph = build_graph(model)
         final_state = graph.compile().invoke(
             {"messages": [{"role": "user", "content": args.query}]},
-            config={"callbacks": [model_timing]},
+            config={"callbacks": [model_timing], "recursion_limit": 50},
         )
         result = structured_result(
             args.query,
