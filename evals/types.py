@@ -1,9 +1,10 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class EvalCase(BaseModel):
     name: str
     question: str
     reference_answer: str
-    expected_tools: list[str] = Field(default_factory=list)
+    gold_sql: str | None = None
+    sql_required: bool = True
     max_retries: int = 2

@@ -15,6 +15,9 @@ from evals.evaluators import (
     relevance_evaluator,
     groundedness_evaluator,
     sql_validity_evaluator,
+    sql_result_evaluator,
+    sql_usage_evaluator,
+    retry_evaluator,
     trajectory_evaluator,
 )
 from evals.types import EvalCase
@@ -83,12 +86,17 @@ def _run_case(
             time.perf_counter() - started_at,
             model_time_sec=timing.elapsed_sec,
         )
-        evaluations.append(correctness_evaluator(result, case))
+        if case.reference_answer:
+            evaluations.append(correctness_evaluator(result, case))
         evaluations.append(relevance_evaluator(result))
         evaluations.append(trajectory_evaluator(result))
+        evaluations.append(sql_usage_evaluator(result, case))
+        evaluations.append(retry_evaluator(result, case))
         if result.sql_attempts:
             evaluations.append(groundedness_evaluator(result))
             evaluations.append(sql_validity_evaluator(result))
+            if case.gold_sql:
+                evaluations.append(sql_result_evaluator(result, case))
     except Exception as exc:
         error = exc
 
