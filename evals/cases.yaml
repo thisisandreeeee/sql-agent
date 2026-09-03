@@ -15,405 +15,277 @@
     SELECT c.name, COUNT(*) AS wins FROM results AS r JOIN constructors AS c ON c.constructorId = r.constructorId WHERE r.position = '1' GROUP BY c.constructorId ORDER BY wins DESC LIMIT 1
 - name: formula_1_004
   question: "What is the name of the race held most recently?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT name FROM races ORDER BY date DESC LIMIT 1
-- name: formula_1_005
-  question: "What is the name of the race that occurred most recently?"
-  reference_answer: ""
+  reference_answer: The most recent race was the Abu Dhabi Grand Prix.
   gold_sql: |
     SELECT name FROM races ORDER BY date DESC LIMIT 1
 - name: formula_1_006
   question: "What is the name and date of the most recent race?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT name ,  date FROM races ORDER BY date DESC LIMIT 1
-- name: formula_1_007
-  question: "What is the name and date of the race that occurred most recently?"
-  reference_answer: ""
+  reference_answer: The most recent race was the Abu Dhabi Grand Prix, held on 2018-11-25.
   gold_sql: |
     SELECT name ,  date FROM races ORDER BY date DESC LIMIT 1
 - name: formula_1_008
   question: "Find the names of all races held in 2017."
-  reference_answer: ""
-  gold_sql: |
-    SELECT name FROM races WHERE YEAR = 2017
-- name: formula_1_009
-  question: "What are the names of all the races that occurred in the year 2017?"
-  reference_answer: ""
+  reference_answer: >-
+    The races held in 2017 were: Australian Grand Prix, Chinese Grand Prix,
+    Bahrain Grand Prix, Russian Grand Prix, Spanish Grand Prix, Monaco Grand
+    Prix, Canadian Grand Prix, Azerbaijan Grand Prix, Austrian Grand Prix,
+    British Grand Prix, Hungarian Grand Prix, Belgian Grand Prix, Italian Grand
+    Prix, Singapore Grand Prix, Malaysian Grand Prix, Japanese Grand Prix,
+    United States Grand Prix, Mexican Grand Prix, Brazilian Grand Prix, and Abu
+    Dhabi Grand Prix.
   gold_sql: |
     SELECT name FROM races WHERE YEAR = 2017
 - name: formula_1_010
   question: "Find the distinct names of all races held between 2014 and 2017?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT name FROM races WHERE YEAR BETWEEN 2014 AND 2017
-- name: formula_1_011
-  question: "What are the unique names of all race held between 2014 and 2017?"
-  reference_answer: ""
+  reference_answer: >-
+    The distinct race names from 2014 through 2017 were: Australian Grand Prix,
+    Malaysian Grand Prix, Bahrain Grand Prix, Chinese Grand Prix, Spanish Grand
+    Prix, Monaco Grand Prix, Canadian Grand Prix, Austrian Grand Prix, British
+    Grand Prix, German Grand Prix, Hungarian Grand Prix, Belgian Grand Prix,
+    Italian Grand Prix, Singapore Grand Prix, Japanese Grand Prix, Russian Grand
+    Prix, United States Grand Prix, Brazilian Grand Prix, Abu Dhabi Grand Prix,
+    Mexican Grand Prix, European Grand Prix, and Azerbaijan Grand Prix.
   gold_sql: |
     SELECT DISTINCT name FROM races WHERE YEAR BETWEEN 2014 AND 2017
 - name: formula_1_012
   question: "List the forename and surname of all distinct drivers who once had laptime less than 93000 milliseconds?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE T2.milliseconds < 93000
-- name: formula_1_013
-  question: "What are the forenames and surnames of all unique drivers who had a lap time of less than 93000 milliseconds?"
-  reference_answer: ""
+  reference_answer: No drivers had a lap time under 93000 milliseconds.
   gold_sql: |
     SELECT DISTINCT T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE T2.milliseconds < 93000
 - name: formula_1_014
   question: "Find all the distinct id and nationality of drivers who have had laptime more than 100000 milliseconds?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT T1.driverid ,  T1.nationality FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE T2.milliseconds >  100000
-- name: formula_1_015
-  question: "What are the different driver ids and nationalities of all drivers who had a laptime of more than 100000 milliseconds?"
-  reference_answer: ""
+  reference_answer: No drivers had a lap time over 100000 milliseconds.
   gold_sql: |
     SELECT DISTINCT T1.driverid ,  T1.nationality FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE T2.milliseconds >  100000
 - name: formula_1_016
   question: "What are the forename and surname of the driver who has the smallest laptime?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid ORDER BY T2.milliseconds LIMIT 1
-- name: formula_1_017
-  question: "What is the forename and surname of the driver with the shortest laptime?"
-  reference_answer: ""
+  reference_answer: No driver lap times were returned.
   gold_sql: |
     SELECT T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid ORDER BY T2.milliseconds LIMIT 1
 - name: formula_1_018
   question: "What is the id and family name of the driver who has the longest laptime?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid ORDER BY T2.milliseconds DESC LIMIT 1
-- name: formula_1_019
-  question: "What is the id and last name of the driver with the longest laptime?"
-  reference_answer: ""
+  reference_answer: No driver lap times were returned.
   gold_sql: |
     SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid ORDER BY T2.milliseconds DESC LIMIT 1
 - name: formula_1_020
   question: "What is the id, forname and surname of the driver who had the first position in terms of laptime at least twice?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.driverid ,  T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE POSITION  =  '1' GROUP BY T1.driverid HAVING count(*)  >=  2
-- name: formula_1_021
-  question: "What is the id, first name, and last name of the driver who was in the first position for laptime at least twice?"
-  reference_answer: ""
+  reference_answer: No driver had at least two first-position lap times.
   gold_sql: |
     SELECT T1.driverid ,  T1.forename ,  T1.surname FROM drivers AS T1 JOIN laptimes AS T2 ON T1.driverid = T2.driverid WHERE POSITION  =  '1' GROUP BY T1.driverid HAVING count(*)  >=  2
 - name: formula_1_022
   question: "How many drivers participated in the race Australian Grand Prix held in 2009?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT count(*) FROM results AS T1 JOIN races AS T2 ON T1.raceid = T2.raceid WHERE T2.name = "Australian Grand Prix" AND YEAR = 2009
-- name: formula_1_023
-  question: "How many drivers were in the Australian Grand Prix held in 2009?"
-  reference_answer: ""
+  reference_answer: The query returned 20 drivers for the 2009 Australian Grand Prix.
   gold_sql: |
     SELECT count(*) FROM results AS T1 JOIN races AS T2 ON T1.raceid = T2.raceid WHERE T2.name = "Australian Grand Prix" AND YEAR = 2009
 - name: formula_1_024
   question: "How many drivers did not participate in the races held in 2009?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT count(DISTINCT driverId) FROM results WHERE raceId NOT IN( SELECT raceId FROM races WHERE YEAR != 2009 )
-- name: formula_1_025
-  question: "How many drivers did not race in 2009?"
-  reference_answer: ""
+  reference_answer: The query returned 25 distinct drivers for the 2009 races.
   gold_sql: |
     SELECT count(DISTINCT driverId) FROM results WHERE raceId NOT IN( SELECT raceId FROM races WHERE YEAR != 2009 )
 - name: formula_1_026
   question: "Give me a list of names and years of races that had any driver whose forename is Lewis?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T2.name ,  T2.year FROM results AS T1 JOIN races AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T1.driverid = T3.driverid WHERE T3.forename = "Lewis"
-- name: formula_1_027
-  question: "What are the names and years of all races that had a driver with the last name Lewis?"
-  reference_answer: ""
+  reference_answer: The query returned 208 race name/year rows for races involving a driver named Lewis, from 2007 through 2017.
   gold_sql: |
     SELECT T2.name ,  T2.year FROM results AS T1 JOIN races AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T1.driverid = T3.driverid WHERE T3.forename = "Lewis"
 - name: formula_1_028
   question: "Find the forename and surname of drivers whose nationality is German?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT forename ,  surname FROM drivers WHERE nationality = "German"
-- name: formula_1_029
-  question: "What is the first and last name of all the German drivers?"
-  reference_answer: ""
+  reference_answer: The query returned 49 German driver name pairs.
   gold_sql: |
     SELECT forename ,  surname FROM drivers WHERE nationality = "German"
 - name: formula_1_030
   question: "Find the id and forenames of drivers who participated both the races with name Australian Grand Prix and the races with name Chinese Grand Prix?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T2.driverid ,  T3.forename FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid  =  T3.driverid WHERE T1.name = "Australian Grand Prix" INTERSECT SELECT T2.driverid ,  T3.forename FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid  =  T3.driverid WHERE T1.name = "Chinese Grand Prix"
-- name: formula_1_031
-  question: "What is the id and first name of all the drivers who participated in the Australian Grand Prix and the Chinese Grand Prix?"
-  reference_answer: ""
+  reference_answer: The query returned 73 driver ID/forename pairs for drivers who participated in both races.
   gold_sql: |
     SELECT T2.driverid ,  T3.forename FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid  =  T3.driverid WHERE T1.name = "Australian Grand Prix" INTERSECT SELECT T2.driverid ,  T3.forename FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid  =  T3.driverid WHERE T1.name = "Chinese Grand Prix"
 - name: formula_1_032
   question: "What are the forenames and surnames of drivers who participated in the races named Australian Grand Prix but not the races named Chinese Grand Prix?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T3.forename ,  T3.surname FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid = T3.driverid WHERE T1.name = "Australian Grand Prix" EXCEPT SELECT T3.forename ,  T3.surname FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid = T3.driverid WHERE T1.name = "Chinese Grand Prix"
-- name: formula_1_033
-  question: "What are the first and last names of all drivers who participated in the Australian Grand Prix but not the Chinese Grand Prix?"
-  reference_answer: ""
+  reference_answer: The query returned 105 driver forename/surname pairs for drivers in the Australian Grand Prix but not the Chinese Grand Prix.
   gold_sql: |
     SELECT T3.forename ,  T3.surname FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid = T3.driverid WHERE T1.name = "Australian Grand Prix" EXCEPT SELECT T3.forename ,  T3.surname FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid JOIN drivers AS T3 ON T2.driverid = T3.driverid WHERE T1.name = "Chinese Grand Prix"
 - name: formula_1_034
   question: "Find all the forenames of distinct drivers who was in position 1 as standing and won?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT T1.forename FROM drivers AS T1 JOIN driverstandings AS T2 ON T1.driverid = T2.driverid WHERE T2.position = 1 AND T2.wins = 1
-- name: formula_1_035
-  question: "What are all the different first names of the drivers who are in position as standing and won?"
-  reference_answer: ""
+  reference_answer: >-
+    The distinct forenames are: Lewis, Kimi, Robert, Giancarlo, Fernando,
+    Michael, Mika, Damon, Nigel, Jenson, Alain, Ayrton, David, Eddie, Nelson,
+    Elio, Michele, Keke, Alan, Carlos, Nino, Juan, Piero, Alberto, Maurice, Peter,
+    Stirling, Phil, Graham, Jackie, Jack, Mike, Bruce, Jim, Pedro, Denny, Mario,
+    Emerson, Clay, Niki, Patrick, Jody, Jacques, Sebastian, and Nico.
   gold_sql: |
     SELECT DISTINCT T1.forename FROM drivers AS T1 JOIN driverstandings AS T2 ON T1.driverid = T2.driverid WHERE T2.position = 1 AND T2.wins = 1
 - name: formula_1_036
   question: "Find all the forenames of distinct drivers who won in position 1 as driver standing and had more than 20 points?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT T1.forename FROM drivers AS T1 JOIN driverstandings AS T2 ON T1.driverid = T2.driverid WHERE T2.position = 1 AND T2.wins = 1 AND T2.points > 20
-- name: formula_1_037
-  question: "What are the first names of the different drivers who won in position 1 as driver standing and had more than 20 points?"
-  reference_answer: ""
+  reference_answer: >-
+    The distinct forenames are: Robert, Michael, Kimi, Fernando, Lewis, Alain,
+    Nelson, Ayrton, Michele, Keke, Carlos, Mike, Graham, Denny, Clay, Emerson,
+    Patrick, Jody, Niki, Sebastian, Jenson, and Nico.
   gold_sql: |
     SELECT DISTINCT T1.forename FROM drivers AS T1 JOIN driverstandings AS T2 ON T1.driverid = T2.driverid WHERE T2.position = 1 AND T2.wins = 1 AND T2.points > 20
 - name: formula_1_038
   question: "What are the numbers of constructors for different nationalities?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT count(*) ,  nationality FROM constructors GROUP BY nationality
-- name: formula_1_039
-  question: "For each nationality, how many different constructors are there?"
-  reference_answer: ""
+  reference_answer: >-
+    Constructor counts by nationality are: American 39, Australian 1, Austrian
+    1, Belgium 1, Brazilian 1, British 85, Canadian 2, Dutch 3, East German 1,
+    French 12, German 10, Hong Kong 1, Indian 1, Irish 1, Italian 29, Japanese
+    5, Malaysian 2, Mexican 1, New Zealand 1, Rhodesian 1, Russian 2, South
+    African 3, Spanish 1, and Swiss 4.
   gold_sql: |
     SELECT count(*) ,  nationality FROM constructors GROUP BY nationality
 - name: formula_1_040
   question: "What are the numbers of races for each constructor id?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT count(*) ,  constructorid FROM constructorStandings GROUP BY constructorid
-- name: formula_1_041
-  question: "For each constructor id, how many races are there?"
-  reference_answer: ""
+  reference_answer: The query returned 156 constructor ID/race-count rows.
   gold_sql: |
     SELECT count(*) ,  constructorid FROM constructorStandings GROUP BY constructorid
 - name: formula_1_042
   question: "What are the names of races that were held after 2017 and the circuits were in the country of Spain?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.name FROM races AS T1 JOIN circuits AS T2 ON T1.circuitid = T2.circuitid WHERE T2.country = "Spain" AND T1.year > 2017
-- name: formula_1_043
-  question: "What are the names of the races held after 2017 in Spain?"
-  reference_answer: ""
+  reference_answer: The race was the Spanish Grand Prix.
   gold_sql: |
     SELECT T1.name FROM races AS T1 JOIN circuits AS T2 ON T1.circuitid = T2.circuitid WHERE T2.country = "Spain" AND T1.year > 2017
 - name: formula_1_044
   question: "What are the unique names of races that held after 2000 and the circuits were in Spain?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT T1.name FROM races AS T1 JOIN circuits AS T2 ON T1.circuitid = T2.circuitid WHERE T2.country = "Spain" AND T1.year > 2000
-- name: formula_1_045
-  question: "What are the names of all races held after 2000 in Spain?"
-  reference_answer: ""
+  reference_answer: The distinct race names were the Spanish Grand Prix and European Grand Prix.
   gold_sql: |
     SELECT DISTINCT T1.name FROM races AS T1 JOIN circuits AS T2 ON T1.circuitid = T2.circuitid WHERE T2.country = "Spain" AND T1.year > 2000
 - name: formula_1_046
   question: "Find the distinct driver id and the stop number of all drivers that have a shorter pit stop duration than some drivers in the race with id 841."
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT driverid ,  STOP FROM pitstops WHERE duration  <  (SELECT max(duration) FROM pitstops WHERE raceid  =  841)
-- name: formula_1_047
-  question: "What is the id and stop number for each driver that has a shorter pit stop than the driver in the race with id 841?"
-  reference_answer: ""
+  reference_answer: No pit-stop rows matched the condition.
   gold_sql: |
     SELECT DISTINCT driverid ,  STOP FROM pitstops WHERE duration  <  (SELECT max(duration) FROM pitstops WHERE raceid  =  841)
 - name: formula_1_048
   question: "Find the distinct driver id of all drivers that have a longer stop duration than some drivers in the race whose id is 841?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT driverid ,  STOP FROM pitstops WHERE duration  >  (SELECT min(duration) FROM pitstops WHERE raceid  =  841)
-- name: formula_1_049
-  question: "What are the different ids and stop durations of all the drivers whose stop lasted longer than the driver in the race with the id 841?"
-  reference_answer: ""
+  reference_answer: No pit-stop rows matched the condition.
   gold_sql: |
     SELECT DISTINCT driverid ,  STOP FROM pitstops WHERE duration  >  (SELECT min(duration) FROM pitstops WHERE raceid  =  841)
 - name: formula_1_050
   question: "List the forenames of all distinct drivers in alphabetical order?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT forename FROM drivers ORDER BY forename ASC
-- name: formula_1_051
-  question: "What are the first names of all the different drivers in alphabetical order?"
-  reference_answer: ""
+  reference_answer: The query returned 466 distinct driver forenames in ascending alphabetical order.
   gold_sql: |
     SELECT DISTINCT forename FROM drivers ORDER BY forename ASC
 - name: formula_1_052
   question: "List the names of all distinct races in reversed  lexicographic order?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT DISTINCT name FROM races ORDER BY name DESC
-- name: formula_1_053
-  question: "What are the different names of all the races in reverse alphabetical order?"
-  reference_answer: ""
+  reference_answer: >-
+    The distinct race names in reverse alphabetical order are: United States
+    Grand Prix West, United States Grand Prix, Turkish Grand Prix, Swiss Grand
+    Prix, Swedish Grand Prix, Spanish Grand Prix, South African Grand Prix,
+    Singapore Grand Prix, San Marino Grand Prix, Russian Grand Prix, Portuguese
+    Grand Prix, Pescara Grand Prix, Pacific Grand Prix, Moroccan Grand Prix,
+    Monaco Grand Prix, Mexican Grand Prix, Malaysian Grand Prix, Luxembourg Grand
+    Prix, Korean Grand Prix, Japanese Grand Prix, Italian Grand Prix, Indianapolis
+    500, Indian Grand Prix, Hungarian Grand Prix, German Grand Prix, French Grand
+    Prix, European Grand Prix, Dutch Grand Prix, Detroit Grand Prix, Dallas Grand
+    Prix, Chinese Grand Prix, Canadian Grand Prix, Caesars Palace Grand Prix,
+    British Grand Prix, Brazilian Grand Prix, Belgian Grand Prix, Bahrain Grand
+    Prix, Azerbaijan Grand Prix, Austrian Grand Prix, Australian Grand Prix,
+    Argentine Grand Prix, and Abu Dhabi Grand Prix.
   gold_sql: |
     SELECT DISTINCT name FROM races ORDER BY name DESC
 - name: formula_1_054
   question: "What are the names of races held between 2009 and 2011?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT name FROM races WHERE YEAR BETWEEN 2009 AND 2011
-- name: formula_1_055
-  question: "What are the names of all races held between 2009 and 2011?"
-  reference_answer: ""
+  reference_answer: The query returned 55 race-name rows for races held from 2009 through 2011.
   gold_sql: |
     SELECT name FROM races WHERE YEAR BETWEEN 2009 AND 2011
 - name: formula_1_056
   question: "What are the names of races held after 12:00:00 or before 09:00:00?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT name FROM races WHERE TIME > "12:00:00" OR TIME < "09:00:00"
-- name: formula_1_057
-  question: "What are the names of all races that occurred after 12:00:00 or before 09:00:00?"
-  reference_answer: ""
+  reference_answer: The query returned 869 race-name rows matching the time condition.
   gold_sql: |
     SELECT name FROM races WHERE TIME > "12:00:00" OR TIME < "09:00:00"
 - name: formula_1_058
   question: "What are the drivers' first, last names and id who had more than 8 pit stops or participated in more than 5 race results?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.forename ,  T1.surname ,  T1.driverid FROM drivers AS T1 JOIN pitstops AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  8 UNION SELECT T1.forename ,  T1.surname ,  T1.driverid FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  5
-- name: formula_1_059
-  question: "What are the drivers' first names,last names, and ids for all those that had more than 8 stops or participated in more than 5 races?"
-  reference_answer: ""
+  reference_answer: The query returned 438 driver rows satisfying at least one condition.
   gold_sql: |
     SELECT T1.forename ,  T1.surname ,  T1.driverid FROM drivers AS T1 JOIN pitstops AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  8 UNION SELECT T1.forename ,  T1.surname ,  T1.driverid FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  5
 - name: formula_1_060
   question: "What are the drivers' last names and id who had 11 pit stops and participated in more than 5 race results?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.surname ,  T1.driverid FROM drivers AS T1 JOIN pitstops AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  =  11 INTERSECT SELECT T1.surname ,  T1.driverid FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  5
-- name: formula_1_061
-  question: "What are the last names and ids of all drivers who had 11 pit stops and participated in more than 5 races?"
-  reference_answer: ""
+  reference_answer: No drivers matched both conditions.
   gold_sql: |
     SELECT T1.surname ,  T1.driverid FROM drivers AS T1 JOIN pitstops AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  =  11 INTERSECT SELECT T1.surname ,  T1.driverid FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid GROUP BY T1.driverid HAVING count(*)  >  5
 - name: formula_1_062
   question: "What is the id and last name of the driver who participated in the most races after 2010?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid WHERE T3.year > 2010 GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1
-- name: formula_1_063
-  question: "What is the id and last name of the driver who participated in the most races after 2010?"
-  reference_answer: ""
+  reference_answer: Driver 20, Vettel, participated in the most races after 2010.
   gold_sql: |
     SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid WHERE T3.year > 2010 GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1
 - name: formula_1_064
   question: "What are the names of circuits that belong to UK or Malaysia?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT name FROM circuits WHERE country = "UK" OR country = "Malaysia"
-- name: formula_1_065
-  question: "What are the names of all the circuits that are in the UK or Malaysia?"
-  reference_answer: ""
+  reference_answer: >-
+    The circuits are: Sepang International Circuit, Silverstone Circuit,
+    Donington Park, Brands Hatch, and Aintree.
   gold_sql: |
     SELECT name FROM circuits WHERE country = "UK" OR country = "Malaysia"
 - name: formula_1_066
   question: "Find the id and location of circuits that belong to France or Belgium?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT circuitid ,  LOCATION FROM circuits WHERE country = "France" OR country = "Belgium"
-- name: formula_1_067
-  question: "What are the ids and locations of all circuits in France or Belgium?"
-  reference_answer: ""
+  reference_answer: >-
+    The circuit ID/location pairs are: 8/Magny Cours, 13/Spa, 34/Le Castellet,
+    40/Heusden-Zolder, 41/Dijon, 50/Brussels, 51/Clermont-Ferrand, 53/Rouen,
+    54/Le Mans, and 55/Reims.
   gold_sql: |
     SELECT circuitid ,  LOCATION FROM circuits WHERE country = "France" OR country = "Belgium"
 - name: formula_1_068
   question: "Find the names of Japanese constructors that have once earned more than 5 points?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.name FROM constructors AS T1 JOIN constructorstandings AS T2 ON T1.constructorid = T2.constructorid WHERE T1.nationality = "Japanese" AND T2.points > 5
-- name: formula_1_069
-  question: "What are the names of all the Japanese constructors that have earned more than 5 points?"
-  reference_answer: ""
+  reference_answer: >-
+    The query returned 140 constructor-name rows: Toyota (95) and Honda (45).
   gold_sql: |
     SELECT T1.name FROM constructors AS T1 JOIN constructorstandings AS T2 ON T1.constructorid = T2.constructorid WHERE T1.nationality = "Japanese" AND T2.points > 5
 - name: formula_1_070
   question: "What is the average fastest lap speed in race named 'Monaco Grand Prix' in 2008 ?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT avg(T2.fastestlapspeed) FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year = 2008 AND T1.name = "Monaco Grand Prix"
-- name: formula_1_071
-  question: "What is the average fastest lap speed for the Monaco Grand Prix in 2008?"
-  reference_answer: ""
+  reference_answer: The average fastest-lap speed was 146.4992.
   gold_sql: |
     SELECT avg(T2.fastestlapspeed) FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year = 2008 AND T1.name = "Monaco Grand Prix"
 - name: formula_1_072
   question: "What is the maximum fastest lap speed in race named 'Monaco Grand Prix' in 2008 ?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT max(T2.fastestlapspeed) FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year = 2008 AND T1.name = "Monaco Grand Prix"
-- name: formula_1_073
-  question: "What is the maximum fastest lap speed in the Monaco Grand Prix in 2008?"
-  reference_answer: ""
+  reference_answer: The maximum fastest-lap speed was 156.789.
   gold_sql: |
     SELECT max(T2.fastestlapspeed) FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year = 2008 AND T1.name = "Monaco Grand Prix"
 - name: formula_1_074
   question: "What are the maximum fastest lap speed in races held after 2004 grouped by race name and ordered by year?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT max(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year
-- name: formula_1_075
-  question: "For each race name, What is the maximum fastest lap speed for races after 2004 ordered by year?"
-  reference_answer: ""
+  reference_answer: >-
+    The maximum fastest-lap speeds were: European Grand Prix (2016) 202.946,
+    German Grand Prix (2016) 209.918, Abu Dhabi Grand Prix (2017) 198.652,
+    Australian Grand Prix (2017) 220.605, Austrian Grand Prix (2017) 230.597,
+    Azerbaijan Grand Prix (2017) 208.919, Bahrain Grand Prix (2017) 209.952,
+    Belgian Grand Prix (2017) 236.583, Brazilian Grand Prix (2017) 218.349,
+    British Grand Prix (2017) 234.025, Canadian Grand Prix (2017) 210.588,
+    Chinese Grand Prix (2017) 205.745, Hungarian Grand Prix (2017) 196.697,
+    Italian Grand Prix (2017) 250.174, Japanese Grand Prix (2017) 224.439,
+    Malaysian Grand Prix (2017) 212.104, Mexican Grand Prix (2017) 196.666,
+    Monaco Grand Prix (2017) 160.561, Russian Grand Prix (2017) 217.388,
+    Singapore Grand Prix (2017) 173.643, Spanish Grand Prix (2017) 200.471,
+    and United States Grand Prix (2017) 203.003.
   gold_sql: |
     SELECT max(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year
 - name: formula_1_076
   question: "What are the average fastest lap speed in races held after 2004 grouped by race name and ordered by year?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT avg(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year
-- name: formula_1_077
-  question: "What is the average fastest lap speed for races held after 2004, for each race, ordered by year?"
-  reference_answer: ""
+  reference_answer: >-
+    The average fastest-lap speeds were: Abu Dhabi Grand Prix (2015)
+    184.10512903225808, Australian Grand Prix (2015) 189.37395, Austrian Grand
+    Prix (2015) 202.2654677419355, Bahrain Grand Prix (2015) 188.33080645161291,
+    Belgian Grand Prix (2015) 202.04837096774193, Brazilian Grand Prix (2015)
+    180.7193870967742, British Grand Prix (2015) 195.54485483870968, Canadian
+    Grand Prix (2015) 196.3454193548387, Chinese Grand Prix (2015)
+    188.20267741935484, Hungarian Grand Prix (2015) 182.8631935483871, Italian
+    Grand Prix (2015) 228.38977419354836, Japanese Grand Prix (2015)
+    211.27977419354838, Malaysian Grand Prix (2015) 189.9078870967742, Mexican
+    Grand Prix (2015) 182.29451612903227, Monaco Grand Prix (2015)
+    150.5973548387097, Russian Grand Prix (2015) 178.44701612903225, Singapore
+    Grand Prix (2015) 151.40698387096774, Spanish Grand Prix (2015)
+    176.39298387096773, United States Grand Prix (2015) 185.93043548387098,
+    European Grand Prix (2016) 199.62063636363638, German Grand Prix (2016)
+    205.55377272727273, and Azerbaijan Grand Prix (2017) 203.45094999999998.
   gold_sql: |
     SELECT avg(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year
 - name: formula_1_078
   question: "Find the id, forename and number of races of all drivers who have at least participated in two races?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.driverid ,  T1.forename ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  >=  2
-- name: formula_1_079
-  question: "What is the id, forename, and number of races for all drivers that have participated in at least 2 races?"
-  reference_answer: ""
+  reference_answer: The query returned 670 driver ID/forename/race-count rows for drivers with at least two races.
   gold_sql: |
     SELECT T1.driverid ,  T1.forename ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  >=  2
 - name: formula_1_080
   question: "Find the driver id and number of races of all drivers who have at most participated in 30 races?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.driverid ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  <=  30
-- name: formula_1_081
-  question: "For each id of a driver who participated in at most 30 races, how many races did they participate in?"
-  reference_answer: ""
+  reference_answer: The query returned 642 driver ID/race-count rows for drivers with at most 30 races.
   gold_sql: |
     SELECT T1.driverid ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  <=  30
 - name: formula_1_082
   question: "Find the id and surname of the driver who participated the most number of races?"
-  reference_answer: ""
+  reference_answer: Driver 22, Barrichello, participated in the most races.
   gold_sql: |
     SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1
-- name: formula_1_083
-  question: "What are the ids and last names of all drivers who participated in the most races?"
-  reference_answer: ""
-  gold_sql: |
-    SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1
-
 - name: database_metadata_001
   question: What tables are in this database?
   reference_answer: >-
