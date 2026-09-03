@@ -96,5 +96,10 @@ def make_check_query_node(model):
     return check_query
 
 
-def should_continue(state: MessagesState) -> Literal[END, "check_query"]:
-    return "check_query" if state["messages"][-1].tool_calls else END
+def should_continue(state: MessagesState) -> Literal[END, "check_query", "run_query"]:
+    tool_calls = state["messages"][-1].tool_calls
+    if not tool_calls:
+        return END
+    args = tool_calls[0].get("args")
+    query = args.get("query") if isinstance(args, dict) else None
+    return "check_query" if isinstance(query, str) and query.strip() else "run_query"
