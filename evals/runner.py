@@ -17,7 +17,7 @@ from evals.evaluators import (
     sql_validity_evaluator,
     sql_result_evaluator,
     sql_usage_evaluator,
-    retry_evaluator,
+    sql_failure_evaluator,
     trajectory_evaluator,
 )
 from evals.types import EvalCase
@@ -91,7 +91,7 @@ def _run_case(
         evaluations.append(relevance_evaluator(result))
         evaluations.append(trajectory_evaluator(result))
         evaluations.append(sql_usage_evaluator(result, case))
-        evaluations.append(retry_evaluator(result, case))
+        evaluations.append(sql_failure_evaluator(result, case))
         if result.sql_attempts:
             evaluations.append(groundedness_evaluator(result))
             evaluations.append(sql_validity_evaluator(result))
@@ -165,9 +165,9 @@ def summarize(cases: list[dict]) -> dict:
                 "input_tokens",
                 "total_tokens",
                 "sql_attempt_count",
+                "sql_failed_count",
             )
         },
-        "retry_count": sum(metric.get("retry_count", 0) for metric in metrics),
     }
 
     rates = [

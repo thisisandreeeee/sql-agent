@@ -7,4 +7,4 @@ class EvalCase(BaseModel):
     reference_answer: str
     gold_sql: str | None = None
     sql_required: bool = True
-    max_retries: int = 2
+    max_sql_failures: int = 10

@@ -23,7 +23,7 @@ class ToolCall(BaseModel):
 class RunMetrics(BaseModel):
     latency_sec: float
     sql_attempt_count: int
-    retry_count: int
+    sql_failed_count: int
     model_time_sec: float | None = None
     input_tokens: int | None = None
     output_tokens: int | None = None
@@ -37,7 +37,7 @@ class EvaluationError(BaseModel):
 
 
 class RunResult(BaseModel):
-    schema_version: str = "1"
+    schema_version: str = "2"
     status: Literal["success", "incomplete", "error"]
     question: str
     answer: str | None = None
@@ -178,7 +178,7 @@ def structured_result(
         run_metrics=RunMetrics(
             latency_sec=round(latency_sec, 3),
             sql_attempt_count=len(sql_attempts),
-            retry_count=max(len(sql_attempts) - 1, 0),
+            sql_failed_count=sum(not attempt.succeeded for attempt in sql_attempts),
             model_time_sec=(
                 round(model_time_sec, 3) if model_time_sec is not None else None
             ),
@@ -201,7 +201,7 @@ def error_result(
         run_metrics=RunMetrics(
             latency_sec=round(latency_sec, 3),
             sql_attempt_count=0,
-            retry_count=0,
+            sql_failed_count=0,
             model_time_sec=(
                 round(model_time_sec, 3) if model_time_sec is not None else None
             ),

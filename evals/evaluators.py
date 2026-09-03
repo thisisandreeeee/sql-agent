@@ -103,11 +103,15 @@ def sql_result_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
     return EvaluatorResult(key="sql_result", score=score, comment=comment)
 
 
-def retry_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
-    retries = result.run_metrics.retry_count
-    score = retries <= case.max_retries
-    comment = None if score else f"Used {retries} retries; maximum is {case.max_retries}."
-    return EvaluatorResult(key="retry_limit", score=score, comment=comment)
+def sql_failure_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
+    failures = result.run_metrics.sql_failed_count
+    score = failures <= case.max_sql_failures
+    comment = (
+        None
+        if score
+        else f"Used {failures} failed SQL attempts; maximum is {case.max_sql_failures}."
+    )
+    return EvaluatorResult(key="sql_failure_limit", score=score, comment=comment)
 
 
 def trajectory_evaluator(result: RunResult) -> EvaluatorResult:
