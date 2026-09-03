@@ -25,7 +25,7 @@ cp .env.example .env
 To run the agent:
 
 ```bash
-uv run python -m sql_agent.main "What tables are in the database?"
+uv run python -m sql_agent.main "Who is the fastest driver?"
 ```
 
 ## Database
