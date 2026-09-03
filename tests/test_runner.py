@@ -6,7 +6,7 @@ from evals.runner import next_run_path, persisted_result, summarize
 from unittest.mock import patch
 
 from evals.evaluators import (
-    retry_evaluator,
+    sql_failure_evaluator,
     sql_result_evaluator,
     sql_usage_evaluator,
     sql_validity_evaluator,
@@ -27,7 +27,7 @@ class SummaryTests(unittest.TestCase):
                         "input_tokens": 100,
                         "total_tokens": 110,
                         "sql_attempt_count": 1,
-                        "retry_count": 0,
+                        "sql_failed_count": 0,
                     }
                 },
                 "evaluations": [
@@ -45,7 +45,7 @@ class SummaryTests(unittest.TestCase):
                         "input_tokens": 200,
                         "total_tokens": 220,
                         "sql_attempt_count": 2,
-                        "retry_count": 1,
+                        "sql_failed_count": 0,
                     }
                 },
                 "evaluations": [
@@ -63,7 +63,8 @@ class SummaryTests(unittest.TestCase):
         self.assertEqual(summary["latency_sec"], {"total": 4.0, "mean": 2.0})
         self.assertEqual(summary["output_tokens"], {"total": 30, "mean": 15.0})
         self.assertEqual(summary["output_tokens_per_second"], 6.0)
-        self.assertEqual(summary["retry_count"], 1)
+        self.assertEqual(summary["sql_attempt_count"], {"total": 3, "mean": 1.5})
+        self.assertEqual(summary["sql_failed_count"], {"total": 0, "mean": 0.0})
         self.assertEqual(
             summary["score_means"], {"correctness": 0.5, "relevance": 0.75}
         )
@@ -74,7 +75,7 @@ class SummaryTests(unittest.TestCase):
             question="How many?",
             messages=[{"role": "user", "content": "How many?"}],
             run_metrics=RunMetrics(
-                latency_sec=1.0, sql_attempt_count=0, retry_count=0
+                latency_sec=1.0, sql_attempt_count=0, sql_failed_count=0
             ),
         )
 
@@ -103,7 +104,7 @@ class SqlUsageEvaluatorTests(unittest.TestCase):
             question="What tables are in this database?",
             answer="races, drivers",
             run_metrics=RunMetrics(
-                latency_sec=1.0, sql_attempt_count=0, retry_count=0
+                latency_sec=1.0, sql_attempt_count=0, sql_failed_count=0
             ),
         )
         case = EvalCase(
@@ -126,7 +127,7 @@ class SqlUsageEvaluatorTests(unittest.TestCase):
                 SqlAttempt(query="SELECT 1", result="[(1,)]", succeeded=True)
             ],
             run_metrics=RunMetrics(
-                latency_sec=1.0, sql_attempt_count=1, retry_count=0
+                latency_sec=1.0, sql_attempt_count=1, sql_failed_count=0
             ),
         )
         case = EvalCase(
@@ -156,7 +157,7 @@ class SqlResultEvaluatorTests(unittest.TestCase):
                 )
             ],
             run_metrics=RunMetrics(
-                latency_sec=1.0, sql_attempt_count=1, retry_count=0
+                latency_sec=1.0, sql_attempt_count=1, sql_failed_count=0
             ),
         )
         case = EvalCase(
@@ -184,7 +185,7 @@ class SqlResultEvaluatorTests(unittest.TestCase):
                 )
             ],
             run_metrics=RunMetrics(
-                latency_sec=1.0, sql_attempt_count=1, retry_count=0
+                latency_sec=1.0, sql_attempt_count=1, sql_failed_count=0
             ),
         )
         case = EvalCase(
@@ -199,7 +200,7 @@ class SqlResultEvaluatorTests(unittest.TestCase):
         self.assertFalse(evaluation["score"])
 
 
-class RetryEvaluatorTests(unittest.TestCase):
+class SqlFailureEvaluatorTests(unittest.TestCase):
     def test_accepts_a_successful_query_after_a_failed_attempt(self):
         result = RunResult(
             status="success",
@@ -210,36 +211,36 @@ class RetryEvaluatorTests(unittest.TestCase):
                 SqlAttempt(query="SELECT COUNT(*) FROM races", result="[(997,)]", succeeded=True),
             ],
             run_metrics=RunMetrics(
-                latency_sec=1.0, sql_attempt_count=2, retry_count=1
+                latency_sec=1.0, sql_attempt_count=2, sql_failed_count=1
             ),
         )
         case = EvalCase(
             name="race_count",
             question=result.question,
             reference_answer="There are 997 races.",
-            max_retries=1,
+            max_sql_failures=1,
         )
 
         self.assertTrue(sql_validity_evaluator(result)["score"])
-        self.assertTrue(retry_evaluator(result, case)["score"])
+        self.assertTrue(sql_failure_evaluator(result, case)["score"])
 
-    def test_rejects_too_many_retries(self):
+    def test_rejects_too_many_sql_failures(self):
         result = RunResult(
             status="success",
             question="How many races are there?",
             answer="997",
             run_metrics=RunMetrics(
-                latency_sec=1.0, sql_attempt_count=3, retry_count=2
+                latency_sec=1.0, sql_attempt_count=3, sql_failed_count=2
             ),
         )
         case = EvalCase(
             name="race_count",
             question=result.question,
             reference_answer="There are 997 races.",
-            max_retries=1,
+            max_sql_failures=1,
         )
 
-        self.assertFalse(retry_evaluator(result, case)["score"])
+        self.assertFalse(sql_failure_evaluator(result, case)["score"])
 
 
 if __name__ == "__main__":
