@@ -1,3 +1,4 @@
+import argparse
 import json
 import time
 from datetime import datetime
@@ -23,7 +24,7 @@ from evals.evaluators import (
 from evals.types import EvalCase
 
 
-def main() -> int:
+def main(run_prefix: str | None = None) -> int:
     with (Path(__file__).parent / "cases.yaml").open() as cases_file:
         cases = [EvalCase.model_validate(case) for case in yaml.safe_load(cases_file)]
 
@@ -47,7 +48,9 @@ def main() -> int:
             failed += 1
 
     run = {"summary": summarize(records), "cases": records}
-    run_path = next_run_path(Path(__file__).resolve().parents[1] / "runs")
+    run_path = next_run_path(
+        Path(__file__).resolve().parents[1] / "runs", run_prefix
+    )
     run_path.write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
     print(f"Saved evaluation run to {run_path}")
     return int(failed > 0)
@@ -124,13 +127,14 @@ def _run_case(
     )
 
 
-def next_run_path(runs_dir: Path) -> Path:
+def next_run_path(runs_dir: Path, run_prefix: str | None = None) -> Path:
     runs_dir.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%dT%H%M%S.%f")
-    path = runs_dir / f"{timestamp}.json"
+    filename_prefix = f"{run_prefix}_" if run_prefix else ""
+    path = runs_dir / f"{filename_prefix}{timestamp}.json"
     suffix = 1
     while path.exists():
-        path = runs_dir / f"{timestamp}_{suffix:04d}.json"
+        path = runs_dir / f"{filename_prefix}{timestamp}_{suffix:04d}.json"
         suffix += 1
     return path
 
@@ -197,4 +201,6 @@ def summarize(cases: list[dict]) -> dict:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-prefix")
+    raise SystemExit(main(parser.parse_args().run_prefix))

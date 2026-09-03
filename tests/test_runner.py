@@ -96,6 +96,12 @@ class SummaryTests(unittest.TestCase):
         self.assertNotEqual(first, second)
         self.assertLess(first.name, second.name)
 
+    def test_run_paths_support_a_prefix(self):
+        with TemporaryDirectory() as directory:
+            path = next_run_path(Path(directory), "benchmark")
+
+        self.assertRegex(path.name, r"^benchmark_\d{8}T\d{6}\.\d{6}\.json$")
+
 
 class SqlUsageEvaluatorTests(unittest.TestCase):
     def test_accepts_metadata_answer_without_query(self):

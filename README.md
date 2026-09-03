@@ -96,6 +96,12 @@ Evaluation cases call the live model and are separate from the unit-test run:
 uv run python -m evals.runner
 ```
 
+To prefix the generated run filename, pass `--run-prefix`:
+
+```bash
+uv run python -m evals.runner --run-prefix benchmark
+```
+
 ## Backlog
 
 - Improve evaluation harness: add sql validity, run metrics, and other P0 evaluators.
