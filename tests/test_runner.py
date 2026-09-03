@@ -3,7 +3,16 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from evals.runner import next_run_path, persisted_result, summarize
-from sql_agent.types import RunMetrics, RunResult
+from unittest.mock import patch
+
+from evals.evaluators import (
+    retry_evaluator,
+    sql_result_evaluator,
+    sql_usage_evaluator,
+    sql_validity_evaluator,
+)
+from evals.types import EvalCase
+from sql_agent.types import RunMetrics, RunResult, SqlAttempt
 
 
 class SummaryTests(unittest.TestCase):
@@ -85,6 +94,152 @@ class SummaryTests(unittest.TestCase):
         self.assertRegex(first.name, r"^\d{8}T\d{6}\.\d{6}(?:_\d{4})?\.json$")
         self.assertNotEqual(first, second)
         self.assertLess(first.name, second.name)
+
+
+class SqlUsageEvaluatorTests(unittest.TestCase):
+    def test_accepts_metadata_answer_without_query(self):
+        result = RunResult(
+            status="success",
+            question="What tables are in this database?",
+            answer="races, drivers",
+            run_metrics=RunMetrics(
+                latency_sec=1.0, sql_attempt_count=0, retry_count=0
+            ),
+        )
+        case = EvalCase(
+            name="database_metadata_001",
+            question=result.question,
+            reference_answer="The database contains races and drivers.",
+            sql_required=False,
+        )
+
+        evaluation = sql_usage_evaluator(result, case)
+
+        self.assertTrue(evaluation["score"])
+
+    def test_rejects_out_of_scope_answer_that_uses_sql(self):
+        result = RunResult(
+            status="success",
+            question="What is the weather today?",
+            answer="I cannot access weather data.",
+            sql_attempts=[
+                SqlAttempt(query="SELECT 1", result="[(1,)]", succeeded=True)
+            ],
+            run_metrics=RunMetrics(
+                latency_sec=1.0, sql_attempt_count=1, retry_count=0
+            ),
+        )
+        case = EvalCase(
+            name="out_of_scope_001",
+            question=result.question,
+            reference_answer="The agent cannot answer live weather questions.",
+            sql_required=False,
+        )
+
+        evaluation = sql_usage_evaluator(result, case)
+
+        self.assertFalse(evaluation["score"])
+
+
+class SqlResultEvaluatorTests(unittest.TestCase):
+    @patch("evals.evaluators.db.query", return_value="[(1,), (2,)]")
+    def test_ignores_row_order_without_order_by(self, _query):
+        result = RunResult(
+            status="success",
+            question="List the values.",
+            answer="1 and 2",
+            sql_attempts=[
+                SqlAttempt(
+                    query="SELECT value FROM values",
+                    result="[(2,), (1,)]",
+                    succeeded=True,
+                )
+            ],
+            run_metrics=RunMetrics(
+                latency_sec=1.0, sql_attempt_count=1, retry_count=0
+            ),
+        )
+        case = EvalCase(
+            name="values",
+            question=result.question,
+            reference_answer="1 and 2",
+            gold_sql="SELECT value FROM values",
+        )
+
+        evaluation = sql_result_evaluator(result, case)
+
+        self.assertTrue(evaluation["score"])
+
+    @patch("evals.evaluators.db.query", return_value="[(1,), (2,)]")
+    def test_preserves_row_order_with_order_by(self, _query):
+        result = RunResult(
+            status="success",
+            question="List the values in order.",
+            answer="2 and 1",
+            sql_attempts=[
+                SqlAttempt(
+                    query="SELECT value FROM values ORDER BY value DESC",
+                    result="[(2,), (1,)]",
+                    succeeded=True,
+                )
+            ],
+            run_metrics=RunMetrics(
+                latency_sec=1.0, sql_attempt_count=1, retry_count=0
+            ),
+        )
+        case = EvalCase(
+            name="ordered_values",
+            question=result.question,
+            reference_answer="1 and 2",
+            gold_sql="SELECT value FROM values ORDER BY value",
+        )
+
+        evaluation = sql_result_evaluator(result, case)
+
+        self.assertFalse(evaluation["score"])
+
+
+class RetryEvaluatorTests(unittest.TestCase):
+    def test_accepts_a_successful_query_after_a_failed_attempt(self):
+        result = RunResult(
+            status="success",
+            question="How many races are there?",
+            answer="997",
+            sql_attempts=[
+                SqlAttempt(query="bad query", result="Error: syntax", succeeded=False),
+                SqlAttempt(query="SELECT COUNT(*) FROM races", result="[(997,)]", succeeded=True),
+            ],
+            run_metrics=RunMetrics(
+                latency_sec=1.0, sql_attempt_count=2, retry_count=1
+            ),
+        )
+        case = EvalCase(
+            name="race_count",
+            question=result.question,
+            reference_answer="There are 997 races.",
+            max_retries=1,
+        )
+
+        self.assertTrue(sql_validity_evaluator(result)["score"])
+        self.assertTrue(retry_evaluator(result, case)["score"])
+
+    def test_rejects_too_many_retries(self):
+        result = RunResult(
+            status="success",
+            question="How many races are there?",
+            answer="997",
+            run_metrics=RunMetrics(
+                latency_sec=1.0, sql_attempt_count=3, retry_count=2
+            ),
+        )
+        case = EvalCase(
+            name="race_count",
+            question=result.question,
+            reference_answer="There are 997 races.",
+            max_retries=1,
+        )
+
+        self.assertFalse(retry_evaluator(result, case)["score"])
 
 
 if __name__ == "__main__":
