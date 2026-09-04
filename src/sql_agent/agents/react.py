@@ -1,0 +1,36 @@
+from langchain.agents import create_agent
+
+from .. import tools
+
+
+REACT_SYSTEM_PROMPT = """
+You are an agent that answers questions using a SQLite database.
+
+You have tools for:
+- listing database tables
+- inspecting table schemas
+- executing SQL queries
+
+Use these tools as needed to answer the user's question.
+
+Before querying unfamiliar tables, inspect their schemas.
+Only execute read-only SQL.
+Never execute INSERT, UPDATE, DELETE, DROP, ALTER, or other
+statements that modify the database.
+
+When a query fails, inspect the error, correct the query, and retry.
+
+Once you have enough information, answer the user's question directly.
+"""
+
+
+def build_react_agent(model):
+    return create_agent(
+        model=model,
+        tools=[
+            tools.sql_db_list_tables,
+            tools.sql_db_schema,
+            tools.sql_db_query,
+        ],
+        system_prompt=REACT_SYSTEM_PROMPT,
+    )
