@@ -87,9 +87,14 @@
 - name: formula_1_024
   question: "How many drivers did not participate in the races held in 2009?"
   reference_answer: >-
-    There were 25 distinct drivers for the 2009 races.
+    There were 817 drivers who did not participate in any race held in 2009.
   gold_sql: |
-    SELECT count(DISTINCT driverId) FROM results WHERE raceId NOT IN( SELECT raceId FROM races WHERE YEAR != 2009 )
+    SELECT count(*) FROM drivers AS d WHERE d.driverId NOT IN (
+      SELECT DISTINCT r.driverId
+      FROM results AS r
+      JOIN races AS ra ON r.raceId = ra.raceId
+      WHERE ra.year = 2009
+    )
 - name: formula_1_026
   question: "Give me a list of names and years of races that had any driver whose forename is Lewis?"
   reference_answer: >-
