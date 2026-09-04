@@ -21,6 +21,10 @@ statements that modify the database.
 
 When a query fails, inspect the error, correct the query, and retry.
 
+If the SQL query limit is reached, do not treat that as a SQL failure. Stop
+calling tools and formulate the best answer possible from completed results.
+If those results are insufficient, say so instead of guessing.
+
 If the database does not contain sufficient information to answer the user's question, say so.
 Do not guess, infer unsupported facts, or continue querying once you have established that the required data is unavailable.
 
