@@ -69,8 +69,6 @@ pulling, passing 27/43 cases versus ReAct's 26/43.
 
 ### Overview metrics
 
-`ReAct vs. Graph` is calculated as `(ReAct - Graph) / Graph × 100`.
-
 | Metric             |      ReAct |      Graph | ReAct vs. Graph |
 | ------------------ | ---------: | ---------: | --------------: |
 | Pass rate          |      41/62 |      38/62 |         +7.895% |
@@ -78,6 +76,10 @@ pulling, passing 27/43 cases versus ReAct's 26/43.
 | Mean total tokens  | 14,650.210 | 12,103.290 |        +21.043% |
 
 ### Drill-down: data-pulling questions
+
+Data-pulling questions ask for explicit facts or straightforward filters,
+joins, and aggregations that can be answered by translating the request into
+SQL.
 
 | Metric       | ReAct | Graph | ReAct vs. Graph |
 | ------------ | ----: | ----: | --------------: |
@@ -88,6 +90,10 @@ pulling, passing 27/43 cases versus ReAct's 26/43.
 | Groundedness | 0.953 | 0.942 |         +1.168% |
 
 ### Drill-down: insight questions
+
+Insight questions require additional analysis or reasoning over the data,
+such as identifying trends, comparing groups, or interpreting derived
+metrics—not just retrieving rows.
 
 | Metric       | ReAct | Graph | ReAct vs. Graph |
 | ------------ | ----: | ----: | --------------: |
