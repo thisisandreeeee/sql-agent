@@ -88,19 +88,19 @@ class SummaryTests(unittest.TestCase):
 
     def test_run_paths_are_timestamped_and_unique(self):
         with TemporaryDirectory() as directory:
-            first = next_run_path(Path(directory))
+            first = next_run_path(Path(directory), "graph")
             first.touch()
-            second = next_run_path(Path(directory))
+            second = next_run_path(Path(directory), "graph")
 
-        self.assertRegex(first.name, r"^\d{8}T\d{6}\.\d{6}(?:_\d{4})?\.json$")
+        self.assertRegex(first.name, r"^graph_\d{8}T\d{6}\.\d{6}(?:_\d{4})?\.json$")
         self.assertNotEqual(first, second)
         self.assertLess(first.name, second.name)
 
-    def test_run_paths_support_a_prefix(self):
+    def test_run_paths_use_the_agent_type(self):
         with TemporaryDirectory() as directory:
-            path = next_run_path(Path(directory), "benchmark")
+            path = next_run_path(Path(directory), "react")
 
-        self.assertRegex(path.name, r"^benchmark_\d{8}T\d{6}\.\d{6}\.json$")
+        self.assertRegex(path.name, r"^react_\d{8}T\d{6}\.\d{6}\.json$")
 
 
 class SqlUsageEvaluatorTests(unittest.TestCase):

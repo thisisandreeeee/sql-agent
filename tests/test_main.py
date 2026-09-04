@@ -1,7 +1,7 @@
 import unittest
 from types import SimpleNamespace
 
-from sql_agent.nodes import should_continue
+from sql_agent.agents.graph_nodes import should_continue
 from sql_agent.types import structured_result
 
 
