@@ -42,5 +42,5 @@ def build_react_agent(model):
             tools.sql_db_query,
         ],
         system_prompt=REACT_SYSTEM_PROMPT,
-        middleware=[ToolCallLimitMiddleware(tool_name="sql_db_query", run_limit=5)],
+        middleware=[ToolCallLimitMiddleware(tool_name="sql_db_query", run_limit=10)],
     )

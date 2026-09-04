@@ -7,7 +7,7 @@ from langgraph.prebuilt import ToolNode
 
 from .. import tools
 
-MAX_SQL_ATTEMPTS = 5
+MAX_SQL_ATTEMPTS = 10
 
 
 def list_tables(state: MessagesState):
