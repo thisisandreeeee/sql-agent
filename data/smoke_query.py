@@ -1,4 +1,4 @@
-"""Run one representative relational query against the seeded database."""
+"""Run one representative query against the seeded Spider Formula 1 database."""
 
 from __future__ import annotations
 
@@ -9,7 +9,21 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_DATABASE = ROOT / "var" / "sql-agent.sqlite"
-REQUIRED_TABLES = {"constructors", "drivers", "races", "results"}
+REQUIRED_TABLES = {
+    "circuits",
+    "constructorResults",
+    "constructorStandings",
+    "constructors",
+    "driverStandings",
+    "drivers",
+    "lapTimes",
+    "pitStops",
+    "qualifying",
+    "races",
+    "results",
+    "seasons",
+    "status",
+}
 
 
 def main() -> None:
@@ -25,6 +39,9 @@ def main() -> None:
     )
     connection.row_factory = sqlite3.Row
     try:
+        if connection.execute("PRAGMA quick_check").fetchone()[0] != "ok":
+            raise AssertionError("SQLite integrity check failed")
+
         tables = {
             row[0]
             for row in connection.execute(

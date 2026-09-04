@@ -1,4 +1,4 @@
-"""Create the disposable runtime database from the checked-in fixture."""
+"""Create the disposable runtime database from Spider's official fixture."""
 
 from __future__ import annotations
 
@@ -11,9 +11,23 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SOURCE = ROOT / "data" / "formula_1.sqlite"
+DEFAULT_SOURCE = ROOT / "data" / "database" / "formula_1" / "formula_1.sqlite"
 DEFAULT_TARGET = ROOT / "var" / "sql-agent.sqlite"
-REQUIRED_TABLES = {"constructors", "drivers", "races", "results"}
+REQUIRED_TABLES = {
+    "circuits",
+    "constructorResults",
+    "constructorStandings",
+    "constructors",
+    "driverStandings",
+    "drivers",
+    "lapTimes",
+    "pitStops",
+    "qualifying",
+    "races",
+    "results",
+    "seasons",
+    "status",
+}
 
 
 def open_read_only(path: Path) -> sqlite3.Connection:
