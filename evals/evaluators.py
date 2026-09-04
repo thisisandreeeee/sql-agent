@@ -25,6 +25,39 @@ from sql_agent import db
 from evals.types import EvalCase
 
 MODEL = "deepseek-v4-pro"
+JUDGE_SCORE_CHOICES = [0.0, 0.5, 1.0]
+
+CORRECTNESS_RUBRIC = """
+Score correctness of the answer against the reference answer:
+- 0.0: The answer is incorrect or fails to answer the question.
+- 0.5: The answer is partially correct but has a meaningful factual error or omission.
+- 1.0: The answer is correct and complete.
+Use exactly one of 0.0, 0.5, or 1.0.
+"""
+
+RELEVANCE_RUBRIC = """
+Score how directly the answer addresses the user's question:
+- 0.0: The answer is irrelevant or does not address the question.
+- 0.5: The answer addresses the question but includes a meaningful omission or digression.
+- 1.0: The answer directly and fully addresses the question.
+Use exactly one of 0.0, 0.5, or 1.0.
+"""
+
+GROUNDEDNESS_RUBRIC = """
+Score whether the answer is supported by the supplied SQL result:
+- 0.0: The answer is unsupported or contradicts the SQL result.
+- 0.5: The answer is partly supported but includes a meaningful unsupported claim or omission.
+- 1.0: The answer is fully supported by the SQL result.
+Use exactly one of 0.0, 0.5, or 1.0.
+"""
+
+TRAJECTORY_RUBRIC = """
+Score the quality of the agent's trajectory:
+- 0.0: The trajectory fails to reach the goal or is fundamentally misguided.
+- 0.5: The trajectory reaches part of the goal but has a meaningful reasoning or efficiency problem.
+- 1.0: The trajectory reaches the goal with sound, reasonably efficient reasoning.
+Use exactly one of 0.0, 0.5, or 1.0.
+"""
 
 
 def build_model():
@@ -42,7 +75,10 @@ def build_model():
 
 def correctness_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
     evaluator = create_llm_as_judge(
-        prompt=CORRECTNESS_PROMPT, feedback_key="correctness", judge=build_model()
+        prompt=CORRECTNESS_PROMPT + CORRECTNESS_RUBRIC,
+        feedback_key="correctness",
+        judge=build_model(),
+        choices=JUDGE_SCORE_CHOICES,
     )
     return evaluator(
         inputs=result.question,
@@ -53,14 +89,20 @@ def correctness_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
 
 def relevance_evaluator(result: RunResult) -> EvaluatorResult:
     evaluator = create_llm_as_judge(
-        prompt=ANSWER_RELEVANCE_PROMPT, feedback_key="relevance", judge=build_model()
+        prompt=ANSWER_RELEVANCE_PROMPT + RELEVANCE_RUBRIC,
+        feedback_key="relevance",
+        judge=build_model(),
+        choices=JUDGE_SCORE_CHOICES,
     )
     return evaluator(inputs=result.question, outputs=result.answer)
 
 
 def groundedness_evaluator(result: RunResult) -> EvaluatorResult:
     evaluator = create_llm_as_judge(
-        prompt=RAG_GROUNDEDNESS_PROMPT, feedback_key="groundedness", judge=build_model()
+        prompt=RAG_GROUNDEDNESS_PROMPT + GROUNDEDNESS_RUBRIC,
+        feedback_key="groundedness",
+        judge=build_model(),
+        choices=JUDGE_SCORE_CHOICES,
     )
     latest_attempt = result.sql_attempts[-1]
     context = f"Question: {result.question}\nSQL: {latest_attempt.query}\nResult: {latest_attempt.result}"
@@ -116,8 +158,9 @@ def sql_failure_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
 
 def trajectory_evaluator(result: RunResult) -> EvaluatorResult:
     evaluator = create_trajectory_llm_as_judge(
-        prompt=TRAJECTORY_ACCURACY_PROMPT,
+        prompt=TRAJECTORY_ACCURACY_PROMPT + TRAJECTORY_RUBRIC,
         feedback_key="trajectory",
         judge=build_model(),
+        choices=JUDGE_SCORE_CHOICES,
     )
     return evaluator(outputs=result.messages)
