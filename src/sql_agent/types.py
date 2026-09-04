@@ -12,7 +12,9 @@ from . import tools
 class SqlAttempt(BaseModel):
     query: str
     result: str | None = None
-    succeeded: bool = False
+    succeeded: bool | None = None
+    executed: bool = False
+    blocked: bool = False
 
 
 class ToolCall(BaseModel):
@@ -88,6 +90,20 @@ def _content_text(content) -> str:
     return str(content)
 
 
+def _tool_result_succeeded(message, result: str) -> bool:
+    """Recognize database and middleware error tool messages."""
+    return (
+        getattr(message, "status", None) != "error"
+        and not result.lstrip().startswith(("Error:", "Tool call limit exceeded"))
+    )
+
+
+def _is_limit_result(result: str) -> bool:
+    return result.lstrip().startswith(
+        ("Tool call limit exceeded", "SQL query limit reached")
+    )
+
+
 def _token_counts(messages) -> dict[str, int | None]:
     usage_records = [
         getattr(message, "usage_metadata", None)
@@ -146,7 +162,13 @@ def structured_result(
             if attempt is not None:
                 result = _content_text(getattr(message, "content", ""))
                 attempt.result = result
-                attempt.succeeded = not result.startswith("Error:")
+                attempt.blocked = _is_limit_result(result)
+                attempt.executed = not attempt.blocked
+                attempt.succeeded = (
+                    None
+                    if attempt.blocked
+                    else _tool_result_succeeded(message, result)
+                )
 
     answer = None
     for message in reversed(messages):
@@ -178,7 +200,10 @@ def structured_result(
         run_metrics=RunMetrics(
             latency_sec=round(latency_sec, 3),
             sql_attempt_count=len(sql_attempts),
-            sql_failed_count=sum(not attempt.succeeded for attempt in sql_attempts),
+            sql_failed_count=sum(
+                attempt.executed and attempt.succeeded is False
+                for attempt in sql_attempts
+            ),
             model_time_sec=(
                 round(model_time_sec, 3) if model_time_sec is not None else None
             ),
