@@ -7,6 +7,8 @@ from langgraph.prebuilt import ToolNode
 
 from .. import tools
 
+MAX_SQL_ATTEMPTS = 5
+
 
 def list_tables(state: MessagesState):
     tool_call = {
@@ -63,7 +65,14 @@ def should_continue(state: MessagesState) -> Literal[END, "run_query"]:
     tool_calls = state["messages"][-1].tool_calls
     if not tool_calls:
         return END
-    return "run_query"
+
+    sql_attempt_count = sum(
+        1
+        for message in state["messages"]
+        for tool_call in getattr(message, "tool_calls", []) or []
+        if tool_call.get("name") == tools.sql_db_query.name
+    )
+    return "run_query" if sql_attempt_count <= MAX_SQL_ATTEMPTS else END
 
 
 def build_graph(model):
