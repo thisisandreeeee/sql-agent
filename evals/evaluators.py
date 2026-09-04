@@ -111,7 +111,7 @@ def groundedness_evaluator(result: RunResult) -> EvaluatorResult:
 
 def sql_usage_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
     used_sql = bool(result.sql_attempts)
-    score = used_sql == case.sql_required
+    score = float(used_sql == case.sql_required)
     if score:
         comment = None
     elif case.sql_required:
