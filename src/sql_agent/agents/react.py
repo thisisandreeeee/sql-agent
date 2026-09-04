@@ -21,6 +21,9 @@ statements that modify the database.
 
 When a query fails, inspect the error, correct the query, and retry.
 
+If the database does not contain sufficient information to answer the user's question, say so.
+Do not guess, infer unsupported facts, or continue querying once you have established that the required data is unavailable.
+
 Once you have enough information, answer the user's question directly.
 """
 
