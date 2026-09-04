@@ -32,10 +32,10 @@ uv run python -m sql_agent.main "Who is the fastest driver?"
 
 ## Database
 
-The checked-in fixture is Spider's `formula_1` SQLite database. It contains 13
-tables covering races, drivers, constructors, results, standings, qualifying,
-pit stops, and lap times. Fixtures in `data/` are immutable; the seed script
-creates the disposable runtime copy at `var/sql-agent.sqlite`.
+The checked-in fixture is the official Spider `formula_1` SQLite database. It
+contains 13 tables covering races, drivers, constructors, results, standings,
+qualifying, pit stops, and lap times. Fixtures in `data/` are immutable; the
+seed script creates the disposable runtime copy at `var/sql-agent.sqlite`.
 
 Create or refresh the runtime database and run the smoke query:
 
@@ -50,33 +50,39 @@ For manual exploration:
 sqlite3 -readonly var/sql-agent.sqlite
 ```
 
-The current fixture was downloaded from [Spider](https://yale-lily.github.io/spider),
-which is released under CC BY-SA 4.0. It is pinned to this
-[dataset mirror revision](https://huggingface.co/datasets/prem-research/spider/tree/2abe051bece3132d964271f79dc8589a84e63d06).
+The current fixture was downloaded from the [official Spider project
+page](https://yale-lily.github.io/spider), which links to the official
+[`spider_data.zip` Google Drive archive](https://drive.google.com/file/d/1403EGqzIDoHMdQF4c9Bkyl7dZLZ5Wt6J/view?usp=sharing).
+Spider is released under the CC BY-SA 4.0 license. The archive is extracted
+using its `database/<database_id>/<database_id>.sqlite` layout; this project
+uses `database/formula_1/formula_1.sqlite`.
 
-- Download URL: `https://huggingface.co/datasets/prem-research/spider/resolve/2abe051bece3132d964271f79dc8589a84e63d06/database/formula_1/formula_1.sqlite`
-- File size: 2,940,928 bytes
-- SHA-256: `fb6dad97c0a4da22f01bdf817a77fe8f6b6559554661ff0120b40cb81b8c3b68`
+- Archive name: `spider_data.zip`
+- Archive size: 205,800,266 bytes
+- Archive SHA-256: `00636695dabed6b5f4b8328a16b13e069a2f16591d5efcce57660669c85b121b`
+- SQLite source: `data/database/formula_1/formula_1.sqlite`
+- SQLite file size: 2,940,928 bytes
+- SQLite SHA-256: `fb6dad97c0a4da22f01bdf817a77fe8f6b6559554661ff0120b40cb81b8c3b68`
 
 Verify the fixture with:
 
 ```bash
-shasum -a 256 data/formula_1.sqlite
+shasum -a 256 data/database/formula_1/formula_1.sqlite
 ```
 
 ### Adding a dataset
 
 For each additional database:
 
-1. Store it as `data/<database_id>.sqlite`, or in a dedicated subdirectory if
-   it needs multiple files.
+1. Store it as `data/database/<database_id>/<database_id>.sqlite`, preserving
+   the Spider database layout.
 2. Pin and record the source URL or release revision, license, file size, and
    SHA-256 checksum.
 3. Validate it before committing:
 
    ```bash
-   sqlite3 -readonly data/<database_id>.sqlite 'PRAGMA quick_check;'
-   sqlite3 -readonly data/<database_id>.sqlite '.tables'
+   sqlite3 -readonly data/database/<database_id>/<database_id>.sqlite 'PRAGMA quick_check;'
+   sqlite3 -readonly data/database/<database_id>/<database_id>.sqlite '.tables'
    ```
 
 4. Update the seed script and add a smoke query for its main joins.
@@ -110,6 +116,8 @@ prefix and records `agent_type` at the top level.
 
 ## Backlog
 
-- Improve evaluation harness: add sql validity, run metrics, and other P0 evaluators.
+- Stop graph recursion and terminate cleanly on empty tables.
+- Include evaluation cases that are prone to hallucination.
+- Repair the contradictory and nondeterministic evaluation cases.
 - Create comprehensive benchmark dataset.
 - Improve workflow harness: e.g. schema context, deterministic SQL validation, and structured query planning.
