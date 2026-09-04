@@ -123,7 +123,7 @@ def sql_usage_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
 
 def sql_failure_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
     failures = result.run_metrics.sql_failed_count
-    score = failures <= case.max_sql_failures
+    score = float(failures <= case.max_sql_failures)
     comment = (
         None
         if score
