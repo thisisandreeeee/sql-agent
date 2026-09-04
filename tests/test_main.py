@@ -1,7 +1,9 @@
 import unittest
 from types import SimpleNamespace
 
-from sql_agent.agents.graph import should_continue
+from langgraph.graph import END
+
+from sql_agent.agents.graph import MAX_SQL_ATTEMPTS, should_continue
 from sql_agent.types import structured_result
 
 
@@ -108,6 +110,23 @@ class StructuredResultTests(unittest.TestCase):
         }
 
         self.assertEqual(should_continue(state), "run_query")
+
+    def test_stops_graph_after_bounded_sql_attempts(self):
+        tool_calls = [
+            {
+                "name": "sql_db_query",
+                "args": {"query": "SELECT 1"},
+                "id": f"query-{index}",
+            }
+            for index in range(MAX_SQL_ATTEMPTS + 1)
+        ]
+        state = {
+            "messages": [
+                SimpleNamespace(tool_calls=tool_calls),
+            ]
+        }
+
+        self.assertEqual(should_continue(state), END)
 
 
 if __name__ == "__main__":
