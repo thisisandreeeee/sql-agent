@@ -39,7 +39,7 @@ def main(agent_type: str = "graph") -> int:
             failed += 1
             continue
 
-        passed = all(score["score"] for score in scores)
+        passed = all(score["score"] == 1.0 for score in scores)
         print(f"{'PASS' if passed else 'FAIL'} {case.name}")
         for score in scores:
             print(f"  {score['key']}: {score['score']}")
@@ -157,7 +157,7 @@ def summarize(cases: list[dict]) -> dict:
     ]
     passed_cases = sum(
         case["error"] is None
-        and all(score.get("score") for score in case["evaluations"])
+        and all(score.get("score") == 1.0 for score in case["evaluations"])
         for case in cases
     )
     summary = {
