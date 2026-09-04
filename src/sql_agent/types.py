@@ -124,7 +124,7 @@ def structured_result(
     latency_sec: float,
     model_time_sec: float | None = None,
 ) -> RunResult:
-    """Convert the graph state into a JSON-serializable evaluation result."""
+    """Convert an agent state into a JSON-serializable evaluation result."""
     messages = state["messages"]
     tool_trace: list[ToolCall] = []
     sql_attempts: list[SqlAttempt] = []

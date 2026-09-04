@@ -7,7 +7,7 @@ from pathlib import Path
 import yaml
 from openevals.types import EvaluatorResult
 
-from sql_agent.graph import build_graph
+from sql_agent.agents import build_agent
 from sql_agent.main import build_model
 from sql_agent.types import ModelTimingCallback, RunResult, structured_result
 
@@ -24,15 +24,15 @@ from evals.evaluators import (
 from evals.types import EvalCase
 
 
-def main(run_prefix: str | None = None) -> int:
+def main(agent_type: str = "graph") -> int:
     with (Path(__file__).parent / "cases.yaml").open() as cases_file:
         cases = [EvalCase.model_validate(case) for case in yaml.safe_load(cases_file)]
 
-    graph = build_graph(build_model()).compile()
+    agent = build_agent(build_model(), agent_type)
     failed = 0
     records = []
     for case in cases:
-        record, scores, error = _run_case(case, graph)
+        record, scores, error = _run_case(case, agent)
         records.append(record)
         if error is not None:
             print(f"FAIL {case.name}: {error}")
@@ -47,18 +47,22 @@ def main(run_prefix: str | None = None) -> int:
             print(scores)
             failed += 1
 
-    run = {"summary": summarize(records), "cases": records}
+    run = {
+        "agent_type": agent_type,
+        "summary": summarize(records),
+        "cases": records,
+    }
     run_path = next_run_path(
-        Path(__file__).resolve().parents[1] / "runs", run_prefix
+        Path(__file__).resolve().parents[1] / "runs", agent_type
     )
     run_path.write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
     print(f"Saved evaluation run to {run_path}")
     return int(failed > 0)
 
 
-def run_case(case: EvalCase, graph) -> list[EvaluatorResult]:
+def run_case(case: EvalCase, agent) -> list[EvaluatorResult]:
     """Run one case and return its evaluations."""
-    _, evaluations, error = _run_case(case, graph)
+    _, evaluations, error = _run_case(case, agent)
     if error is not None:
         raise error
     return evaluations
@@ -71,7 +75,7 @@ def persisted_result(result: RunResult | None) -> dict | None:
 
 
 def _run_case(
-    case: EvalCase, graph
+    case: EvalCase, agent
 ) -> tuple[dict, list[EvaluatorResult], Exception | None]:
     result = None
     evaluations = []
@@ -79,7 +83,7 @@ def _run_case(
     try:
         started_at = time.perf_counter()
         timing = ModelTimingCallback()
-        state = graph.invoke(
+        state = agent.invoke(
             {"messages": [{"role": "user", "content": case.question}]},
             config={"callbacks": [timing], "recursion_limit": 50},
         )
@@ -127,14 +131,13 @@ def _run_case(
     )
 
 
-def next_run_path(runs_dir: Path, run_prefix: str | None = None) -> Path:
+def next_run_path(runs_dir: Path, agent_type: str) -> Path:
     runs_dir.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%dT%H%M%S.%f")
-    filename_prefix = f"{run_prefix}_" if run_prefix else ""
-    path = runs_dir / f"{filename_prefix}{timestamp}.json"
+    path = runs_dir / f"{agent_type}_{timestamp}.json"
     suffix = 1
     while path.exists():
-        path = runs_dir / f"{filename_prefix}{timestamp}_{suffix:04d}.json"
+        path = runs_dir / f"{agent_type}_{timestamp}_{suffix:04d}.json"
         suffix += 1
     return path
 
@@ -202,5 +205,5 @@ def summarize(cases: list[dict]) -> dict:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--run-prefix")
-    raise SystemExit(main(parser.parse_args().run_prefix))
+    parser.add_argument("--agent-type", choices=("graph", "react"), default="graph")
+    raise SystemExit(main(parser.parse_args().agent_type))

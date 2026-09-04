@@ -8,8 +8,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 from langchain.chat_models import init_chat_model
 
+from .agents import build_agent
 from .types import ModelTimingCallback, error_result, structured_result
-from .graph import build_graph
 
 ROOT = Path(__file__).resolve().parents[2]
 MODEL = "deepseek-v4-flash"
@@ -44,8 +44,8 @@ def main() -> int:
     model_timing = ModelTimingCallback()
     try:
         model = build_model()
-        graph = build_graph(model)
-        final_state = graph.compile().invoke(
+        agent = build_agent(model, agent_type="react")
+        final_state = agent.invoke(
             {"messages": [{"role": "user", "content": args.query}]},
             config={"callbacks": [model_timing], "recursion_limit": 50},
         )
