@@ -34,6 +34,12 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("query")
     parser.add_argument(
+        "--agent-type",
+        choices=("graph", "react"),
+        default="react",
+        help="Agent workflow to use (default: react).",
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         help="Write the structured evaluation result to this JSON file.",
@@ -44,7 +50,7 @@ def main() -> int:
     model_timing = ModelTimingCallback()
     try:
         model = build_model()
-        agent = build_agent(model, agent_type="react")
+        agent = build_agent(model, agent_type=args.agent_type)
         final_state = agent.invoke(
             {"messages": [{"role": "user", "content": args.query}]},
             config={"callbacks": [model_timing], "recursion_limit": 50},
