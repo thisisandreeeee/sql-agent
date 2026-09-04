@@ -1,6 +1,8 @@
 # SQL Agent
 
 A minimal SQL agent built with [LangGraph](https://langchain-ai.github.io/langgraph/).
+It includes a deterministic graph agent (`graph`) and a ReAct agent (`react`)
+that use the same database tools.
 
 ## Setup
 
@@ -90,21 +92,24 @@ Run the unit tests:
 uv run pytest -q
 ```
 
-Evaluation cases call the live model and are separate from the unit-test run:
+Evaluation cases call the live model and are separate from the unit-test run.
+The deterministic graph is the default:
 
 ```bash
-uv run python -m evals.runner
+uv run python -m evals.runner --agent-type graph
 ```
 
-To prefix the generated run filename, pass `--run-prefix`:
+Run the ReAct comparison with:
 
 ```bash
-uv run python -m evals.runner --run-prefix benchmark
+uv run python -m evals.runner --agent-type react
 ```
+
+Each evaluation artifact is written with the selected agent type as its filename
+prefix and records `agent_type` at the top level.
 
 ## Backlog
 
 - Improve evaluation harness: add sql validity, run metrics, and other P0 evaluators.
 - Create comprehensive benchmark dataset.
 - Improve workflow harness: e.g. schema context, deterministic SQL validation, and structured query planning.
-- Compare a deterministic workflow with a ReAct-style loop.
