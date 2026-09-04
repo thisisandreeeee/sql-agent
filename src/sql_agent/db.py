@@ -7,10 +7,32 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATABASE = ROOT / "var" / "sql-agent.sqlite"
 
+_READ_ONLY_ACTIONS = {
+    sqlite3.SQLITE_SELECT,
+    sqlite3.SQLITE_READ,
+    sqlite3.SQLITE_FUNCTION,
+    sqlite3.SQLITE_RECURSIVE,
+}
+
+
+def _read_only_authorizer(action, arg1, arg2, database_name, trigger_name):
+    """Allow queries only; deny writes, attachments, and connection changes."""
+    return (
+        sqlite3.SQLITE_OK
+        if action in _READ_ONLY_ACTIONS
+        else sqlite3.SQLITE_DENY
+    )
+
+
+def _connect_read_only(database: Path) -> sqlite3.Connection:
+    connection = sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True)
+    connection.set_authorizer(_read_only_authorizer)
+    return connection
+
 
 def list_tables(database: Path = DEFAULT_DATABASE) -> list[str]:
     """Return non-system table names from the SQLite database."""
-    with sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True) as connection:
+    with _connect_read_only(database) as connection:
         return [
             row[0]
             for row in connection.execute(
@@ -27,7 +49,7 @@ def schema(table_names: str, database: Path = DEFAULT_DATABASE) -> str:
     if not names:
         return "Error: at least one table name is required"
 
-    with sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True) as connection:
+    with _connect_read_only(database) as connection:
         definitions = {
             row[0]: row[1]
             for row in connection.execute(
@@ -63,7 +85,7 @@ def query(sql: str, database: Path = DEFAULT_DATABASE) -> str:
     if not sql.strip():
         return "Error: SQL query is required"
 
-    with sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True) as connection:
+    with _connect_read_only(database) as connection:
         try:
             rows = connection.execute(sql).fetchall()
         except sqlite3.Error as error:
