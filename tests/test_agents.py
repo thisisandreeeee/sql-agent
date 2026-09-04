@@ -1,6 +1,8 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
+from langchain.agents.middleware import ToolCallLimitMiddleware
+
 from sql_agent import tools
 from sql_agent.agents import build_agent
 from sql_agent.agents.react import REACT_SYSTEM_PROMPT, build_react_agent
@@ -38,15 +40,21 @@ class ReactAgentTests(unittest.TestCase):
         model = MagicMock()
         build_react_agent(model)
 
-        create_agent.assert_called_once_with(
-            model=model,
-            tools=[
+        create_agent.assert_called_once()
+        kwargs = create_agent.call_args.kwargs
+        self.assertIs(kwargs["model"], model)
+        self.assertEqual(
+            kwargs["tools"],
+            [
                 tools.sql_db_list_tables,
                 tools.sql_db_schema,
                 tools.sql_db_query,
             ],
-            system_prompt=REACT_SYSTEM_PROMPT,
         )
+        self.assertEqual(kwargs["system_prompt"], REACT_SYSTEM_PROMPT)
+        self.assertEqual(len(kwargs["middleware"]), 1)
+        self.assertIsInstance(kwargs["middleware"][0], ToolCallLimitMiddleware)
+        self.assertEqual(kwargs["middleware"][0].run_limit, 5)
 
 
 if __name__ == "__main__":
