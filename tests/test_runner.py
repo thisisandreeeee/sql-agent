@@ -31,7 +31,7 @@ class SummaryTests(unittest.TestCase):
                     }
                 },
                 "evaluations": [
-                    {"key": "correctness", "score": True},
+                    {"key": "correctness", "score": 1.0},
                     {"key": "relevance", "score": 0.5},
                 ],
                 "error": None,
@@ -49,8 +49,8 @@ class SummaryTests(unittest.TestCase):
                     }
                 },
                 "evaluations": [
-                    {"key": "correctness", "score": False},
-                    {"key": "relevance", "score": True},
+                    {"key": "correctness", "score": 0.0},
+                    {"key": "relevance", "score": 1.0},
                 ],
                 "error": None,
             },
@@ -59,7 +59,7 @@ class SummaryTests(unittest.TestCase):
         summary = summarize(cases)
 
         self.assertEqual(summary["total_cases"], 2)
-        self.assertEqual(summary["passed_cases"], 1)
+        self.assertEqual(summary["passed_cases"], 0)
         self.assertEqual(summary["latency_sec"], {"total": 4.0, "mean": 2.0})
         self.assertEqual(summary["output_tokens"], {"total": 30, "mean": 15.0})
         self.assertEqual(summary["output_tokens_per_second"], 6.0)
@@ -68,6 +68,28 @@ class SummaryTests(unittest.TestCase):
         self.assertEqual(
             summary["score_means"], {"correctness": 0.5, "relevance": 0.75}
         )
+
+    def test_passed_cases_require_exact_one_scores(self):
+        summary = summarize(
+            [
+                {
+                    "result": None,
+                    "evaluations": [
+                        {"key": "correctness", "score": 1.0},
+                    ],
+                    "error": None,
+                },
+                {
+                    "result": None,
+                    "evaluations": [
+                        {"key": "correctness", "score": 0.5},
+                    ],
+                    "error": None,
+                }
+            ]
+        )
+
+        self.assertEqual(summary["passed_cases"], 1)
 
     def test_persisted_result_excludes_messages_and_duplicate_question(self):
         result = RunResult(
