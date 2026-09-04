@@ -1,4 +1,5 @@
 from langchain.agents import create_agent
+from langchain.agents.middleware import ToolCallLimitMiddleware
 
 from .. import tools
 
@@ -33,4 +34,5 @@ def build_react_agent(model):
             tools.sql_db_query,
         ],
         system_prompt=REACT_SYSTEM_PROMPT,
+        middleware=[ToolCallLimitMiddleware(run_limit=5)],
     )
