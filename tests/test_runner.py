@@ -3,11 +3,9 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 from evals.runner import next_run_path, persisted_result, summarize
-from unittest.mock import patch
 
 from evals.evaluators import (
     sql_failure_evaluator,
-    sql_result_evaluator,
     sql_usage_evaluator,
 )
 from evals.types import EvalCase
@@ -165,64 +163,6 @@ class SqlUsageEvaluatorTests(unittest.TestCase):
         )
 
         evaluation = sql_usage_evaluator(result, case)
-
-        self.assertFalse(evaluation["score"])
-
-
-class SqlResultEvaluatorTests(unittest.TestCase):
-    @patch("evals.evaluators.db.query", return_value="[(1,), (2,)]")
-    def test_ignores_row_order_without_order_by(self, _query):
-        result = RunResult(
-            status="success",
-            question="List the values.",
-            answer="1 and 2",
-            sql_attempts=[
-                SqlAttempt(
-                    query="SELECT value FROM values",
-                    result="[(2,), (1,)]",
-                    succeeded=True,
-                )
-            ],
-            run_metrics=RunMetrics(
-                latency_sec=1.0, sql_attempt_count=1, sql_failed_count=0
-            ),
-        )
-        case = EvalCase(
-            name="values",
-            question=result.question,
-            reference_answer="1 and 2",
-            gold_sql="SELECT value FROM values",
-        )
-
-        evaluation = sql_result_evaluator(result, case)
-
-        self.assertTrue(evaluation["score"])
-
-    @patch("evals.evaluators.db.query", return_value="[(1,), (2,)]")
-    def test_preserves_row_order_with_order_by(self, _query):
-        result = RunResult(
-            status="success",
-            question="List the values in order.",
-            answer="2 and 1",
-            sql_attempts=[
-                SqlAttempt(
-                    query="SELECT value FROM values ORDER BY value DESC",
-                    result="[(2,), (1,)]",
-                    succeeded=True,
-                )
-            ],
-            run_metrics=RunMetrics(
-                latency_sec=1.0, sql_attempt_count=1, sql_failed_count=0
-            ),
-        )
-        case = EvalCase(
-            name="ordered_values",
-            question=result.question,
-            reference_answer="1 and 2",
-            gold_sql="SELECT value FROM values ORDER BY value",
-        )
-
-        evaluation = sql_result_evaluator(result, case)
 
         self.assertFalse(evaluation["score"])
 

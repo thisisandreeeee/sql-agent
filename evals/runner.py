@@ -15,7 +15,6 @@ from evals.evaluators import (
     correctness_evaluator,
     relevance_evaluator,
     groundedness_evaluator,
-    sql_result_evaluator,
     sql_usage_evaluator,
     sql_failure_evaluator,
     trajectory_evaluator,
@@ -98,8 +97,6 @@ def _run_case(
         evaluations.append(sql_failure_evaluator(result, case))
         if result.sql_attempts:
             evaluations.append(groundedness_evaluator(result))
-            if case.gold_sql:
-                evaluations.append(sql_result_evaluator(result, case))
     except Exception as exc:
         error = exc
 

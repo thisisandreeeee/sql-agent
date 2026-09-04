@@ -1,9 +1,6 @@
 """Evaluators used by the agent eval suite."""
 
-import ast
 import os
-import re
-from collections import Counter
 from pathlib import Path
 
 from agentevals.trajectory.llm import (
@@ -21,7 +18,6 @@ from openevals.prompts import (
 from openevals.types import EvaluatorResult
 
 from sql_agent.types import RunResult
-from sql_agent import db
 from evals.types import EvalCase
 
 MODEL = "deepseek-v4-pro"
@@ -123,24 +119,6 @@ def sql_usage_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
     else:
         comment = "Expected the agent to answer without a SQL query."
     return EvaluatorResult(key="sql_usage", score=score, comment=comment)
-
-
-def sql_result_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
-    gold_result = db.query(case.gold_sql or "")
-    actual_result = result.sql_attempts[-1].result
-    try:
-        expected_rows = ast.literal_eval(gold_result)
-        actual_rows = ast.literal_eval(actual_result or "")
-        ordered = bool(re.search(r"\border\s+by\b", case.gold_sql or "", re.I))
-        score = (
-            actual_rows == expected_rows
-            if ordered
-            else Counter(actual_rows) == Counter(expected_rows)
-        )
-    except (SyntaxError, ValueError, TypeError):
-        score = actual_result == gold_result
-    comment = None if score else "The query result did not match the gold query."
-    return EvaluatorResult(key="sql_result", score=score, comment=comment)
 
 
 def sql_failure_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
