@@ -1,7 +1,7 @@
 from typing import Literal
 from uuid import uuid4
 
-from langchain.messages import AIMessage
+from langchain.messages import AIMessage, ToolMessage
 from langgraph.graph import END, START, MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 
@@ -61,7 +61,39 @@ def make_generate_query_node(model):
     return generate_query
 
 
-def should_continue(state: MessagesState) -> Literal[END, "run_query"]:
+FINALIZE_SYSTEM_PROMPT = """
+You must now provide the final answer without calling any tools.
+Use only the information already returned by the database tools.
+If that information is insufficient, say so clearly instead of guessing.
+Answer the user's question directly and mention that the SQL query limit was
+reached only if it is relevant to explaining an incomplete answer.
+"""
+
+
+def make_finalize_node(model):
+    def finalize(state: MessagesState):
+        pending_tool_messages = [
+            ToolMessage(
+                content=(
+                    "SQL query limit reached; this query was not executed. "
+                    "Formulate the answer using the completed tool results."
+                ),
+                tool_call_id=tool_call["id"],
+                name=tool_call.get("name"),
+            )
+            for tool_call in getattr(state["messages"][-1], "tool_calls", []) or []
+        ]
+        response = model.invoke(
+            [{"role": "system", "content": FINALIZE_SYSTEM_PROMPT}]
+            + state["messages"]
+            + pending_tool_messages
+        )
+        return {"messages": [*pending_tool_messages, response]}
+
+    return finalize
+
+
+def should_continue(state: MessagesState) -> Literal[END, "run_query", "finalize"]:
     tool_calls = state["messages"][-1].tool_calls
     if not tool_calls:
         return END
@@ -72,7 +104,7 @@ def should_continue(state: MessagesState) -> Literal[END, "run_query"]:
         for tool_call in getattr(message, "tool_calls", []) or []
         if tool_call.get("name") == tools.sql_db_query.name
     )
-    return "run_query" if sql_attempt_count <= MAX_SQL_ATTEMPTS else END
+    return "run_query" if sql_attempt_count <= MAX_SQL_ATTEMPTS else "finalize"
 
 
 def build_graph(model):
@@ -83,6 +115,7 @@ def build_graph(model):
     graph.add_node("get_schema", ToolNode([tools.sql_db_schema], name="get_schema"))
     graph.add_node("generate_query", make_generate_query_node(model))
     graph.add_node("run_query", ToolNode([tools.sql_db_query], name="run_query"))
+    graph.add_node("finalize", make_finalize_node(model))
 
     graph.add_edge(START, "list_tables")
     graph.add_edge("list_tables", "call_get_schema")
@@ -90,5 +123,6 @@ def build_graph(model):
     graph.add_edge("get_schema", "generate_query")
     graph.add_conditional_edges("generate_query", should_continue)
     graph.add_edge("run_query", "generate_query")
+    graph.add_edge("finalize", END)
 
     return graph.compile()
