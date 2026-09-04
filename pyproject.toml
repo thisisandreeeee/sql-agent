@@ -1,7 +1,7 @@
 [project]
 name = "sql-agent"
 version = "0.1.0"
-description = "A minimal SQL agent scaffold built with LangGraph."
+description = "An evaluated natural-language-to-SQL agent experiment built with LangGraph."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
