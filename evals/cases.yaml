@@ -544,9 +544,25 @@
 - name: formula_1_062
   question: "What is the id and last name of the driver who participated in the most races after 2010?"
   reference_answer: >-
-    Driver 20, Vettel, participated in the most races after 2010.
+    Drivers 1, Hamilton, and 20, Vettel, tied for the most races after 2010,
+    with 137 races each.
   gold_sql: |
-    SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid  =  T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid WHERE T3.year > 2010 GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1
+    SELECT T1.driverid, T1.surname
+    FROM drivers AS T1
+    JOIN results AS T2 ON T1.driverid = T2.driverid
+    JOIN races AS T3 ON T2.raceid = T3.raceid
+    WHERE T3.year > 2010
+    GROUP BY T1.driverid, T1.surname
+    HAVING count(*) = (
+      SELECT max(race_count)
+      FROM (
+        SELECT count(*) AS race_count
+        FROM results AS T4
+        JOIN races AS T5 ON T4.raceid = T5.raceid
+        WHERE T5.year > 2010
+        GROUP BY T4.driverid
+      )
+    )
 - name: formula_1_064
   question: "What are the names of circuits that belong to UK or Malaysia?"
   reference_answer: >-
