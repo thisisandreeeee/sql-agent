@@ -104,8 +104,12 @@ def groundedness_evaluator(result: RunResult) -> EvaluatorResult:
         judge=build_model(),
         choices=JUDGE_SCORE_CHOICES,
     )
-    latest_attempt = result.sql_attempts[-1]
-    context = f"Question: {result.question}\nSQL: {latest_attempt.query}\nResult: {latest_attempt.result}"
+    attempts = "\n\n".join(
+        f"Attempt {i}:\nSQL: {attempt.query}\nResult: {attempt.result}"
+        for i, attempt in enumerate(result.sql_attempts, 1)
+        if attempt.succeeded and attempt.result is not None
+    )
+    context = f"Question: {result.question}\nSQL evidence:\n{attempts}"
     return evaluator(context=context, outputs=result.answer)
 
 
