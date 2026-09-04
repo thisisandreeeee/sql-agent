@@ -1,50 +1,103 @@
-# SQL Agent
+# sql-agent
 
-A small, evaluated natural-language-to-SQL experiment built with
-[LangGraph](https://langchain-ai.github.io/langgraph/). It answers questions
-against a local SQLite database and compares two workflows:
+A minimal [LangGraph](https://langchain-ai.github.io/langgraph/) SQL agent
+that answers questions using a local SQLite database.
+
+Two agent styles are included:
 
 - `graph`: a fixed list-tables → schema → query → answer workflow.
 - `react`: a model-directed tool loop using the same database tools.
 
-The goal is to make the full path inspectable: database provenance, generated
-SQL, returned rows, final answer, latency, token usage, and evaluation scores.
-This is an engineering benchmark, not a production data service.
+The project is an evaluation harness for comparing these styles. It is meant
+to make agent performance measurable and inspectable, not to build the best
+possible SQL agent.
 
 ## How it works
 
-1. The checked-in Spider Formula 1 fixture is validated and copied to the
-   disposable runtime database at `var/sql-agent.sqlite`.
-2. The agent can list tables, inspect schemas with sample rows, and execute
-   SQL.
-3. SQLite connections use `mode=ro` plus an authorizer that permits reads only;
-   writes, DDL, `ATTACH`/`DETACH`, and connection-changing pragmas are denied.
-4. Both workflows bound SQL attempts to five per run. Results are converted to
-   a versioned `RunResult` containing the answer, SQL attempts, tool trace, and
-   run metrics.
+```mermaid
+flowchart TB
+    F["Checked-in SQLite fixture"] -->|"validate and copy"| D["var/sql-agent.sqlite"]
+    D -.-> T["Read-only database tools"]
 
-The application uses `deepseek-v4-flash`. The evaluation judges use
-`deepseek-v4-pro`, so running evaluations requires a live API key and can be
-non-deterministic.
+    Q["User question"] --> G1
+    subgraph Graph["graph"]
+        direction LR
+        G1["List tables"] --> G2["Inspect schema"] --> G3["Generate SQL"] --> G4["Run SQL"]
+        G4 -->|"retry on error; max 10 SQL attempts"| G3
+        G3 --> G5["Answer"]
+        G4 --> G5
+    end
 
-## Example trace
+    Q --> R1
+    subgraph ReAct["react"]
+        direction LR
+        R1["Model chooses a tool"] --> R2["Inspect result"] --> R3{"Enough evidence?"}
+        R3 -->|"no"| R1
+        R3 -->|"yes"| R4["Answer"]
+    end
 
-For the question “How many races are in the database?”, an abbreviated trace
-looks like this:
-
-```text
-User:  How many races are in the database?
-Tool:  sql_db_list_tables()
-Tool:  sql_db_schema("races")
-Tool:  sql_db_query("SELECT COUNT(*) FROM races")
-       -> [(997,)]
-Agent: There are 997 races in the database.
+    T -.-> G1
+    T -.-> R1
 ```
 
-The complete tool trace, SQL attempts, returned rows, and run metrics are
-available in the structured result when the CLI is run with `--output`.
+Both agents can use three tools:
 
-## Quick start
+- `sql_db_list_tables`: list the available tables.
+- `sql_db_schema`: inspect table definitions and up to three sample rows.
+- `sql_db_query`: execute a read-only SQL query and return its rows.
+
+## Evaluation metrics
+
+The evaluation suite scores each case with the applicable metrics below:
+
+- **Correctness** — compares the answer with the reference answer.
+- **Relevance** — measures whether the answer directly addresses the question.
+- **Trajectory** — assesses whether the tool-use path is sound and reasonably efficient.
+- **Groundedness** — checks that claims are supported by returned SQL results.
+- **SQL usage** — checks whether the agent queried the database when the case required it, and avoided SQL when it did not.
+- **SQL failure limit** — checks that failed SQL attempts stay within the case's allowed limit.
+
+## Experiment findings
+
+The fixed graph is faster and uses fewer tokens, making it cheaper under
+token-based pricing. It is strongest on straightforward data-pulling
+questions that mostly translate natural language into SQL. ReAct is more
+effective when the question requires analytical reasoning: it passed 12/14
+insight cases versus 9/14 for the graph and scored higher on insight
+correctness (0.893 versus 0.679). The graph was slightly better on data
+pulling, passing 27/43 cases versus ReAct's 26/43.
+
+### Overview metrics
+
+`ReAct vs. Graph` is calculated as `(ReAct - Graph) / Graph × 100`.
+
+| Metric             |      ReAct |      Graph | ReAct vs. Graph |
+| ------------------ | ---------: | ---------: | --------------: |
+| Pass rate          |      41/62 |      38/62 |         +7.895% |
+| Mean latency (sec) |     11.157 |      8.821 |        +26.482% |
+| Mean total tokens  | 14,650.210 | 12,103.290 |        +21.043% |
+
+### Drill-down: data-pulling questions
+
+| Metric       | ReAct | Graph | ReAct vs. Graph |
+| ------------ | ----: | ----: | --------------: |
+| Passed       | 26/43 | 27/43 |         -3.704% |
+| Correctness  | 0.814 | 0.826 |         -1.453% |
+| Relevance    | 0.930 | 0.942 |         -1.274% |
+| Trajectory   | 0.919 | 0.919 |         -0.000% |
+| Groundedness | 0.953 | 0.942 |         +1.168% |
+
+### Drill-down: insight questions
+
+| Metric       | ReAct | Graph | ReAct vs. Graph |
+| ------------ | ----: | ----: | --------------: |
+| Passed       | 12/14 |  9/14 |        +33.333% |
+| Correctness  | 0.893 | 0.679 |        +31.517% |
+| Relevance    | 1.000 | 0.893 |        +11.982% |
+| Trajectory   | 1.000 | 0.893 |        +11.982% |
+| Groundedness | 1.000 | 0.929 |         +7.643% |
+
+## Run, evaluate, and test
 
 Install [uv](https://docs.astral.sh/uv/) if needed, then install dependencies:
 
@@ -76,6 +129,22 @@ For manual database exploration:
 sqlite3 -readonly var/sql-agent.sqlite
 ```
 
+Run the evaluation suite for either workflow:
+
+```bash
+uv run python -m evals.runner --agent-type graph
+uv run python -m evals.runner --agent-type react
+```
+
+Each evaluation writes an ignored, timestamped JSON artifact under `runs/`.
+Run the local checks with:
+
+```bash
+uv run pytest -q
+uv run python data/seed_db.py
+uv run python data/smoke_query.py
+```
+
 ## Data provenance
 
 The fixture is the official Spider `formula_1` SQLite database. Spider covers
@@ -100,40 +169,3 @@ To add a dataset, preserve the `data/database/<database_id>/` layout, record
 its source, license, size, and SHA-256, validate it with `PRAGMA quick_check`,
 and add a representative smoke query. Keep source fixtures immutable and use
 `var/` for runtime copies.
-
-## Evaluation
-
-The evaluation cases in `evals/cases.yaml` cover database facts, joins, aggregations,
-empty-result questions, metadata, out-of-scope requests, and safety behavior.
-Run either workflow with:
-
-```bash
-uv run python -m evals.runner --agent-type graph
-uv run python -m evals.runner --agent-type react
-```
-
-Each run writes an ignored, timestamped JSON artifact under `runs/`. For
-historical context, a recorded 48-case snapshot from 2026-09-04, before both
-the current 62-case suite and the graph loop guard in this review, was:
-
-| Workflow | Passed | Mean latency | Correctness | Groundedness |
-| -------- | -----: | -----------: | ----------: | -----------: |
-| Graph    |  28/48 |      9.926 s |       0.826 |        0.939 |
-| ReAct    |  28/48 |      7.877 s |       0.792 |        0.965 |
-
-These results are directional because both generation and judging use live
-models. The main learning is that valid, bounded SQL execution is not enough:
-the remaining failures mostly involve interpreting large or empty result sets
-and producing an exact answer. The graph was more accurate in this snapshot;
-ReAct was faster and slightly better grounded. Re-run the benchmark after code
-changes before treating the numbers as a baseline.
-
-## Tests and project status
-
-Run the local checks with:
-
-```bash
-uv run pytest -q
-uv run python data/seed_db.py
-uv run python data/smoke_query.py
-```
