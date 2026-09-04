@@ -1263,77 +1263,6 @@
     Driver 22, Barrichello, participated in the most races.
   gold_sql: |
     SELECT T1.driverid ,  T1.surname FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid ORDER BY count(*) DESC LIMIT 1
-- name: formula_1_084
-  question: "What is the most recent race with at least one recorded result, and how many result rows does it have?"
-  reference_answer: >-
-    The most recent race with at least one recorded result was the Abu Dhabi Grand Prix on 2017-11-26,
-    with 20 result rows.
-  gold_sql: |
-    SELECT ra.name, ra.date, COUNT(r.resultId) AS result_count
-    FROM races AS ra
-    JOIN results AS r ON r.raceId = ra.raceId
-    GROUP BY ra.raceId, ra.name, ra.date
-    ORDER BY ra.date DESC
-    LIMIT 1
-- name: formula_1_086
-  question: "How many constructors have no recorded constructor results?"
-  reference_answer: >-
-    36 constructors have no recorded constructor results.
-  gold_sql: |
-    SELECT COUNT(*) AS constructors_without_results
-    FROM constructors AS c
-    LEFT JOIN constructorResults AS cr ON cr.constructorId = c.constructorId
-    WHERE cr.constructorResultsId IS NULL
-- name: formula_1_088
-  question: "How many races were won by a driver who started from pole position?"
-  reference_answer: >-
-    171 races were won by a driver who started from pole position.
-  gold_sql: |
-    SELECT COUNT(DISTINCT r.raceId) AS pole_wins
-    FROM results AS r
-    JOIN qualifying AS q
-      ON q.raceId = r.raceId AND q.driverId = r.driverId
-    WHERE r.position = '1' AND q.position = 1
-- name: formula_1_090
-  question: "What are the three most common race-result statuses?"
-  reference_answer: >-
-    The three most common race-result statuses were Finished (6009), +1 Lap (3314), and Engine (1980).
-  gold_sql: |
-    SELECT s.status, COUNT(*) AS result_count
-    FROM results AS r
-    JOIN status AS s ON s.statusId = r.statusId
-    GROUP BY s.statusId, s.status
-    ORDER BY result_count DESC, s.status
-    LIMIT 3
-- name: formula_1_092
-  question: "Which years were tied for having the most races, and how many races did each have?"
-  reference_answer: >-
-    2016 and 2018 were tied for the most races, with 21 races each.
-  gold_sql: |
-    WITH race_counts AS (
-      SELECT year, COUNT(*) AS race_count
-      FROM races
-      GROUP BY year
-    )
-    SELECT year, race_count
-    FROM race_counts
-    WHERE race_count = (SELECT MAX(race_count) FROM race_counts)
-    ORDER BY year
-- name: formula_1_094
-  question: "For the five constructors with the most wins, how many wins and podium finishes did each have?"
-  reference_answer: >-
-    The five constructors with the most wins were Ferrari (230 wins, 738 podium finishes), McLaren
-    (178 wins, 469 podium finishes), Williams (114 wins, 312 podium finishes), Mercedes (76 wins, 154
-    podium finishes), and Red Bull (55 wins, 148 podium finishes).
-  gold_sql: |
-    SELECT c.name,
-           SUM(CASE WHEN r.position = '1' THEN 1 ELSE 0 END) AS wins,
-           SUM(CASE WHEN r.position IN ('1', '2', '3') THEN 1 ELSE 0 END) AS podium_finishes
-    FROM constructors AS c
-    JOIN results AS r ON r.constructorId = c.constructorId
-    GROUP BY c.constructorId, c.name
-    ORDER BY wins DESC, c.name
-    LIMIT 5
 - name: formula_1_insight_001
   question: >-
     Which three drivers improved their points per race the most from 2014-2015 to 2016-2017 among
@@ -1596,6 +1525,77 @@
     WHERE p.points_per_race_2017 > m.median_points_per_race_2017
       AND p.improvement > 0
     ORDER BY p.improvement DESC, p.points_per_race_2017 DESC, p.constructorId
+- name: formula_1_insight_009
+  question: "What is the most recent race with at least one recorded result, and how many result rows does it have?"
+  reference_answer: >-
+    The most recent race with at least one recorded result was the Abu Dhabi Grand Prix on 2017-11-26,
+    with 20 result rows.
+  gold_sql: |
+    SELECT ra.name, ra.date, COUNT(r.resultId) AS result_count
+    FROM races AS ra
+    JOIN results AS r ON r.raceId = ra.raceId
+    GROUP BY ra.raceId, ra.name, ra.date
+    ORDER BY ra.date DESC
+    LIMIT 1
+- name: formula_1_insight_010
+  question: "How many constructors have no recorded constructor results?"
+  reference_answer: >-
+    36 constructors have no recorded constructor results.
+  gold_sql: |
+    SELECT COUNT(*) AS constructors_without_results
+    FROM constructors AS c
+    LEFT JOIN constructorResults AS cr ON cr.constructorId = c.constructorId
+    WHERE cr.constructorResultsId IS NULL
+- name: formula_1_insight_011
+  question: "How many races were won by a driver who started from pole position?"
+  reference_answer: >-
+    171 races were won by a driver who started from pole position.
+  gold_sql: |
+    SELECT COUNT(DISTINCT r.raceId) AS pole_wins
+    FROM results AS r
+    JOIN qualifying AS q
+      ON q.raceId = r.raceId AND q.driverId = r.driverId
+    WHERE r.position = '1' AND q.position = 1
+- name: formula_1_insight_012
+  question: "What are the three most common race-result statuses?"
+  reference_answer: >-
+    The three most common race-result statuses were Finished (6009), +1 Lap (3314), and Engine (1980).
+  gold_sql: |
+    SELECT s.status, COUNT(*) AS result_count
+    FROM results AS r
+    JOIN status AS s ON s.statusId = r.statusId
+    GROUP BY s.statusId, s.status
+    ORDER BY result_count DESC, s.status
+    LIMIT 3
+- name: formula_1_insight_013
+  question: "Which years were tied for having the most races, and how many races did each have?"
+  reference_answer: >-
+    2016 and 2018 were tied for the most races, with 21 races each.
+  gold_sql: |
+    WITH race_counts AS (
+      SELECT year, COUNT(*) AS race_count
+      FROM races
+      GROUP BY year
+    )
+    SELECT year, race_count
+    FROM race_counts
+    WHERE race_count = (SELECT MAX(race_count) FROM race_counts)
+    ORDER BY year
+- name: formula_1_insight_014
+  question: "For the five constructors with the most wins, how many wins and podium finishes did each have?"
+  reference_answer: >-
+    The five constructors with the most wins were Ferrari (230 wins, 738 podium finishes), McLaren
+    (178 wins, 469 podium finishes), Williams (114 wins, 312 podium finishes), Mercedes (76 wins, 154
+    podium finishes), and Red Bull (55 wins, 148 podium finishes).
+  gold_sql: |
+    SELECT c.name,
+           SUM(CASE WHEN r.position = '1' THEN 1 ELSE 0 END) AS wins,
+           SUM(CASE WHEN r.position IN ('1', '2', '3') THEN 1 ELSE 0 END) AS podium_finishes
+    FROM constructors AS c
+    JOIN results AS r ON r.constructorId = c.constructorId
+    GROUP BY c.constructorId, c.name
+    ORDER BY wins DESC, c.name
+    LIMIT 5
 - name: database_metadata_001
   question: What tables are in this database?
   reference_answer: >-
