@@ -1334,6 +1334,268 @@
     GROUP BY c.constructorId, c.name
     ORDER BY wins DESC, c.name
     LIMIT 5
+- name: formula_1_insight_001
+  question: >-
+    Which three drivers improved their points per race the most from 2014-2015 to 2016-2017 among
+    drivers with at least 20 race entries in each period? For each driver, report both rates, the
+    change, and the number of races in each period.
+  reference_answer: >-
+    Kimi R�_ikk̦nen improved the most, from 5.395 points per race across 38 races to 9.537 across 41,
+    a gain of 4.142. Daniel Ricciardo was second, improving from 8.684 across 38 races to 11.122 across
+    41, a gain of 2.438. Nico Rosberg was third, improving from 16.816 across 38 races to 18.333 across
+    21, a gain of 1.518.
+  gold_sql: |
+    WITH period_stats AS (
+      SELECT r.driverId,
+             CASE WHEN ra.year BETWEEN 2014 AND 2015 THEN 'baseline' ELSE 'recent' END AS period,
+             COUNT(DISTINCT r.raceId) AS races,
+             SUM(COALESCE(r.points, 0.0)) AS points
+      FROM results AS r
+      JOIN races AS ra ON ra.raceId = r.raceId
+      WHERE ra.year BETWEEN 2014 AND 2017
+      GROUP BY r.driverId, period
+    ), comparison AS (
+      SELECT driverId,
+             MAX(CASE WHEN period = 'baseline' THEN races END) AS baseline_races,
+             MAX(CASE WHEN period = 'baseline' THEN points END) AS baseline_points,
+             MAX(CASE WHEN period = 'recent' THEN races END) AS recent_races,
+             MAX(CASE WHEN period = 'recent' THEN points END) AS recent_points
+      FROM period_stats
+      GROUP BY driverId
+    )
+    SELECT d.driverId, d.forename, d.surname,
+           baseline_races,
+           ROUND(baseline_points / baseline_races, 3) AS baseline_points_per_race,
+           recent_races,
+           ROUND(recent_points / recent_races, 3) AS recent_points_per_race,
+           ROUND(recent_points / recent_races - baseline_points / baseline_races, 3) AS improvement
+    FROM comparison AS x
+    JOIN drivers AS d ON d.driverId = x.driverId
+    WHERE baseline_races >= 20 AND recent_races >= 20
+    ORDER BY recent_points / recent_races - baseline_points / baseline_races DESC,
+             recent_points / recent_races DESC,
+             d.driverId
+    LIMIT 3
+- name: formula_1_insight_002
+  question: >-
+    Which three drivers had the best pole-to-win conversion rate across their careers, considering
+    only drivers who started from pole at least 10 times? Report wins from pole, pole starts, and the
+    conversion percentage.
+  reference_answer: >-
+    Alberto Ascari had the best pole-to-win conversion rate at 64.3%, winning 9 of 14 races started
+    from pole. Fernando Alonso was second at 63.6% with 14 wins from 22 poles, and Michael Schumacher
+    was third at 58.8% with 40 wins from 68 poles.
+  gold_sql: |
+    WITH pole_stats AS (
+      SELECT r.driverId,
+             COUNT(*) AS pole_starts,
+             SUM(CASE WHEN r.position = '1' THEN 1 ELSE 0 END) AS wins_from_pole
+      FROM results AS r
+      WHERE r.grid = 1
+      GROUP BY r.driverId
+    )
+    SELECT d.driverId, d.forename, d.surname,
+           p.wins_from_pole, p.pole_starts,
+           ROUND(100.0 * p.wins_from_pole / p.pole_starts, 1) AS conversion_pct
+    FROM pole_stats AS p
+    JOIN drivers AS d ON d.driverId = p.driverId
+    WHERE p.pole_starts >= 10
+    ORDER BY 1.0 * p.wins_from_pole / p.pole_starts DESC,
+             p.wins_from_pole DESC,
+             d.driverId
+    LIMIT 3
+- name: formula_1_insight_003
+  question: >-
+    How did the annual retirement rate change from 2008 through 2017, defining a retirement as a
+    result whose positionText is 'R'? Report each year's rate, identify the highest and lowest years,
+    and say whether the period shows a sustained decline.
+  reference_answer: >-
+    The retirement rates were 21.7% in 2008, 17.1% in 2009, 22.6% in 2010, 16.2% in 2011, 15.4% in
+    2012, 11.5% in 2013, 18.4% in 2014, 17.7% in 2015, 16.0% in 2016, and 21.3% in 2017. The highest
+    rate was 22.6% in 2010 and the lowest was 11.5% in 2013. There was no sustained decline: the rate
+    fell through 2013 but later rose, ending near its 2008 level.
+  gold_sql: |
+    SELECT ra.year,
+           COUNT(*) AS entries,
+           SUM(CASE WHEN r.positionText = 'R' THEN 1 ELSE 0 END) AS retirements,
+           ROUND(100.0 * SUM(CASE WHEN r.positionText = 'R' THEN 1 ELSE 0 END) / COUNT(*), 1)
+             AS retirement_pct
+    FROM results AS r
+    JOIN races AS ra ON ra.raceId = r.raceId
+    WHERE ra.year BETWEEN 2008 AND 2017
+    GROUP BY ra.year
+    ORDER BY ra.year
+- name: formula_1_insight_004
+  question: >-
+    Between 2013 and 2017, which three drivers gained the most positions on average from the starting
+    grid to the final positionOrder? Exclude pit-lane starts where grid is 0 and require at least 40
+    starts. Define positions gained as grid minus positionOrder.
+  reference_answer: >-
+    Marcus Ericsson gained the most positions on average at 1.88 across 76 starts. Sergio P̩rez was
+    second at 0.94 across 98 starts, followed by Kevin Magnussen at 0.84 across 61 starts.
+  gold_sql: |
+    SELECT d.driverId, d.forename, d.surname,
+           COUNT(*) AS starts,
+           ROUND(AVG(r.grid - r.positionOrder), 2) AS avg_positions_gained
+    FROM results AS r
+    JOIN races AS ra ON ra.raceId = r.raceId
+    JOIN drivers AS d ON d.driverId = r.driverId
+    WHERE ra.year BETWEEN 2013 AND 2017
+      AND r.grid > 0
+      AND r.positionOrder IS NOT NULL
+    GROUP BY d.driverId, d.forename, d.surname
+    HAVING COUNT(*) >= 40
+    ORDER BY AVG(r.grid - r.positionOrder) DESC, starts DESC, d.driverId
+    LIMIT 3
+- name: formula_1_insight_005
+  question: >-
+    For each season from 2008 through 2017, what percentage of all constructor points was scored by
+    that season's highest-scoring constructor? Identify the most and least concentrated seasons and
+    compare 2017 with 2008.
+  reference_answer: >-
+    The leading-constructor shares were Ferrari 24.5% in 2008; Brawn 26.7% in 2009; Red Bull 26.0%
+    in 2010, 33.9% in 2011, 22.8% in 2012, and 31.1% in 2013; and Mercedes 34.6% in 2014, 36.6% in
+    2015, 36.1% in 2016, and 33.1% in 2017. Concentration was highest in 2015 at 36.6% and lowest in
+    2012 at 22.8%. The 2017 share was 8.6 percentage points above 2008, although the path was not
+    consistently upward.
+  gold_sql: |
+    WITH constructor_year AS (
+      SELECT ra.year, cr.constructorId, SUM(COALESCE(cr.points, 0.0)) AS points
+      FROM constructorResults AS cr
+      JOIN races AS ra ON ra.raceId = cr.raceId
+      WHERE ra.year BETWEEN 2008 AND 2017
+      GROUP BY ra.year, cr.constructorId
+    ), ranked AS (
+      SELECT year, constructorId, points,
+             SUM(points) OVER (PARTITION BY year) AS total_points,
+             ROW_NUMBER() OVER (PARTITION BY year ORDER BY points DESC, constructorId) AS rank
+      FROM constructor_year
+    )
+    SELECT r.year, c.name AS top_constructor, r.points AS top_points,
+           ROUND(100.0 * r.points / r.total_points, 1) AS points_share_pct
+    FROM ranked AS r
+    JOIN constructors AS c ON c.constructorId = r.constructorId
+    WHERE r.rank = 1
+    ORDER BY r.year
+- name: formula_1_insight_006
+  question: >-
+    Which three drivers most outperformed their usual finishing position at the Monaco Grand Prix
+    from 2008 through 2017? Require at least 5 Monaco starts and 30 starts at other races, and define
+    Monaco advantage as average positionOrder elsewhere minus average positionOrder at Monaco.
+  reference_answer: >-
+    Mark Webber had the largest Monaco advantage: an average finish of 3.00 in 6 Monaco starts versus
+    7.23 across 106 other starts, an advantage of 4.23 positions. Adrian Sutil was second at 3.13
+    positions, averaging 11.17 at Monaco and 14.30 elsewhere. Daniel Ricciardo was third at 1.80,
+    averaging 8.00 at Monaco and 9.80 elsewhere.
+  gold_sql: |
+    WITH driver_splits AS (
+      SELECT r.driverId,
+             SUM(CASE WHEN ra.name = 'Monaco Grand Prix' THEN 1 ELSE 0 END) AS monaco_starts,
+             AVG(CASE WHEN ra.name = 'Monaco Grand Prix' THEN r.positionOrder END)
+               AS monaco_avg_finish,
+             SUM(CASE WHEN ra.name <> 'Monaco Grand Prix' THEN 1 ELSE 0 END) AS other_starts,
+             AVG(CASE WHEN ra.name <> 'Monaco Grand Prix' THEN r.positionOrder END)
+               AS other_avg_finish
+      FROM results AS r
+      JOIN races AS ra ON ra.raceId = r.raceId
+      WHERE ra.year BETWEEN 2008 AND 2017
+      GROUP BY r.driverId
+    )
+    SELECT d.driverId, d.forename, d.surname,
+           s.monaco_starts, ROUND(s.monaco_avg_finish, 2) AS monaco_avg_finish,
+           s.other_starts, ROUND(s.other_avg_finish, 2) AS other_avg_finish,
+           ROUND(s.other_avg_finish - s.monaco_avg_finish, 2) AS monaco_advantage
+    FROM driver_splits AS s
+    JOIN drivers AS d ON d.driverId = s.driverId
+    WHERE s.monaco_starts >= 5 AND s.other_starts >= 30
+    ORDER BY s.other_avg_finish - s.monaco_avg_finish DESC,
+             s.monaco_avg_finish,
+             d.driverId
+    LIMIT 3
+- name: formula_1_insight_007
+  question: >-
+    Which three constructors were most dependent on their top-scoring driver for points in 2017?
+    Consider only constructors that scored points, and report the driver, their points, the team
+    total, and their share of the total.
+  reference_answer: >-
+    Sauber was most dependent on one driver: Pascal Wehrlein scored all 5 of its points, or 100.0%.
+    Toro Rosso was next, with Carlos Sainz scoring 48 of 53 points, or 90.6%. Renault was third, with
+    Nico H�_lkenberg scoring 43 of 57 points, or 75.4%. These ratios measure concentration, not team
+    quality; Sauber's 100% came from a total of only 5 points.
+  gold_sql: |
+    WITH driver_points AS (
+      SELECT r.constructorId, r.driverId, SUM(COALESCE(r.points, 0.0)) AS points
+      FROM results AS r
+      JOIN races AS ra ON ra.raceId = r.raceId
+      WHERE ra.year = 2017
+      GROUP BY r.constructorId, r.driverId
+    ), ranked AS (
+      SELECT constructorId, driverId, points,
+             SUM(points) OVER (PARTITION BY constructorId) AS team_points,
+             ROW_NUMBER() OVER (PARTITION BY constructorId ORDER BY points DESC, driverId) AS rank
+      FROM driver_points
+    )
+    SELECT c.name AS constructor, d.driverId, d.forename, d.surname,
+           r.points AS driver_points, r.team_points,
+           ROUND(100.0 * r.points / r.team_points, 1) AS top_driver_share_pct
+    FROM ranked AS r
+    JOIN constructors AS c ON c.constructorId = r.constructorId
+    JOIN drivers AS d ON d.driverId = r.driverId
+    WHERE r.rank = 1 AND r.team_points > 0
+    ORDER BY 1.0 * r.points / r.team_points DESC, c.name
+    LIMIT 3
+- name: formula_1_insight_008
+  question: >-
+    Using historical performance as a proxy, which constructor is the strongest growth-investment
+    candidate under this rule: it entered at least 15 races in both 2015 and 2017, had above-median
+    points per race among eligible teams in 2017, improved since 2015, and had the largest increase?
+    Report the candidate and all other teams that passed the screen.
+  reference_answer: >-
+    Red Bull is the strongest candidate under this proxy. Its points per race rose from 9.842 across
+    19 races in 2015 to 18.400 across 20 races in 2017, an increase of 8.558. The eligible-team median
+    in 2017 was 6.750. The other teams passing the screen were Ferrari, up 3.574 from 22.526 to 26.100,
+    and Force India, up 2.192 from 7.158 to 9.350. This is a historical performance screen, not a
+    forecast or a financial valuation.
+  gold_sql: |
+    WITH team_year AS (
+      SELECT cr.constructorId, ra.year,
+             COUNT(DISTINCT cr.raceId) AS races,
+             SUM(COALESCE(cr.points, 0.0)) AS points,
+             1.0 * SUM(COALESCE(cr.points, 0.0)) / COUNT(DISTINCT cr.raceId) AS points_per_race
+      FROM constructorResults AS cr
+      JOIN races AS ra ON ra.raceId = cr.raceId
+      WHERE ra.year IN (2015, 2017)
+      GROUP BY cr.constructorId, ra.year
+    ), paired AS (
+      SELECT y15.constructorId,
+             y15.races AS races_2015, y15.points_per_race AS points_per_race_2015,
+             y17.races AS races_2017, y17.points_per_race AS points_per_race_2017,
+             y17.points_per_race - y15.points_per_race AS improvement
+      FROM team_year AS y15
+      JOIN team_year AS y17 ON y17.constructorId = y15.constructorId
+      WHERE y15.year = 2015 AND y17.year = 2017
+        AND y15.races >= 15 AND y17.races >= 15
+    ), ordered_2017 AS (
+      SELECT points_per_race_2017,
+             ROW_NUMBER() OVER (ORDER BY points_per_race_2017) AS row_number,
+             COUNT(*) OVER () AS team_count
+      FROM paired
+    ), median AS (
+      SELECT AVG(points_per_race_2017) AS median_points_per_race_2017
+      FROM ordered_2017
+      WHERE row_number IN ((team_count + 1) / 2, (team_count + 2) / 2)
+    )
+    SELECT c.name,
+           p.races_2015, ROUND(p.points_per_race_2015, 3) AS points_per_race_2015,
+           p.races_2017, ROUND(p.points_per_race_2017, 3) AS points_per_race_2017,
+           ROUND(p.improvement, 3) AS improvement,
+           ROUND(m.median_points_per_race_2017, 3) AS median_points_per_race_2017
+    FROM paired AS p
+    JOIN constructors AS c ON c.constructorId = p.constructorId
+    CROSS JOIN median AS m
+    WHERE p.points_per_race_2017 > m.median_points_per_race_2017
+      AND p.improvement > 0
+    ORDER BY p.improvement DESC, p.points_per_race_2017 DESC, p.constructorId
 - name: database_metadata_001
   question: What tables are in this database?
   reference_answer: >-
