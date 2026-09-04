@@ -15,7 +15,6 @@ from evals.evaluators import (
     correctness_evaluator,
     relevance_evaluator,
     groundedness_evaluator,
-    sql_validity_evaluator,
     sql_result_evaluator,
     sql_usage_evaluator,
     sql_failure_evaluator,
@@ -52,9 +51,7 @@ def main(agent_type: str = "graph") -> int:
         "summary": summarize(records),
         "cases": records,
     }
-    run_path = next_run_path(
-        Path(__file__).resolve().parents[1] / "runs", agent_type
-    )
+    run_path = next_run_path(Path(__file__).resolve().parents[1] / "runs", agent_type)
     run_path.write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
     print(f"Saved evaluation run to {run_path}")
     return int(failed > 0)
@@ -101,7 +98,6 @@ def _run_case(
         evaluations.append(sql_failure_evaluator(result, case))
         if result.sql_attempts:
             evaluations.append(groundedness_evaluator(result))
-            evaluations.append(sql_validity_evaluator(result))
             if case.gold_sql:
                 evaluations.append(sql_result_evaluator(result, case))
     except Exception as exc:

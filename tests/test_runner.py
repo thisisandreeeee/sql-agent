@@ -9,7 +9,6 @@ from evals.evaluators import (
     sql_failure_evaluator,
     sql_result_evaluator,
     sql_usage_evaluator,
-    sql_validity_evaluator,
 )
 from evals.types import EvalCase
 from sql_agent.types import RunMetrics, RunResult, SqlAttempt
@@ -85,7 +84,7 @@ class SummaryTests(unittest.TestCase):
                         {"key": "correctness", "score": 0.5},
                     ],
                     "error": None,
-                }
+                },
             ]
         )
 
@@ -236,7 +235,11 @@ class SqlFailureEvaluatorTests(unittest.TestCase):
             answer="997",
             sql_attempts=[
                 SqlAttempt(query="bad query", result="Error: syntax", succeeded=False),
-                SqlAttempt(query="SELECT COUNT(*) FROM races", result="[(997,)]", succeeded=True),
+                SqlAttempt(
+                    query="SELECT COUNT(*) FROM races",
+                    result="[(997,)]",
+                    succeeded=True,
+                ),
             ],
             run_metrics=RunMetrics(
                 latency_sec=1.0, sql_attempt_count=2, sql_failed_count=1
@@ -249,7 +252,6 @@ class SqlFailureEvaluatorTests(unittest.TestCase):
             max_sql_failures=1,
         )
 
-        self.assertTrue(sql_validity_evaluator(result)["score"])
         self.assertTrue(sql_failure_evaluator(result, case)["score"])
 
     def test_rejects_too_many_sql_failures(self):

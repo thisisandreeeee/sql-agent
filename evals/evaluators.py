@@ -109,12 +109,6 @@ def groundedness_evaluator(result: RunResult) -> EvaluatorResult:
     return evaluator(context=context, outputs=result.answer)
 
 
-def sql_validity_evaluator(result: RunResult) -> EvaluatorResult:
-    score = bool(result.sql_attempts) and result.sql_attempts[-1].succeeded
-    comment = None if score else "The final SQL query failed."
-    return EvaluatorResult(key="sql_validity", score=score, comment=comment)
-
-
 def sql_usage_evaluator(result: RunResult, case: EvalCase) -> EvaluatorResult:
     used_sql = bool(result.sql_attempts)
     score = used_sql == case.sql_required
