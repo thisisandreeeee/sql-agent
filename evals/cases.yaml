@@ -241,48 +241,63 @@
 - name: formula_1_040
   question: "What are the numbers of races for each constructor id?"
   reference_answer: >-
-    The constructor ID/race-count pairs were: constructor ID 1: 780; constructor ID 2: 70;
-    constructor ID 3: 708; constructor ID 4: 347; constructor ID 5: 226; constructor ID 6: 909;
-    constructor ID 7: 138; constructor ID 8: 52; constructor ID 9: 244; constructor ID 10: 190;
-    constructor ID 11: 92; constructor ID 12: 17; constructor ID 13: 18; constructor ID 14: 4;
-    constructor ID 15: 367; constructor ID 16: 112; constructor ID 17: 241; constructor ID 18: 337;
-    constructor ID 19: 81; constructor ID 20: 82; constructor ID 21: 297; constructor ID 22: 259;
-    constructor ID 23: 17; constructor ID 24: 46; constructor ID 25: 426; constructor ID 26: 120;
-    constructor ID 27: 332; constructor ID 28: 32; constructor ID 29: 95; constructor ID 30: 33;
-    constructor ID 31: 32; constructor ID 32: 405; constructor ID 33: 126; constructor ID 34: 315;
-    constructor ID 35: 79; constructor ID 36: 24; constructor ID 37: 194; constructor ID 39: 84;
-    constructor ID 40: 16; constructor ID 41: 32; constructor ID 42: 70; constructor ID 44: 48;
-    constructor ID 45: 172; constructor ID 46: 32; constructor ID 47: 16; constructor ID 48: 32;
-    constructor ID 49: 79; constructor ID 50: 47; constructor ID 51: 113; constructor ID 52: 39;
-    constructor ID 53: 72; constructor ID 54: 116; constructor ID 55: 62; constructor ID 56: 123;
-    constructor ID 57: 138; constructor ID 58: 106; constructor ID 59: 64; constructor ID 60: 31;
-    constructor ID 61: 11; constructor ID 62: 3; constructor ID 63: 121; constructor ID 64: 71;
-    constructor ID 65: 14; constructor ID 66: 231; constructor ID 67: 46; constructor ID 68: 13;
-    constructor ID 69: 8; constructor ID 70: 17; constructor ID 71: 4; constructor ID 72: 2; constructor
-    ID 73: 31; constructor ID 74: 14; constructor ID 75: 12; constructor ID 76: 11; constructor ID 77:
-    12; constructor ID 78: 12; constructor ID 79: 11; constructor ID 80: 30; constructor ID 81: 19;
-    constructor ID 82: 56; constructor ID 83: 6; constructor ID 84: 4; constructor ID 85: 12;
-    constructor ID 86: 26; constructor ID 87: 17; constructor ID 89: 14; constructor ID 90: 5;
-    constructor ID 91: 6; constructor ID 92: 20; constructor ID 93: 10; constructor ID 94: 19;
-    constructor ID 95: 56; constructor ID 96: 3; constructor ID 97: 15; constructor ID 98: 3;
-    constructor ID 99: 17; constructor ID 100: 4; constructor ID 101: 19; constructor ID 103: 3;
-    constructor ID 104: 10; constructor ID 105: 30; constructor ID 106: 9; constructor ID 113: 1;
-    constructor ID 117: 14; constructor ID 118: 20; constructor ID 123: 5; constructor ID 124: 1;
-    constructor ID 125: 11; constructor ID 127: 10; constructor ID 131: 156; constructor ID 164: 56;
-    constructor ID 166: 38; constructor ID 167: 82; constructor ID 168: 1; constructor ID 169: 5;
-    constructor ID 170: 89; constructor ID 171: 9; constructor ID 172: 66; constructor ID 173: 6;
-    constructor ID 174: 8; constructor ID 175: 10; constructor ID 176: 58; constructor ID 177: 8;
-    constructor ID 178: 1; constructor ID 179: 4; constructor ID 180: 54; constructor ID 181: 28;
-    constructor ID 182: 47; constructor ID 183: 55; constructor ID 184: 21; constructor ID 185: 10;
-    constructor ID 186: 10; constructor ID 187: 46; constructor ID 188: 8; constructor ID 189: 19;
-    constructor ID 190: 25; constructor ID 191: 43; constructor ID 192: 6; constructor ID 193: 6;
-    constructor ID 194: 22; constructor ID 195: 12; constructor ID 196: 23; constructor ID 197: 5;
-    constructor ID 198: 12; constructor ID 199: 11; constructor ID 200: 11; constructor ID 201: 8;
-    constructor ID 202: 14; constructor ID 203: 3; constructor ID 204: 31; constructor ID 205: 38;
-    constructor ID 206: 58; constructor ID 207: 58; constructor ID 208: 77; constructor ID 209: 39;
-    constructor ID 210: 41.
+    The constructor ID/race-count pairs are: constructor ID 1: 780 races; constructor ID 2: 71 races;
+    constructor ID 3: 694 races; constructor ID 4: 344 races; constructor ID 5: 226 races; constructor
+    ID 6: 897 races; constructor ID 7: 140 races; constructor ID 8: 39 races; constructor ID 9: 245
+    races; constructor ID 10: 191 races; constructor ID 11: 88 races; constructor ID 12: 17 races;
+    constructor ID 13: 14 races; constructor ID 14: 4 races; constructor ID 15: 374 races; constructor
+    ID 16: 118 races; constructor ID 17: 250 races; constructor ID 18: 345 races; constructor ID 19: 85
+    races; constructor ID 20: 83 races; constructor ID 21: 296 races; constructor ID 22: 260 races;
+    constructor ID 23: 17 races; constructor ID 24: 49 races; constructor ID 25: 433 races; constructor
+    ID 26: 88 races; constructor ID 27: 330 races; constructor ID 28: 27 races; constructor ID 29: 97
+    races; constructor ID 30: 33 races; constructor ID 31: 21 races; constructor ID 32: 395 races;
+    constructor ID 33: 114 races; constructor ID 34: 310 races; constructor ID 35: 80 races; constructor
+    ID 36: 29 races; constructor ID 37: 196 races; constructor ID 38: 8 races; constructor ID 39: 78
+    races; constructor ID 40: 16 races; constructor ID 41: 32 races; constructor ID 42: 65 races;
+    constructor ID 44: 46 races; constructor ID 45: 171 races; constructor ID 46: 26 races; constructor
+    ID 47: 14 races; constructor ID 48: 32 races; constructor ID 49: 74 races; constructor ID 50: 44
+    races; constructor ID 51: 99 races; constructor ID 52: 25 races; constructor ID 53: 70 races;
+    constructor ID 54: 116 races; constructor ID 55: 51 races; constructor ID 56: 119 races; constructor
+    ID 57: 133 races; constructor ID 58: 98 races; constructor ID 59: 64 races; constructor ID 60: 31
+    races; constructor ID 61: 2 races; constructor ID 62: 3 races; constructor ID 63: 119 races;
+    constructor ID 64: 60 races; constructor ID 65: 8 races; constructor ID 66: 200 races; constructor
+    ID 67: 41 races; constructor ID 68: 5 races; constructor ID 69: 1 races; constructor ID 70: 8 races;
+    constructor ID 71: 1 races; constructor ID 72: 2 races; constructor ID 73: 16 races; constructor ID
+    74: 8 races; constructor ID 75: 11 races; constructor ID 76: 2 races; constructor ID 77: 8 races;
+    constructor ID 78: 4 races; constructor ID 79: 4 races; constructor ID 80: 30 races; constructor ID
+    81: 10 races; constructor ID 82: 47 races; constructor ID 83: 1 races; constructor ID 84: 1 races;
+    constructor ID 85: 6 races; constructor ID 86: 14 races; constructor ID 87: 11 races; constructor ID
+    89: 3 races; constructor ID 90: 1 races; constructor ID 91: 1 races; constructor ID 92: 10 races;
+    constructor ID 93: 1 races; constructor ID 94: 13 races; constructor ID 95: 33 races; constructor ID
+    96: 1 races; constructor ID 97: 7 races; constructor ID 98: 1 races; constructor ID 99: 8 races;
+    constructor ID 100: 1 races; constructor ID 101: 6 races; constructor ID 102: 1 races; constructor
+    ID 103: 1 races; constructor ID 104: 2 races; constructor ID 105: 20 races; constructor ID 106: 5
+    races; constructor ID 107: 2 races; constructor ID 108: 2 races; constructor ID 109: 2 races;
+    constructor ID 110: 2 races; constructor ID 111: 1 races; constructor ID 112: 1 races; constructor
+    ID 113: 3 races; constructor ID 114: 2 races; constructor ID 115: 2 races; constructor ID 116: 1
+    races; constructor ID 117: 6 races; constructor ID 118: 11 races; constructor ID 119: 1 races;
+    constructor ID 120: 1 races; constructor ID 121: 1 races; constructor ID 122: 1 races; constructor
+    ID 123: 1 races; constructor ID 124: 1 races; constructor ID 125: 3 races; constructor ID 127: 1
+    races; constructor ID 128: 1 races; constructor ID 131: 156 races; constructor ID 164: 57 races;
+    constructor ID 166: 38 races; constructor ID 167: 46 races; constructor ID 168: 1 races; constructor
+    ID 169: 2 races; constructor ID 170: 67 races; constructor ID 171: 5 races; constructor ID 172: 56
+    races; constructor ID 173: 2 races; constructor ID 174: 3 races; constructor ID 175: 2 races;
+    constructor ID 176: 51 races; constructor ID 177: 2 races; constructor ID 178: 1 races; constructor
+    ID 179: 1 races; constructor ID 180: 44 races; constructor ID 181: 24 races; constructor ID 182: 23
+    races; constructor ID 183: 35 races; constructor ID 184: 2 races; constructor ID 185: 1 races;
+    constructor ID 186: 2 races; constructor ID 187: 39 races; constructor ID 188: 2 races; constructor
+    ID 189: 13 races; constructor ID 190: 17 races; constructor ID 191: 33 races; constructor ID 192: 2
+    races; constructor ID 193: 1 races; constructor ID 194: 14 races; constructor ID 195: 12 races;
+    constructor ID 196: 23 races; constructor ID 197: 1 races; constructor ID 198: 10 races; constructor
+    ID 199: 7 races; constructor ID 200: 11 races; constructor ID 201: 3 races; constructor ID 202: 14
+    races; constructor ID 203: 2 races; constructor ID 204: 29 races; constructor ID 205: 38 races;
+    constructor ID 206: 59 races; constructor ID 207: 56 races; constructor ID 208: 77 races;
+    constructor ID 209: 39 races; constructor ID 210: 41 races.
   gold_sql: |
-    SELECT count(*) ,  constructorid FROM constructorStandings GROUP BY constructorid
+    SELECT cr.constructorId, COUNT(DISTINCT cr.raceId) AS race_count
+    FROM constructorResults AS cr
+    GROUP BY cr.constructorId
+    ORDER BY cr.constructorId
 - name: formula_1_042
   question: "What are the names of races that were held after 2017 and the circuits were in the country of Spain?"
   reference_answer: >-
@@ -378,17 +393,20 @@
 - name: formula_1_056
   question: "What are the names of races held after 12:00:00 or before 09:00:00?"
   reference_answer: >-
-    The 39 distinct race names held after 12:00:00 or before 09:00:00 were: Australian Grand Prix; Chinese Grand Prix; Japanese Grand Prix; Brazilian
-    Grand Prix; Malaysian Grand Prix; Canadian Grand Prix; United States Grand Prix; Bahrain Grand Prix;
-    San Marino Grand Prix; European Grand Prix; Spanish Grand Prix; Monaco Grand Prix; French Grand
-    Prix; German Grand Prix; Hungarian Grand Prix; Turkish Grand Prix; Italian Grand Prix; British Grand
-    Prix; Belgian Grand Prix; Austrian Grand Prix; Argentine Grand Prix; Luxembourg Grand Prix;
-    Portuguese Grand Prix; Pacific Grand Prix; South African Grand Prix; Mexican Grand Prix; Korean
-    Grand Prix; Abu Dhabi Grand Prix; Detroit Grand Prix; Dutch Grand Prix; Dallas Grand Prix; United
-    States Grand Prix West; Swiss Grand Prix; Caesars Palace Grand Prix; Swedish Grand Prix;
-    Indianapolis 500; Moroccan Grand Prix; Pescara Grand Prix; Azerbaijan Grand Prix.
+    The 39 distinct race names are: Abu Dhabi Grand Prix; Argentine Grand Prix; Australian Grand Prix;
+    Austrian Grand Prix; Azerbaijan Grand Prix; Bahrain Grand Prix; Belgian Grand Prix; Brazilian Grand
+    Prix; British Grand Prix; Caesars Palace Grand Prix; Canadian Grand Prix; Chinese Grand Prix; Dallas
+    Grand Prix; Detroit Grand Prix; Dutch Grand Prix; European Grand Prix; French Grand Prix; German
+    Grand Prix; Hungarian Grand Prix; Indianapolis 500; Italian Grand Prix; Japanese Grand Prix; Korean
+    Grand Prix; Luxembourg Grand Prix; Malaysian Grand Prix; Mexican Grand Prix; Monaco Grand Prix;
+    Moroccan Grand Prix; Pacific Grand Prix; Pescara Grand Prix; Portuguese Grand Prix; San Marino Grand
+    Prix; South African Grand Prix; Spanish Grand Prix; Swedish Grand Prix; Swiss Grand Prix; Turkish
+    Grand Prix; United States Grand Prix; United States Grand Prix West.
   gold_sql: |
-    SELECT name FROM races WHERE TIME > "12:00:00" OR TIME < "09:00:00"
+    SELECT DISTINCT name
+    FROM races
+    WHERE time > "12:00:00" OR time < "09:00:00"
+    ORDER BY name
 - name: formula_1_058
   question: "What are the drivers' first, last names and id who had more than 8 pit stops or participated in more than 5 race results?"
   reference_answer: >-
@@ -598,45 +616,249 @@
 - name: formula_1_074
   question: "What are the maximum fastest lap speed in races held after 2004 grouped by race name and ordered by year?"
   reference_answer: >-
-    The maximum fastest-lap speeds by race and year were: European Grand Prix (2016): 202.946;
-    German Grand Prix (2016): 209.918; Abu Dhabi Grand Prix (2017): 198.652; Australian Grand Prix
-    (2017): 220.605; Austrian Grand Prix (2017): 230.597; Azerbaijan Grand Prix (2017): 208.919; Bahrain
-    Grand Prix (2017): 209.952; Belgian Grand Prix (2017): 236.583; Brazilian Grand Prix (2017):
-    218.349; British Grand Prix (2017): 234.025; Canadian Grand Prix (2017): 210.588; Chinese Grand Prix
-    (2017): 205.745; Hungarian Grand Prix (2017): 196.697; Italian Grand Prix (2017): 250.174; Japanese
-    Grand Prix (2017): 224.439; Malaysian Grand Prix (2017): 212.104; Mexican Grand Prix (2017):
-    196.666; Monaco Grand Prix (2017): 160.561; Russian Grand Prix (2017): 217.388; Singapore Grand Prix
-    (2017): 173.643; Spanish Grand Prix (2017): 200.471; United States Grand Prix (2017): 203.003.
+    The maximum fastest-lap speeds for the 244 races held after 2004 were: Australian Grand Prix (2005):
+    222.807; Bahrain Grand Prix (2005): 213.054; Belgian Grand Prix (2005): 225.329; Brazilian Grand
+    Prix (2005): 214.651; British Grand Prix (2005): 229.902; Canadian Grand Prix (2005): 211.061;
+    Chinese Grand Prix (2005): 210.458; European Grand Prix (2005): 204.305; French Grand Prix (2005):
+    207.785; German Grand Prix (2005): 219.924; Hungarian Grand Prix (2005): 194.186; Italian Grand Prix
+    (2005): 255.874; Japanese Grand Prix (2005): 228.372; Malaysian Grand Prix (2005): 208.987; Monaco
+    Grand Prix (2005): 158.54; San Marino Grand Prix (2005): 216.946; Spanish Grand Prix (2005):
+    220.213; Turkish Grand Prix (2005): 226.693; United States Grand Prix (2005): 211.074; Australian
+    Grand Prix (2006): 221.869; Bahrain Grand Prix (2006): 210.838; Brazilian Grand Prix (2006):
+    214.966; British Grand Prix (2006): 226.811; Canadian Grand Prix (2006): 207.006; Chinese Grand Prix
+    (2006): 201.09; European Grand Prix (2006): 201.226; French Grand Prix (2006): 205.931; German Grand
+    Prix (2006): 215.65; Hungarian Grand Prix (2006): 188.845; Italian Grand Prix (2006): 252.604;
+    Japanese Grand Prix (2006): 225.572; Malaysian Grand Prix (2006): 210.487; Monaco Grand Prix (2006):
+    160.014; San Marino Grand Prix (2006): 211.098; Spanish Grand Prix (2006): 217.32; Turkish Grand
+    Prix (2006): 218.36; United States Grand Prix (2006): 207.527; Australian Grand Prix (2007):
+    223.978; Bahrain Grand Prix (2007): 207.12; Belgian Grand Prix (2007): 233.388; Brazilian Grand Prix
+    (2007): 214.126; British Grand Prix (2007): 229.514; Canadian Grand Prix (2007): 205.58; Chinese
+    Grand Prix (2007): 201.362; European Grand Prix (2007): 199.592; French Grand Prix (2007): 208.67;
+    Hungarian Grand Prix (2007): 197.029; Italian Grand Prix (2007): 251.653; Japanese Grand Prix
+    (2007): 186.259; Malaysian Grand Prix (2007): 206.355; Monaco Grand Prix (2007): 159.715; Spanish
+    Grand Prix (2007): 202.685; Turkish Grand Prix (2007): 220.136; United States Grand Prix (2007):
+    206.397; Australian Grand Prix (2008): 218.385; Bahrain Grand Prix (2008): 209.062; Belgian Grand
+    Prix (2008): 233.618; Brazilian Grand Prix (2008): 210.377; British Grand Prix (2008): 200.842;
+    Canadian Grand Prix (2008): 202.871; Chinese Grand Prix (2008): 203.722; European Grand Prix (2008):
+    197.637; French Grand Prix (2008): 207.224; German Grand Prix (2008): 216.7; Hungarian Grand Prix
+    (2008): 194.243; Italian Grand Prix (2008): 236.859; Japanese Grand Prix (2008): 209.456; Malaysian
+    Grand Prix (2008): 209.244; Monaco Grand Prix (2008): 156.789; Singapore Grand Prix (2008): 172.74;
+    Spanish Grand Prix (2008): 205.191; Turkish Grand Prix (2008): 222.144; Abu Dhabi Grand Prix (2009):
+    199.387; Australian Grand Prix (2009): 217.668; Bahrain Grand Prix (2009): 206.049; Belgian Grand
+    Prix (2009): 235.07; Brazilian Grand Prix (2009): 210.386; British Grand Prix (2009): 229.238;
+    Chinese Grand Prix (2009): 174.289; European Grand Prix (2009): 197.687; German Grand Prix (2009):
+    198.498; Hungarian Grand Prix (2009): 192.498; Italian Grand Prix (2009): 246.106; Japanese Grand
+    Prix (2009): 225.833; Malaysian Grand Prix (2009): 206.483; Monaco Grand Prix (2009): 159.991;
+    Singapore Grand Prix (2009): 168.725; Spanish Grand Prix (2009): 202.484; Turkish Grand Prix (2009):
+    219.422; Abu Dhabi Grand Prix (2010): 197.428; Australian Grand Prix (2010): 216.061; Bahrain Grand
+    Prix (2010): 191.706; Belgian Grand Prix (2010): 231.178; Brazilian Grand Prix (2010): 210.049;
+    British Grand Prix (2010): 233.373; Canadian Grand Prix (2010): 203.965; Chinese Grand Prix (2010):
+    192.273; European Grand Prix (2010): 197.521; German Grand Prix (2010): 217.166; Hungarian Grand
+    Prix (2010): 191.491; Italian Grand Prix (2010): 247.861; Japanese Grand Prix (2010): 223.647;
+    Korean Grand Prix (2010): 183.335; Malaysian Grand Prix (2010): 205.605; Monaco Grand Prix (2010):
+    159.91; Singapore Grand Prix (2010): 169.137; Spanish Grand Prix (2010): 198.655; Turkish Grand Prix
+    (2010): 215.519; Abu Dhabi Grand Prix (2011): 194.854; Australian Grand Prix (2011): 214.631;
+    Belgian Grand Prix (2011): 229.465; Brazilian Grand Prix (2011): 205.942; British Grand Prix (2011):
+    223.454; Canadian Grand Prix (2011): 204.007; European Grand Prix (2011): 191.536; German Grand Prix
+    (2011): 196.526; Hungarian Grand Prix (2011): 189.073; Indian Grand Prix (2011): 211.463; Italian
+    Grand Prix (2011): 241.971; Japanese Grand Prix (2011): 216.481; Korean Grand Prix (2011): 202.941;
+    Malaysian Grand Prix (2011): 198.415; Monaco Grand Prix (2011): 157.724; Singapore Grand Prix
+    (2011): 168.392; Spanish Grand Prix (2011): 193.227; Turkish Grand Prix (2011): 214.226; Abu Dhabi
+    Grand Prix (2012): 192.32; Australian Grand Prix (2012): 214.053; Bahrain Grand Prix (2012):
+    202.151; Belgian Grand Prix (2012): 223.488; Brazilian Grand Prix (2012): 198.701; British Grand
+    Prix (2012): 224.037; Canadian Grand Prix (2012): 207.249; Chinese Grand Prix (2012): 196.314;
+    European Grand Prix (2012): 190.953; German Grand Prix (2012): 209.163; Hungarian Grand Prix (2012):
+    187.453; Indian Grand Prix (2012): 209.176; Italian Grand Prix (2012): 239.053; Japanese Grand Prix
+    (2012): 218.276; Korean Grand Prix (2012): 198.104; Malaysian Grand Prix (2012): 198.117; Monaco
+    Grand Prix (2012): 155.557; Singapore Grand Prix (2012): 164.48; Spanish Grand Prix (2012): 194.295;
+    United States Grand Prix (2012): 199.772; Abu Dhabi Grand Prix (2013): 193.305; Australian Grand
+    Prix (2013): 213.845; Bahrain Grand Prix (2013): 200.938; Belgian Grand Prix (2013): 227.657;
+    Brazilian Grand Prix (2013): 205.636; British Grand Prix (2013): 227.059; Canadian Grand Prix
+    (2013): 206.08; Chinese Grand Prix (2013): 202.706; German Grand Prix (2013): 198.279; Hungarian
+    Grand Prix (2013): 187.603; Indian Grand Prix (2013): 210.426; Italian Grand Prix (2013): 242.924;
+    Japanese Grand Prix (2013): 221.015; Korean Grand Prix (2013): 199.388; Malaysian Grand Prix (2013):
+    201.159; Monaco Grand Prix (2013): 157.018; Singapore Grand Prix (2013): 167.94; Spanish Grand Prix
+    (2013): 194.37; United States Grand Prix (2013): 198.754; Abu Dhabi Grand Prix (2014): 191.341;
+    Australian Grand Prix (2014): 206.436; Austrian Grand Prix (2014): 215.874; Bahrain Grand Prix
+    (2014): 200.816; Belgian Grand Prix (2014): 228.161; Brazilian Grand Prix (2014): 210.895; British
+    Grand Prix (2014): 218.239; Canadian Grand Prix (2014): 199.984; Chinese Grand Prix (2014): 195.45;
+    German Grand Prix (2014): 206.066; Hungarian Grand Prix (2014): 183.981; Italian Grand Prix (2014):
+    236.975; Japanese Grand Prix (2014): 187.322; Malaysian Grand Prix (2014): 193.611; Monaco Grand
+    Prix (2014): 153.212; Russian Grand Prix (2014): 208.658; Singapore Grand Prix (2014): 165.137;
+    Spanish Grand Prix (2014): 188.465; United States Grand Prix (2014): 195.768; Abu Dhabi Grand Prix
+    (2015): 191.302; Australian Grand Prix (2015): 209.915; Austrian Grand Prix (2015): 218.622; Bahrain
+    Grand Prix (2015): 202.294; Belgian Grand Prix (2015): 224.295; Brazilian Grand Prix (2015):
+    207.296; British Grand Prix (2015): 218.425; Canadian Grand Prix (2015): 203.925; Chinese Grand Prix
+    (2015): 191.996; Hungarian Grand Prix (2015): 185.939; Italian Grand Prix (2015): 240.617; Japanese
+    Grand Prix (2015): 217.434; Malaysian Grand Prix (2015): 195.516; Mexican Grand Prix (2015):
+    192.426; Monaco Grand Prix (2015): 153.891; Russian Grand Prix (2015): 210.378; Singapore Grand Prix
+    (2015): 165.701; Spanish Grand Prix (2015): 189.849; United States Grand Prix (2015): 197.154; Abu
+    Dhabi Grand Prix (2016): 192.756; Australian Grand Prix (2016): 214.51; Austrian Grand Prix (2016):
+    227.647; Bahrain Grand Prix (2016): 206.21; Belgian Grand Prix (2016): 225.969; Brazilian Grand Prix
+    (2016): 181.846; British Grand Prix (2016): 221.957; Canadian Grand Prix (2016): 207.669; Chinese
+    Grand Prix (2016): 196.581; European Grand Prix (2016): 202.946; German Grand Prix (2016): 209.918;
+    Hungarian Grand Prix (2016): 189.822; Italian Grand Prix (2016): 244.373; Japanese Grand Prix
+    (2016): 219.781; Malaysian Grand Prix (2016): 206.948; Mexican Grand Prix (2016): 190.972; Monaco
+    Grand Prix (2016): 154.135; Russian Grand Prix (2016): 212.452; Singapore Grand Prix (2016):
+    170.113; Spanish Grand Prix (2016): 192.735; United States Grand Prix (2016): 198.712; Abu Dhabi
+    Grand Prix (2017): 198.652; Australian Grand Prix (2017): 220.605; Austrian Grand Prix (2017):
+    230.597; Azerbaijan Grand Prix (2017): 208.919; Bahrain Grand Prix (2017): 209.952; Belgian Grand
+    Prix (2017): 236.583; Brazilian Grand Prix (2017): 218.349; British Grand Prix (2017): 234.025;
+    Canadian Grand Prix (2017): 210.588; Chinese Grand Prix (2017): 205.745; Hungarian Grand Prix
+    (2017): 196.697; Italian Grand Prix (2017): 250.174; Japanese Grand Prix (2017): 224.439; Malaysian
+    Grand Prix (2017): 212.104; Mexican Grand Prix (2017): 196.666; Monaco Grand Prix (2017): 160.561;
+    Russian Grand Prix (2017): 217.388; Singapore Grand Prix (2017): 173.643; Spanish Grand Prix (2017):
+    200.471; United States Grand Prix (2017): 203.003.
   gold_sql: |
-    SELECT max(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year
+    SELECT MAX(CAST(res.fastestLapSpeed AS REAL)) AS max_fastest_lap_speed, rc.name, rc.year
+    FROM races AS rc
+    JOIN results AS res ON rc.raceId = res.raceId
+    WHERE rc.year > 2004
+      AND res.fastestLapSpeed IS NOT NULL
+      AND res.fastestLapSpeed != ''
+    GROUP BY rc.raceId, rc.name, rc.year
+    ORDER BY rc.year, rc.name
 - name: formula_1_076
   question: "What are the average fastest lap speed in races held after 2004 grouped by race name and ordered by year?"
   reference_answer: >-
-    The average fastest-lap speeds by race and year were: Abu Dhabi Grand Prix (2015):
-    184.10512903225808; Australian Grand Prix (2015): 189.37395; Austrian Grand Prix (2015):
-    202.2654677419355; Bahrain Grand Prix (2015): 188.33080645161291; Belgian Grand Prix (2015):
-    202.04837096774193; Brazilian Grand Prix (2015): 180.7193870967742; British Grand Prix (2015):
-    195.54485483870968; Canadian Grand Prix (2015): 196.3454193548387; Chinese Grand Prix (2015):
-    188.20267741935484; Hungarian Grand Prix (2015): 182.8631935483871; Italian Grand Prix (2015):
-    228.38977419354836; Japanese Grand Prix (2015): 211.27977419354838; Malaysian Grand Prix (2015):
-    189.9078870967742; Mexican Grand Prix (2015): 182.29451612903227; Monaco Grand Prix (2015):
-    150.5973548387097; Russian Grand Prix (2015): 178.44701612903225; Singapore Grand Prix (2015):
-    151.40698387096774; Spanish Grand Prix (2015): 176.39298387096773; United States Grand Prix (2015):
-    185.93043548387098; European Grand Prix (2016): 199.62063636363638; German Grand Prix (2016):
-    205.55377272727273; Azerbaijan Grand Prix (2017): 203.45094999999998.
+    The average fastest-lap speeds for the 244 races held after 2004 were: Australian Grand Prix (2005):
+    218.43024999999997; Bahrain Grand Prix (2005): 207.88678947368422; Belgian Grand Prix (2005):
+    216.455; Brazilian Grand Prix (2005): 210.08744444444446; British Grand Prix (2005): 223.4813;
+    Canadian Grand Prix (2005): 206.72820000000002; Chinese Grand Prix (2005): 206.65365000000003;
+    European Grand Prix (2005): 201.05978947368422; French Grand Prix (2005): 203.0388947368421; German
+    Grand Prix (2005): 214.91035000000002; Hungarian Grand Prix (2005): 190.31205555555556; Italian
+    Grand Prix (2005): 250.06374999999997; Japanese Grand Prix (2005): 222.53973684210527; Malaysian
+    Grand Prix (2005): 204.0964; Monaco Grand Prix (2005): 154.60294444444446; San Marino Grand Prix
+    (2005): 210.93885; Spanish Grand Prix (2005): 215.3105; Turkish Grand Prix (2005): 221.348; United
+    States Grand Prix (2005): 206.70483333333334; Australian Grand Prix (2006): 214.8104210526316;
+    Bahrain Grand Prix (2006): 207.70628571428574; Brazilian Grand Prix (2006): 209.99050000000003;
+    British Grand Prix (2006): 221.5976842105263; Canadian Grand Prix (2006): 198.03325; Chinese Grand
+    Prix (2006): 195.18; European Grand Prix (2006): 193.62742857142857; French Grand Prix (2006):
+    202.11104761904764; German Grand Prix (2006): 212.05865; Hungarian Grand Prix (2006): 177.26985;
+    Italian Grand Prix (2006): 247.7051818181818; Japanese Grand Prix (2006): 221.82245454545455;
+    Malaysian Grand Prix (2006): 205.7534761904762; Monaco Grand Prix (2006): 156.0214090909091; San
+    Marino Grand Prix (2006): 207.05214285714288; Spanish Grand Prix (2006): 212.77404545454544; Turkish
+    Grand Prix (2006): 214.141; United States Grand Prix (2006): 193.8118; Australian Grand Prix (2007):
+    217.7501818181818; Bahrain Grand Prix (2007): 204.166; Belgian Grand Prix (2007):
+    229.15138095238095; Brazilian Grand Prix (2007): 203.42659090909092; British Grand Prix (2007):
+    223.40436363636363; Canadian Grand Prix (2007): 201.21428571428572; Chinese Grand Prix (2007):
+    194.9597727272727; European Grand Prix (2007): 176.19922727272726; French Grand Prix (2007):
+    205.82094736842106; Hungarian Grand Prix (2007): 193.55172727272728; Italian Grand Prix (2007):
+    246.84885714285716; Japanese Grand Prix (2007): 179.61772727272728; Malaysian Grand Prix (2007):
+    203.07419047619047; Monaco Grand Prix (2007): 156.4125238095238; Spanish Grand Prix (2007):
+    199.13233333333335; Turkish Grand Prix (2007): 215.66845454545455; United States Grand Prix (2007):
+    203.1633157894737; Australian Grand Prix (2008): 214.30664705882353; Bahrain Grand Prix (2008):
+    205.62871428571427; Belgian Grand Prix (2008): 229.66275000000002; Brazilian Grand Prix (2008):
+    207.79105555555554; British Grand Prix (2008): 197.4372222222222; Canadian Grand Prix (2008):
+    200.09845; Chinese Grand Prix (2008): 197.677; European Grand Prix (2008): 195.51957894736842;
+    French Grand Prix (2008): 203.97865; German Grand Prix (2008): 213.7977; Hungarian Grand Prix
+    (2008): 191.68925; Italian Grand Prix (2008): 229.76065; Japanese Grand Prix (2008):
+    205.91615789473684; Malaysian Grand Prix (2008): 206.39415; Monaco Grand Prix (2008): 146.4992;
+    Singapore Grand Prix (2008): 169.58755000000002; Spanish Grand Prix (2008): 201.2473; Turkish Grand
+    Prix (2008): 219.23983333333334; Abu Dhabi Grand Prix (2009): 198.0411; Australian Grand Prix
+    (2009): 214.9188947368421; Bahrain Grand Prix (2009): 204.15064999999998; Belgian Grand Prix (2009):
+    233.22225; Brazilian Grand Prix (2009): 208.22117647058826; British Grand Prix (2009):
+    226.02519999999998; Chinese Grand Prix (2009): 171.06045; European Grand Prix (2009): 195.77755;
+    German Grand Prix (2009): 195.3176; Hungarian Grand Prix (2009): 190.09661111111112; Italian Grand
+    Prix (2009): 243.57963157894736; Japanese Grand Prix (2009): 223.12042105263154; Malaysian Grand
+    Prix (2009): 202.32055555555556; Monaco Grand Prix (2009): 157.76815; Singapore Grand Prix (2009):
+    166.36745000000002; Spanish Grand Prix (2009): 199.6415625; Turkish Grand Prix (2009): 217.0229; Abu
+    Dhabi Grand Prix (2010): 193.55904545454544; Australian Grand Prix (2010): 203.90415000000002;
+    Bahrain Grand Prix (2010): 186.32291304347825; Belgian Grand Prix (2010): 222.7862608695652;
+    Brazilian Grand Prix (2010): 205.372625; British Grand Prix (2010): 224.547875; Canadian Grand Prix
+    (2010): 197.24208695652175; Chinese Grand Prix (2010): 186.4367; European Grand Prix (2010):
+    193.54716666666664; German Grand Prix (2010): 208.41421739130436; Hungarian Grand Prix (2010):
+    184.447; Italian Grand Prix (2010): 242.8503181818182; Japanese Grand Prix (2010):
+    213.07915789473682; Korean Grand Prix (2010): 176.51695833333335; Malaysian Grand Prix (2010):
+    198.75617391304348; Monaco Grand Prix (2010): 152.4858695652174; Singapore Grand Prix (2010):
+    163.27447826086956; Spanish Grand Prix (2010): 193.50931818181817; Turkish Grand Prix (2010):
+    211.20950000000002; Abu Dhabi Grand Prix (2011): 189.77952173913044; Australian Grand Prix (2011):
+    208.2561363636364; Belgian Grand Prix (2011): 222.14121739130434; Brazilian Grand Prix (2011):
+    199.54933333333335; British Grand Prix (2011): 213.67341666666667; Canadian Grand Prix (2011):
+    189.52104166666666; European Grand Prix (2011): 187.33145833333333; German Grand Prix (2011):
+    190.46737499999998; Hungarian Grand Prix (2011): 182.69770833333334; Indian Grand Prix (2011):
+    203.08947826086956; Italian Grand Prix (2011): 235.28605; Japanese Grand Prix (2011):
+    212.01958333333334; Korean Grand Prix (2011): 197.25854166666667; Malaysian Grand Prix (2011):
+    193.27824999999999; Monaco Grand Prix (2011): 151.9935652173913; Singapore Grand Prix (2011):
+    160.45133333333334; Spanish Grand Prix (2011): 187.81112499999998; Turkish Grand Prix (2011):
+    209.94395652173915; Abu Dhabi Grand Prix (2012): 187.68273913043475; Australian Grand Prix (2012):
+    209.20495; Bahrain Grand Prix (2012): 198.23083333333332; Belgian Grand Prix (2012):
+    215.41930000000002; Brazilian Grand Prix (2012): 194.99380952380952; British Grand Prix (2012):
+    220.13036363636365; Canadian Grand Prix (2012): 201.48995833333333; Chinese Grand Prix (2012):
+    193.40245833333333; European Grand Prix (2012): 186.93056521739132; German Grand Prix (2012):
+    205.78741666666667; Hungarian Grand Prix (2012): 182.51654166666665; Indian Grand Prix (2012):
+    205.20974999999999; Italian Grand Prix (2012): 234.24758333333332; Japanese Grand Prix (2012):
+    213.51595454545452; Korean Grand Prix (2012): 194.6847727272727; Malaysian Grand Prix (2012):
+    192.91379166666664; Monaco Grand Prix (2012): 151.22714285714287; Singapore Grand Prix (2012):
+    159.852125; Spanish Grand Prix (2012): 188.52379166666665; United States Grand Prix (2012):
+    195.76125000000002; Abu Dhabi Grand Prix (2013): 189.59528571428572; Australian Grand Prix (2013):
+    210.33757142857144; Bahrain Grand Prix (2013): 197.74422727272724; Belgian Grand Prix (2013):
+    223.56127272727272; Brazilian Grand Prix (2013): 201.6898181818182; British Grand Prix (2013):
+    220.95018181818185; Canadian Grand Prix (2013): 201.45731818181818; Chinese Grand Prix (2013):
+    194.5029090909091; German Grand Prix (2013): 193.444; Hungarian Grand Prix (2013):
+    182.60954545454544; Indian Grand Prix (2013): 207.03223809523809; Italian Grand Prix (2013):
+    238.27038095238095; Japanese Grand Prix (2013): 216.49735; Korean Grand Prix (2013):
+    195.41377272727274; Malaysian Grand Prix (2013): 196.52876190476192; Monaco Grand Prix (2013):
+    151.49304545454544; Singapore Grand Prix (2013): 164.0255; Spanish Grand Prix (2013):
+    190.80754545454545; United States Grand Prix (2013): 195.24409523809524; Abu Dhabi Grand Prix
+    (2014): 187.2674; Australian Grand Prix (2014): 200.9788; Austrian Grand Prix (2014):
+    212.11586363636363; Bahrain Grand Prix (2014): 195.00104545454545; Belgian Grand Prix (2014):
+    221.58105; Brazilian Grand Prix (2014): 208.61583333333334; British Grand Prix (2014): 213.4163;
+    Canadian Grand Prix (2014): 194.6962; Chinese Grand Prix (2014): 189.989; German Grand Prix (2014):
+    201.2988095238095; Hungarian Grand Prix (2014): 173.9525909090909; Italian Grand Prix (2014):
+    233.2840909090909; Japanese Grand Prix (2014): 183.6117142857143; Malaysian Grand Prix (2014):
+    187.4674761904762; Monaco Grand Prix (2014): 146.69189999999998; Russian Grand Prix (2014):
+    203.90738095238098; Singapore Grand Prix (2014): 161.18295238095237; Spanish Grand Prix (2014):
+    184.4994090909091; United States Grand Prix (2014): 192.5068125; Abu Dhabi Grand Prix (2015):
+    187.7707894736842; Australian Grand Prix (2015): 207.17569230769232; Austrian Grand Prix (2015):
+    210.75900000000001; Bahrain Grand Prix (2015): 197.316; Belgian Grand Prix (2015):
+    219.94644444444444; Brazilian Grand Prix (2015): 203.47326315789473; British Grand Prix (2015):
+    211.07475; Canadian Grand Prix (2015): 199.9486; Chinese Grand Prix (2015): 188.99994999999998;
+    Hungarian Grand Prix (2015): 180.3434; Italian Grand Prix (2015): 235.99344444444444; Japanese Grand
+    Prix (2015): 211.67135; Malaysian Grand Prix (2015): 189.94110526315788; Mexican Grand Prix (2015):
+    187.6364210526316; Monaco Grand Prix (2015): 150.5396; Russian Grand Prix (2015):
+    205.84394117647057; Singapore Grand Prix (2015): 162.9178; Spanish Grand Prix (2015): 183.24815;
+    United States Grand Prix (2015): 186.5395263157895; Abu Dhabi Grand Prix (2016): 188.59727272727275;
+    Australian Grand Prix (2016): 207.4074761904762; Austrian Grand Prix (2016): 221.4454090909091;
+    Bahrain Grand Prix (2016): 202.03765; Belgian Grand Prix (2016): 219.87794736842102; Brazilian Grand
+    Prix (2016): 177.4882380952381; British Grand Prix (2016): 210.16163636363635; Canadian Grand Prix
+    (2016): 203.03472727272728; Chinese Grand Prix (2016): 193.9165909090909; European Grand Prix
+    (2016): 199.62063636363638; German Grand Prix (2016): 205.55377272727273; Hungarian Grand Prix
+    (2016): 184.9729090909091; Italian Grand Prix (2016): 239.3505238095238; Japanese Grand Prix (2016):
+    215.05131818181817; Malaysian Grand Prix (2016): 200.78519047619045; Mexican Grand Prix (2016):
+    185.80485714285714; Monaco Grand Prix (2016): 144.64981818181818; Russian Grand Prix (2016):
+    207.57763157894738; Singapore Grand Prix (2016): 165.14659999999998; Spanish Grand Prix (2016):
+    187.4859; United States Grand Prix (2016): 191.74514285714287; Abu Dhabi Grand Prix (2017):
+    184.88665; Australian Grand Prix (2017): 215.67979999999997; Austrian Grand Prix (2017): 226.9865;
+    Azerbaijan Grand Prix (2017): 203.45094999999998; Bahrain Grand Prix (2017): 204.56594736842106;
+    Belgian Grand Prix (2017): 231.06747368421054; Brazilian Grand Prix (2017): 212.43276470588236;
+    British Grand Prix (2017): 229.0571666666667; Canadian Grand Prix (2017): 205.98222222222222;
+    Chinese Grand Prix (2017): 201.24455555555556; Hungarian Grand Prix (2017): 192.69715789473685;
+    Italian Grand Prix (2017): 244.29614999999998; Japanese Grand Prix (2017): 217.62052631578948;
+    Malaysian Grand Prix (2017): 207.83784210526315; Mexican Grand Prix (2017): 191.76330000000002;
+    Monaco Grand Prix (2017): 157.1974; Russian Grand Prix (2017): 212.96429411764706; Singapore Grand
+    Prix (2017): 166.23205882352943; Spanish Grand Prix (2017): 195.64911111111113; United States Grand
+    Prix (2017): 197.8394.
   gold_sql: |
-    SELECT avg(T2.fastestlapspeed) ,  T1.name ,  T1.year FROM races AS T1 JOIN results AS T2 ON T1.raceid = T2.raceid WHERE T1.year > 2014 GROUP BY T1.name ORDER BY T1.year
+    SELECT AVG(CAST(res.fastestLapSpeed AS REAL)) AS avg_fastest_lap_speed, rc.name, rc.year
+    FROM races AS rc
+    JOIN results AS res ON rc.raceId = res.raceId
+    WHERE rc.year > 2004
+      AND res.fastestLapSpeed IS NOT NULL
+      AND res.fastestLapSpeed != ''
+    GROUP BY rc.raceId, rc.name, rc.year
+    ORDER BY rc.year, rc.name
 - name: formula_1_078
   question: "Find the id, forename and number of races of all drivers who have at least participated in two races?"
   reference_answer: >-
-    The 670 driver ID/forename/race counts were: driver ID 1 (Lewis): 208 races; driver ID 2
-    (Nick): 184 races; driver ID 3 (Nico): 206 races; driver ID 4 (Fernando): 293 races; driver ID 5
-    (Heikki): 112 races; driver ID 6 (Kazuki): 36 races; driver ID 7 (S̩bastien): 27 races; driver ID 8
-    (Kimi): 273 races; driver ID 9 (Robert): 76 races; driver ID 10 (Timo): 95 races; driver ID 11
-    (Takuma): 91 races; driver ID 12 (Nelson): 28 races; driver ID 13 (Felipe): 271 races; driver ID 14
-    (David): 247 races; driver ID 15 (Jarno): 256 races; driver ID 16 (Adrian): 128 races; driver ID 17
-    (Mark): 217 races; driver ID 18 (Jenson): 309 races; driver ID 19 (Anthony): 24 races; driver ID 20
-    (Sebastian): 199 races; driver ID 21 (Giancarlo): 231 races; driver ID 22 (Rubens): 326 races;
+    The 669 drivers who participated in at least two distinct races are: driver ID 1 (Lewis): 208 races;
+    driver ID 2 (Nick): 184 races; driver ID 3 (Nico): 206 races; driver ID 4 (Fernando): 293 races;
+    driver ID 5 (Heikki): 112 races; driver ID 6 (Kazuki): 36 races; driver ID 7 (S̩bastien): 27 races;
+    driver ID 8 (Kimi): 273 races; driver ID 9 (Robert): 76 races; driver ID 10 (Timo): 95 races; driver
+    ID 11 (Takuma): 91 races; driver ID 12 (Nelson): 28 races; driver ID 13 (Felipe): 271 races; driver
+    ID 14 (David): 247 races; driver ID 15 (Jarno): 256 races; driver ID 16 (Adrian): 128 races; driver
+    ID 17 (Mark): 217 races; driver ID 18 (Jenson): 309 races; driver ID 19 (Anthony): 24 races; driver
+    ID 20 (Sebastian): 199 races; driver ID 21 (Giancarlo): 231 races; driver ID 22 (Rubens): 326 races;
     driver ID 23 (Ralf): 180 races; driver ID 24 (Vitantonio): 81 races; driver ID 25 (Alexander): 69
     races; driver ID 26 (Scott): 28 races; driver ID 27 (Christijan): 46 races; driver ID 29 (Sakon): 21
     races; driver ID 30 (Michael): 308 races; driver ID 31 (Juan): 95 races; driver ID 32 (Christian):
@@ -660,161 +882,160 @@
     driver ID 85 (Andrea): 28 races; driver ID 86 (Giovanni): 10 races; driver ID 87 (Mark): 63 races;
     driver ID 88 (Aguri): 88 races; driver ID 89 (Taki): 18 races; driver ID 90 (Roberto): 74 races;
     driver ID 91 (Karl): 42 races; driver ID 92 (Bertrand): 84 races; driver ID 93 (Domenico): 7 races;
-    driver ID 94 (Pierluigi): 123 races; driver ID 95 (Nigel): 192 races; driver ID 96
-    (Jean-Christophe): 11 races; driver ID 97 (Massimiliano): 7 races; driver ID 98 (Jean-Denis): 3
-    races; driver ID 99 (Gabriele): 78 races; driver ID 100 (��rik): 63 races; driver ID 101 (David): 30
-    races; driver ID 102 (Ayrton): 162 races; driver ID 103 (��ric): 47 races; driver ID 104
-    (Christian): 43 races; driver ID 105 (Michele): 215 races; driver ID 106 (Olivier): 10 races; driver
-    ID 107 (Roland): 3 races; driver ID 108 (Paul): 27 races; driver ID 109 (Jyrki): 70 races; driver ID
-    110 (Andrea): 214 races; driver ID 111 (Jean-Marc): 9 races; driver ID 112 (Philippe): 115 races;
-    driver ID 113 (Philippe): 2 races; driver ID 114 (Yannick): 50 races; driver ID 115 (Hideki): 3
-    races; driver ID 116 (Franck): 2 races; driver ID 117 (Alain): 202 races; driver ID 118 (Derek): 162
-    races; driver ID 119 (Riccardo): 257 races; driver ID 120 (Fabrizio): 20 races; driver ID 121
-    (Michael): 13 races; driver ID 122 (Ivan): 98 races; driver ID 123 (Thierry): 164 races; driver ID
-    125 (Emanuele): 6 races; driver ID 126 (Toshio): 2 races; driver ID 127 (Maur�_cio): 80 races;
-    driver ID 128 (Eric): 29 races; driver ID 129 (Olivier): 62 races; driver ID 130 (Andrea): 10 races;
-    driver ID 131 (Stefano): 81 races; driver ID 132 (Giovanna): 3 races; driver ID 133 (Alex): 75
-    races; driver ID 134 (Enrico): 6 races; driver ID 135 (Perry): 7 races; driver ID 136 (Jan): 41
-    races; driver ID 137 (Nelson): 207 races; driver ID 138 (Satoru): 80 races; driver ID 139
-    (Emanuele): 40 races; driver ID 140 (Stefan): 103 races; driver ID 141 (Julian): 20 races; driver ID
-    142 (Pedro): 13 races; driver ID 143 (Michael): 4 races; driver ID 144 (Naoki): 2 races; driver ID
-    145 (Alessandro): 77 races; driver ID 146 (Bernd): 32 races; driver ID 147 (Paolo): 15 races; driver
-    ID 148 (Gregor): 22 races; driver ID 149 (Claudio): 14 races; driver ID 150 (Gary): 2 races; driver
-    ID 151 (Martin): 15 races; driver ID 152 (Bruno): 82 races; driver ID 153 (Jaime): 46 races; driver
-    ID 154 (Romain): 124 races; driver ID 155 (Kamui): 76 races; driver ID 156 (Jonathan): 88 races;
-    driver ID 157 (Christian): 47 races; driver ID 158 (Eddie): 143 races; driver ID 159 (Luis): 32
-    races; driver ID 160 (Piercarlo): 111 races; driver ID 161 (Volker): 10 races; driver ID 162
-    (Pierre-Henri): 17 races; driver ID 163 (Ren̩): 164 races; driver ID 164 (Joachim): 7 races; driver
-    ID 165 (Oscar): 21 races; driver ID 166 (Philippe): 54 races; driver ID 167 (Adri��n): 21 races;
-    driver ID 168 (Jean-Louis): 2 races; driver ID 169 (Pascal): 12 races; driver ID 170 (Teo): 70
-    races; driver ID 171 (Franco): 2 races; driver ID 172 (Jacques): 180 races; driver ID 173 (Elio):
-    110 races; driver ID 174 (Johnny): 16 races; driver ID 175 (Patrick): 122 races; driver ID 176
-    (Marc): 88 races; driver ID 177 (Keke): 128 races; driver ID 178 (Alan): 117 races; driver ID 179
-    (Huub): 28 races; driver ID 180 (Allen): 9 races; driver ID 181 (Manfred): 55 races; driver ID 182
-    (Niki): 174 races; driver ID 183 (Fran̤ois): 20 races; driver ID 184 (Mauro): 41 races; driver ID
-    185 (Stefan): 22 races; driver ID 186 (Kenny): 9 races; driver ID 187 (John): 154 races; driver ID
-    188 (Johnny): 23 races; driver ID 189 (Jo): 8 races; driver ID 190 (Corrado): 19 races; driver ID
-    191 (Mike): 5 races; driver ID 192 (Chico): 32 races; driver ID 193 (Danny): 15 races; driver ID 194
-    (Eliseo): 37 races; driver ID 195 (Roberto): 29 races; driver ID 196 (Raul): 30 races; driver ID 197
-    (Jean-Pierre): 143 races; driver ID 198 (Jacques): 3 races; driver ID 199 (Carlos): 146 races;
-    driver ID 200 (Jochen): 114 races; driver ID 201 (Slim): 15 races; driver ID 202 (Didier): 72 races;
-    driver ID 203 (Gilles): 68 races; driver ID 204 (Riccardo): 8 races; driver ID 205 (Brian): 37
-    races; driver ID 206 (Derek): 64 races; driver ID 207 (Mario): 129 races; driver ID 208 (Emilio): 14
-    races; driver ID 209 (Geoff): 12 races; driver ID 210 (Tommy): 5 races; driver ID 211 (Rupert): 37
-    races; driver ID 212 (Hector): 58 races; driver ID 213 (Beppe): 17 races; driver ID 214 (Kevin): 2
-    races; driver ID 215 (Miguel ́ngel): 4 races; driver ID 216 (Siegfried): 13 races; driver ID 217
-    (Ricardo): 11 races; driver ID 219 (Jean-Pierre): 55 races; driver ID 220 (Giorgio): 2 races; driver
-    ID 221 (Patrick): 95 races; driver ID 222 (Jody): 113 races; driver ID 223 (Clay): 138 races; driver
-    ID 224 (Emerson): 149 races; driver ID 225 (Dave): 7 races; driver ID 227 (Tiff): 2 races; driver ID
-    229 (Harald): 29 races; driver ID 230 (Vittorio): 78 races; driver ID 231 (James): 93 races; driver
-    ID 232 (Arturo): 84 races; driver ID 233 (Hans-Joachim): 81 races; driver ID 234 (Gianfranco): 3
-    races; driver ID 235 (Jacky): 121 races; driver ID 236 (Patrick): 5 races; driver ID 237 (Alex): 20
-    races; driver ID 238 (Ronnie): 123 races; driver ID 239 (Brett): 42 races; driver ID 240 (Danny): 6
-    races; driver ID 241 (Lamberto): 5 races; driver ID 242 (Divina): 3 races; driver ID 243 (Rolf): 61
-    races; driver ID 244 (Alberto): 3 races; driver ID 245 (Tony): 6 races; driver ID 246 (Hans): 15
-    races; driver ID 247 (Michael): 5 races; driver ID 249 (Bobby): 2 races; driver ID 250 (Carlos): 73
-    races; driver ID 251 (Ian): 20 races; driver ID 252 (Tom): 42 races; driver ID 253 (Ingo): 6 races;
-    driver ID 254 (Renzo): 7 races; driver ID 255 (Gunnar): 32 races; driver ID 256 (Larry): 15 races;
-    driver ID 257 (Boy): 7 races; driver ID 258 (Patrick): 13 races; driver ID 259 (David): 11 races;
-    driver ID 260 (Conny): 5 races; driver ID 262 (Jackie): 51 races; driver ID 263 (Mikko): 2 races;
-    driver ID 265 (Guy): 16 races; driver ID 267 (Vern): 12 races; driver ID 269 (Teddy): 4 races;
-    driver ID 270 (Ian): 11 races; driver ID 271 (Loris): 6 races; driver ID 273 (Kazuyoshi): 2 races;
-    driver ID 274 (Noritake): 2 races; driver ID 275 (Lella): 17 races; driver ID 276 (Bob): 12 races;
-    driver ID 277 (Michel): 8 races; driver ID 278 (Chris): 106 races; driver ID 280 (Henri): 59 races;
-    driver ID 282 (Damien): 2 races; driver ID 283 (Mike): 8 races; driver ID 284 (Alessandro): 4 races;
-    driver ID 285 (Otto): 3 races; driver ID 288 (Mark): 15 races; driver ID 289 (Graham): 179 races;
-    driver ID 290 (Wilson): 38 races; driver ID 292 (Eddie): 3 races; driver ID 293 (Dave): 13 races;
-    driver ID 294 (Tony): 10 races; driver ID 295 (Roelof): 6 races; driver ID 296 (Fran̤ois): 15 races;
-    driver ID 297 (Torsten): 2 races; driver ID 298 (Gijs): 9 races; driver ID 299 (Hiroshi): 2 races;
-    driver ID 300 (John): 2 races; driver ID 302 (Jim): 2 races; driver ID 304 (Denny): 112 races;
-    driver ID 305 (Mike): 51 races; driver ID 306 (Jean-Pierre): 87 races; driver ID 307 (Howden): 39
-    races; driver ID 308 (Richard): 4 races; driver ID 309 (Peter): 31 races; driver ID 310 (Paddy): 2
-    races; driver ID 311 (Tom): 4 races; driver ID 312 (Brian): 13 races; driver ID 313 (Rikky): 13
-    races; driver ID 314 (Tim): 36 races; driver ID 315 (G̩rard): 2 races; driver ID 316 (Leo): 6 races;
-    driver ID 317 (Reine): 23 races; driver ID 319 (Jos̩): 3 races; driver ID 320 (Peter): 30 races;
-    driver ID 321 (Derek): 14 races; driver ID 322 (David): 7 races; driver ID 324 (Helmuth): 3 races;
-    driver ID 326 (Eppie): 2 races; driver ID 327 (Fran̤ois): 47 races; driver ID 328 (Jackie): 100
-    races; driver ID 329 (Mike): 29 races; driver ID 330 (Nanni): 17 races; driver ID 332 (George): 12
-    races; driver ID 333 (Andrea): 35 races; driver ID 334 (Jackie): 4 races; driver ID 335 (Roger): 2
-    races; driver ID 337 (Helmut): 9 races; driver ID 338 (David): 11 races; driver ID 339 (Alex): 9
-    races; driver ID 340 (John): 10 races; driver ID 341 (John): 112 races; driver ID 342 (Skip): 6
-    races; driver ID 343 (Bill): 3 races; driver ID 344 (Sam): 2 races; driver ID 345 (Pedro): 54 races;
-    driver ID 346 (Jo): 100 races; driver ID 347 (Jo): 109 races; driver ID 350 (Vic): 13 races; driver
-    ID 351 (Silvio): 18 races; driver ID 352 (George): 13 races; driver ID 353 (Pete): 11 races; driver
-    ID 354 (Chris): 2 races; driver ID 356 (Jack): 129 races; driver ID 357 (John): 15 races; driver ID
-    358 (Jochen): 62 races; driver ID 359 (Johnny): 12 races; driver ID 360 (Bruce): 103 races; driver
-    ID 361 (Piers): 29 races; driver ID 362 (Peter): 4 races; driver ID 363 (Ignazio): 4 races; driver
-    ID 364 (Dan): 87 races; driver ID 365 (Hubert): 3 races; driver ID 368 (Sam): 6 races; driver ID 369
-    (Basil): 2 races; driver ID 370 (Richard): 17 races; driver ID 371 (Al): 2 races; driver ID 373
-    (Jim): 72 races; driver ID 374 (Mike): 36 races; driver ID 375 (Ludovico): 13 races; driver ID 376
-    (Lucien): 19 races; driver ID 377 (Jo): 2 races; driver ID 379 (Kurt): 2 races; driver ID 380
-    (Frank): 9 races; driver ID 382 (Mois̩s): 8 races; driver ID 383 (Bob): 26 races; driver ID 385
-    (Lorenzo): 44 races; driver ID 386 (Richie): 54 races; driver ID 387 (Mike): 7 races; driver ID 388
-    (Chris): 10 races; driver ID 389 (Guy): 13 races; driver ID 390 (Alan): 2 races; driver ID 392
-    (Mike): 2 races; driver ID 394 (Giancarlo): 26 races; driver ID 396 (Bob): 9 races; driver ID 397
-    (Peter): 15 races; driver ID 398 (Vic): 2 races; driver ID 399 (John): 5 races; driver ID 400
-    (Chris): 2 races; driver ID 401 (Trevor): 29 races; driver ID 402 (Giacomo): 3 races; driver ID 403
-    (Phil): 52 races; driver ID 404 (Innes): 55 races; driver ID 405 (Ronnie): 11 races; driver ID 406
-    (Paul): 3 races; driver ID 407 (David): 2 races; driver ID 408 (Tony): 27 races; driver ID 409
-    (Trevor): 2 races; driver ID 410 (Neville): 3 races; driver ID 411 (Doug): 3 races; driver ID 412
-    (Brausch): 2 races; driver ID 413 (Ernie): 3 races; driver ID 418 (Masten): 45 races; driver ID 420
-    (Ian): 7 races; driver ID 423 (Gerhard): 5 races; driver ID 424 (Roberto): 4 races; driver ID 425
-    (Nino): 5 races; driver ID 427 (Maurice): 87 races; driver ID 428 (Bernard): 6 races; driver ID 429
-    (Andr̩): 15 races; driver ID 430 (Carel Godin): 31 races; driver ID 431 (Edgar): 7 races; driver ID
-    432 (M��rio de Ara̼jo): 5 races; driver ID 433 (Walt): 4 races; driver ID 434 (Hap): 6 races; driver
-    ID 435 (Willy): 12 races; driver ID 436 (John): 5 races; driver ID 437 (Ian): 26 races; driver ID
-    438 (Tony): 10 races; driver ID 439 (Nasif): 5 races; driver ID 440 (Jim): 12 races; driver ID 441
-    (Tim): 4 races; driver ID 442 (Kurt): 2 races; driver ID 444 (Roberto): 3 races; driver ID 445
-    (G�_nther): 2 races; driver ID 446 (Carlo): 2 races; driver ID 447 (Gaetano): 2 races; driver ID 449
-    (Rodger): 12 races; driver ID 453 (Jackie): 11 races; driver ID 454 (Ricardo): 6 races; driver ID
-    455 (Wolfgang): 13 races; driver ID 456 (Roy): 51 races; driver ID 459 (Tony): 9 races; driver ID
-    460 (Gerry): 5 races; driver ID 461 (Heinz): 2 races; driver ID 462 (Colin): 3 races; driver ID 463
-    (Jay): 3 races; driver ID 464 (Tony): 3 races; driver ID 465 (Keith): 7 races; driver ID 467
-    (Ernesto): 2 races; driver ID 468 (Roger): 2 races; driver ID 475 (Stirling): 73 races; driver ID
-    476 (Wolfgang): 28 races; driver ID 477 (Cliff): 18 races; driver ID 478 (Hans): 20 races; driver ID
-    479 (Tony): 41 races; driver ID 480 (Michael): 4 races; driver ID 481 (Henry): 10 races; driver ID
-    482 (Olivier): 17 races; driver ID 483 (Giorgio): 15 races; driver ID 484 (Brian): 9 races; driver
-    ID 486 (Jack): 13 races; driver ID 487 (Massimo): 2 races; driver ID 489 (Renato): 2 races; driver
-    ID 491 (Alfonso): 2 races; driver ID 494 (Lloyd): 2 races; driver ID 496 (Carlos): 12 races; driver
-    ID 498 (Jos̩ Froil��n): 29 races; driver ID 500 (Gino): 4 races; driver ID 501 (Harry): 64 races;
-    driver ID 502 (Alan): 7 races; driver ID 505 (Chris): 4 races; driver ID 506 (Bruce): 9 races;
-    driver ID 507 (Chuck): 6 races; driver ID 508 (Lance): 4 races; driver ID 509 (Jim): 12 races;
-    driver ID 510 (Paul): 3 races; driver ID 511 (Don): 2 races; driver ID 512 (Johnny): 9 races; driver
-    ID 513 (Eddie): 9 races; driver ID 514 (Bob): 5 races; driver ID 516 (Bob): 5 races; driver ID 517
-    (Red): 2 races; driver ID 518 (Duane): 10 races; driver ID 519 (Bill): 3 races; driver ID 520
-    (Gene): 9 races; driver ID 521 (Chuck): 7 races; driver ID 522 (Bobby): 2 races; driver ID 523
-    (Shorty): 3 races; driver ID 525 (Jimmy): 9 races; driver ID 526 (Troy): 9 races; driver ID 527
-    (Eddie): 4 races; driver ID 528 (Don): 8 races; driver ID 529 (Tony): 13 races; driver ID 531
-    (Anthony): 3 races; driver ID 532 (Eddie): 4 races; driver ID 533 (Johnny): 6 races; driver ID 534
-    (Gene): 2 races; driver ID 535 (Jim): 2 races; driver ID 536 (Len): 3 races; driver ID 537 (Dick): 5
-    races; driver ID 538 (Al): 5 races; driver ID 539 (Dempsey): 2 races; driver ID 540 (Mike): 2 races;
-    driver ID 541 (Ron): 15 races; driver ID 542 (David): 3 races; driver ID 543 (Giulio): 4 races;
-    driver ID 547 (Horace): 18 races; driver ID 549 (Ivor): 6 races; driver ID 551 (Maria): 5 races;
-    driver ID 553 (Andr̩): 2 races; driver ID 554 (Jean): 57 races; driver ID 555 (Paul): 9 races;
-    driver ID 556 (Jimmy): 7 races; driver ID 558 (Al): 5 races; driver ID 559 (Pat): 6 races; driver ID
-    560 (Bill): 3 races; driver ID 561 (Ray): 3 races; driver ID 562 (Jack): 4 races; driver ID 563
-    (Chuck): 4 races; driver ID 564 (Jud): 2 races; driver ID 565 (Mike): 3 races; driver ID 566
-    (Carroll): 9 races; driver ID 567 (Fritz): 3 races; driver ID 573 (Alessandro): 2 races; driver ID
-    577 (Luigi): 26 races; driver ID 578 (Mike): 48 races; driver ID 579 (Juan): 58 races; driver ID 580
-    (Paco): 14 races; driver ID 581 (Peter): 37 races; driver ID 583 (Gerino): 7 races; driver ID 585
-    (Paul): 2 races; driver ID 586 (Luigi): 9 races; driver ID 589 (Louis): 17 races; driver ID 590
-    (Stuart): 14 races; driver ID 592 (Jimmy): 6 races; driver ID 593 (Johnnie): 10 races; driver ID 594
-    (Johnnie): 3 races; driver ID 595 (Billy): 2 races; driver ID 596 (Ed): 5 races; driver ID 597
-    (Pat): 5 races; driver ID 601 (Dick): 2 races; driver ID 606 (Alfonso): 6 races; driver ID 607
-    (Cesare): 9 races; driver ID 608 (Eugenio): 17 races; driver ID 609 (Andr̩): 12 races; driver ID 610
-    (Les): 3 races; driver ID 611 (Sam): 9 races; driver ID 612 (Andy): 11 races; driver ID 613
-    (Marshall): 4 races; driver ID 615 (Fred): 8 races; driver ID 619 (Bob): 7 races; driver ID 620
+    driver ID 94 (Pierluigi): 123 races; driver ID 95 (Nigel): 192 races; driver ID 96 (Jean-
+    Christophe): 11 races; driver ID 97 (Massimiliano): 7 races; driver ID 98 (Jean-Denis): 3 races;
+    driver ID 99 (Gabriele): 78 races; driver ID 100 (��rik): 63 races; driver ID 101 (David): 30 races;
+    driver ID 102 (Ayrton): 162 races; driver ID 103 (��ric): 47 races; driver ID 104 (Christian): 43
+    races; driver ID 105 (Michele): 215 races; driver ID 106 (Olivier): 10 races; driver ID 107
+    (Roland): 3 races; driver ID 108 (Paul): 27 races; driver ID 109 (Jyrki): 70 races; driver ID 110
+    (Andrea): 214 races; driver ID 111 (Jean-Marc): 9 races; driver ID 112 (Philippe): 115 races; driver
+    ID 113 (Philippe): 2 races; driver ID 114 (Yannick): 50 races; driver ID 115 (Hideki): 3 races;
+    driver ID 116 (Franck): 2 races; driver ID 117 (Alain): 202 races; driver ID 118 (Derek): 162 races;
+    driver ID 119 (Riccardo): 257 races; driver ID 120 (Fabrizio): 20 races; driver ID 121 (Michael): 13
+    races; driver ID 122 (Ivan): 98 races; driver ID 123 (Thierry): 164 races; driver ID 125 (Emanuele):
+    6 races; driver ID 126 (Toshio): 2 races; driver ID 127 (Maur�_cio): 80 races; driver ID 128 (Eric):
+    29 races; driver ID 129 (Olivier): 62 races; driver ID 130 (Andrea): 10 races; driver ID 131
+    (Stefano): 81 races; driver ID 132 (Giovanna): 3 races; driver ID 133 (Alex): 75 races; driver ID
+    134 (Enrico): 6 races; driver ID 135 (Perry): 7 races; driver ID 136 (Jan): 41 races; driver ID 137
+    (Nelson): 207 races; driver ID 138 (Satoru): 80 races; driver ID 139 (Emanuele): 40 races; driver ID
+    140 (Stefan): 103 races; driver ID 141 (Julian): 20 races; driver ID 142 (Pedro): 13 races; driver
+    ID 143 (Michael): 4 races; driver ID 144 (Naoki): 2 races; driver ID 145 (Alessandro): 77 races;
+    driver ID 146 (Bernd): 32 races; driver ID 147 (Paolo): 15 races; driver ID 148 (Gregor): 22 races;
+    driver ID 149 (Claudio): 14 races; driver ID 150 (Gary): 2 races; driver ID 151 (Martin): 15 races;
+    driver ID 152 (Bruno): 82 races; driver ID 153 (Jaime): 46 races; driver ID 154 (Romain): 124 races;
+    driver ID 155 (Kamui): 76 races; driver ID 156 (Jonathan): 88 races; driver ID 157 (Christian): 47
+    races; driver ID 158 (Eddie): 143 races; driver ID 159 (Luis): 32 races; driver ID 160 (Piercarlo):
+    111 races; driver ID 161 (Volker): 10 races; driver ID 162 (Pierre-Henri): 17 races; driver ID 163
+    (Ren̩): 164 races; driver ID 164 (Joachim): 7 races; driver ID 165 (Oscar): 21 races; driver ID 166
+    (Philippe): 54 races; driver ID 167 (Adri��n): 21 races; driver ID 168 (Jean-Louis): 2 races; driver
+    ID 169 (Pascal): 12 races; driver ID 170 (Teo): 70 races; driver ID 171 (Franco): 2 races; driver ID
+    172 (Jacques): 180 races; driver ID 173 (Elio): 110 races; driver ID 174 (Johnny): 16 races; driver
+    ID 175 (Patrick): 122 races; driver ID 176 (Marc): 88 races; driver ID 177 (Keke): 128 races; driver
+    ID 178 (Alan): 117 races; driver ID 179 (Huub): 28 races; driver ID 180 (Allen): 9 races; driver ID
+    181 (Manfred): 55 races; driver ID 182 (Niki): 174 races; driver ID 183 (Fran̤ois): 20 races; driver
+    ID 184 (Mauro): 41 races; driver ID 185 (Stefan): 22 races; driver ID 186 (Kenny): 9 races; driver
+    ID 187 (John): 154 races; driver ID 188 (Johnny): 23 races; driver ID 189 (Jo): 8 races; driver ID
+    190 (Corrado): 19 races; driver ID 191 (Mike): 5 races; driver ID 192 (Chico): 32 races; driver ID
+    193 (Danny): 15 races; driver ID 194 (Eliseo): 37 races; driver ID 195 (Roberto): 29 races; driver
+    ID 196 (Raul): 30 races; driver ID 197 (Jean-Pierre): 143 races; driver ID 198 (Jacques): 3 races;
+    driver ID 199 (Carlos): 146 races; driver ID 200 (Jochen): 114 races; driver ID 201 (Slim): 15
+    races; driver ID 202 (Didier): 72 races; driver ID 203 (Gilles): 68 races; driver ID 204 (Riccardo):
+    8 races; driver ID 205 (Brian): 37 races; driver ID 206 (Derek): 64 races; driver ID 207 (Mario):
+    129 races; driver ID 208 (Emilio): 14 races; driver ID 209 (Geoff): 12 races; driver ID 210 (Tommy):
+    5 races; driver ID 211 (Rupert): 37 races; driver ID 212 (Hector): 58 races; driver ID 213 (Beppe):
+    17 races; driver ID 214 (Kevin): 2 races; driver ID 215 (Miguel ́ngel): 4 races; driver ID 216
+    (Siegfried): 13 races; driver ID 217 (Ricardo): 11 races; driver ID 219 (Jean-Pierre): 55 races;
+    driver ID 220 (Giorgio): 2 races; driver ID 221 (Patrick): 95 races; driver ID 222 (Jody): 113
+    races; driver ID 223 (Clay): 138 races; driver ID 224 (Emerson): 149 races; driver ID 225 (Dave): 7
+    races; driver ID 227 (Tiff): 2 races; driver ID 229 (Harald): 28 races; driver ID 230 (Vittorio): 78
+    races; driver ID 231 (James): 93 races; driver ID 232 (Arturo): 84 races; driver ID 233 (Hans-
+    Joachim): 81 races; driver ID 234 (Gianfranco): 3 races; driver ID 235 (Jacky): 121 races; driver ID
+    236 (Patrick): 5 races; driver ID 237 (Alex): 20 races; driver ID 238 (Ronnie): 123 races; driver ID
+    239 (Brett): 42 races; driver ID 240 (Danny): 6 races; driver ID 241 (Lamberto): 5 races; driver ID
+    242 (Divina): 3 races; driver ID 243 (Rolf): 61 races; driver ID 244 (Alberto): 3 races; driver ID
+    245 (Tony): 6 races; driver ID 246 (Hans): 15 races; driver ID 247 (Michael): 5 races; driver ID 249
+    (Bobby): 2 races; driver ID 250 (Carlos): 73 races; driver ID 251 (Ian): 20 races; driver ID 252
+    (Tom): 42 races; driver ID 253 (Ingo): 6 races; driver ID 254 (Renzo): 7 races; driver ID 255
+    (Gunnar): 32 races; driver ID 256 (Larry): 15 races; driver ID 257 (Boy): 7 races; driver ID 258
+    (Patrick): 13 races; driver ID 259 (David): 11 races; driver ID 260 (Conny): 5 races; driver ID 262
+    (Jackie): 51 races; driver ID 263 (Mikko): 2 races; driver ID 265 (Guy): 16 races; driver ID 267
+    (Vern): 12 races; driver ID 269 (Teddy): 4 races; driver ID 270 (Ian): 11 races; driver ID 271
+    (Loris): 6 races; driver ID 273 (Kazuyoshi): 2 races; driver ID 274 (Noritake): 2 races; driver ID
+    275 (Lella): 17 races; driver ID 276 (Bob): 12 races; driver ID 277 (Michel): 8 races; driver ID 278
+    (Chris): 106 races; driver ID 280 (Henri): 59 races; driver ID 282 (Damien): 2 races; driver ID 283
+    (Mike): 8 races; driver ID 284 (Alessandro): 4 races; driver ID 285 (Otto): 3 races; driver ID 288
+    (Mark): 15 races; driver ID 289 (Graham): 179 races; driver ID 290 (Wilson): 38 races; driver ID 292
+    (Eddie): 3 races; driver ID 293 (Dave): 13 races; driver ID 294 (Tony): 10 races; driver ID 295
+    (Roelof): 6 races; driver ID 296 (Fran̤ois): 15 races; driver ID 297 (Torsten): 2 races; driver ID
+    298 (Gijs): 9 races; driver ID 299 (Hiroshi): 2 races; driver ID 300 (John): 2 races; driver ID 302
+    (Jim): 2 races; driver ID 304 (Denny): 112 races; driver ID 305 (Mike): 51 races; driver ID 306
+    (Jean-Pierre): 87 races; driver ID 307 (Howden): 39 races; driver ID 308 (Richard): 4 races; driver
+    ID 309 (Peter): 31 races; driver ID 310 (Paddy): 2 races; driver ID 311 (Tom): 4 races; driver ID
+    312 (Brian): 13 races; driver ID 313 (Rikky): 13 races; driver ID 314 (Tim): 36 races; driver ID 315
+    (G̩rard): 2 races; driver ID 316 (Leo): 6 races; driver ID 317 (Reine): 23 races; driver ID 319
+    (Jos̩): 3 races; driver ID 320 (Peter): 30 races; driver ID 321 (Derek): 14 races; driver ID 322
+    (David): 7 races; driver ID 324 (Helmuth): 3 races; driver ID 326 (Eppie): 2 races; driver ID 327
+    (Fran̤ois): 47 races; driver ID 328 (Jackie): 100 races; driver ID 329 (Mike): 29 races; driver ID
+    330 (Nanni): 17 races; driver ID 332 (George): 12 races; driver ID 333 (Andrea): 35 races; driver ID
+    334 (Jackie): 4 races; driver ID 335 (Roger): 2 races; driver ID 337 (Helmut): 9 races; driver ID
+    338 (David): 11 races; driver ID 339 (Alex): 9 races; driver ID 340 (John): 10 races; driver ID 341
+    (John): 112 races; driver ID 342 (Skip): 6 races; driver ID 343 (Bill): 3 races; driver ID 344
+    (Sam): 2 races; driver ID 345 (Pedro): 54 races; driver ID 346 (Jo): 100 races; driver ID 347 (Jo):
+    109 races; driver ID 350 (Vic): 13 races; driver ID 351 (Silvio): 18 races; driver ID 352 (George):
+    13 races; driver ID 353 (Pete): 11 races; driver ID 354 (Chris): 2 races; driver ID 356 (Jack): 128
+    races; driver ID 357 (John): 15 races; driver ID 358 (Jochen): 62 races; driver ID 359 (Johnny): 12
+    races; driver ID 360 (Bruce): 103 races; driver ID 361 (Piers): 29 races; driver ID 362 (Peter): 4
+    races; driver ID 363 (Ignazio): 4 races; driver ID 364 (Dan): 87 races; driver ID 365 (Hubert): 3
+    races; driver ID 368 (Sam): 6 races; driver ID 369 (Basil): 2 races; driver ID 370 (Richard): 17
+    races; driver ID 371 (Al): 2 races; driver ID 373 (Jim): 72 races; driver ID 374 (Mike): 36 races;
+    driver ID 375 (Ludovico): 13 races; driver ID 376 (Lucien): 19 races; driver ID 377 (Jo): 2 races;
+    driver ID 379 (Kurt): 2 races; driver ID 380 (Frank): 9 races; driver ID 382 (Mois̩s): 8 races;
+    driver ID 383 (Bob): 26 races; driver ID 385 (Lorenzo): 44 races; driver ID 386 (Richie): 54 races;
+    driver ID 387 (Mike): 7 races; driver ID 388 (Chris): 10 races; driver ID 389 (Guy): 13 races;
+    driver ID 390 (Alan): 2 races; driver ID 392 (Mike): 2 races; driver ID 394 (Giancarlo): 26 races;
+    driver ID 396 (Bob): 9 races; driver ID 397 (Peter): 15 races; driver ID 398 (Vic): 2 races; driver
+    ID 399 (John): 5 races; driver ID 400 (Chris): 2 races; driver ID 401 (Trevor): 29 races; driver ID
+    402 (Giacomo): 3 races; driver ID 403 (Phil): 52 races; driver ID 404 (Innes): 55 races; driver ID
+    405 (Ronnie): 11 races; driver ID 406 (Paul): 3 races; driver ID 407 (David): 2 races; driver ID 408
+    (Tony): 27 races; driver ID 409 (Trevor): 2 races; driver ID 410 (Neville): 3 races; driver ID 411
+    (Doug): 3 races; driver ID 412 (Brausch): 2 races; driver ID 413 (Ernie): 3 races; driver ID 418
+    (Masten): 45 races; driver ID 420 (Ian): 7 races; driver ID 423 (Gerhard): 5 races; driver ID 424
+    (Roberto): 4 races; driver ID 425 (Nino): 5 races; driver ID 427 (Maurice): 85 races; driver ID 428
+    (Bernard): 6 races; driver ID 429 (Andr̩): 15 races; driver ID 430 (Carel Godin): 31 races; driver
+    ID 431 (Edgar): 7 races; driver ID 432 (M��rio de Ara̼jo): 5 races; driver ID 433 (Walt): 4 races;
+    driver ID 434 (Hap): 6 races; driver ID 435 (Willy): 12 races; driver ID 436 (John): 5 races; driver
+    ID 437 (Ian): 26 races; driver ID 438 (Tony): 10 races; driver ID 439 (Nasif): 5 races; driver ID
+    440 (Jim): 12 races; driver ID 441 (Tim): 4 races; driver ID 442 (Kurt): 2 races; driver ID 444
+    (Roberto): 3 races; driver ID 445 (G�_nther): 2 races; driver ID 446 (Carlo): 2 races; driver ID 447
+    (Gaetano): 2 races; driver ID 449 (Rodger): 12 races; driver ID 453 (Jackie): 11 races; driver ID
+    454 (Ricardo): 6 races; driver ID 455 (Wolfgang): 13 races; driver ID 456 (Roy): 51 races; driver ID
+    459 (Tony): 9 races; driver ID 460 (Gerry): 5 races; driver ID 461 (Heinz): 2 races; driver ID 462
+    (Colin): 3 races; driver ID 463 (Jay): 3 races; driver ID 464 (Tony): 3 races; driver ID 465
+    (Keith): 6 races; driver ID 467 (Ernesto): 2 races; driver ID 468 (Roger): 2 races; driver ID 475
+    (Stirling): 67 races; driver ID 476 (Wolfgang): 28 races; driver ID 477 (Cliff): 18 races; driver ID
+    478 (Hans): 20 races; driver ID 479 (Tony): 39 races; driver ID 480 (Michael): 4 races; driver ID
+    481 (Henry): 10 races; driver ID 482 (Olivier): 17 races; driver ID 483 (Giorgio): 15 races; driver
+    ID 484 (Brian): 9 races; driver ID 486 (Jack): 13 races; driver ID 487 (Massimo): 2 races; driver ID
+    489 (Renato): 2 races; driver ID 491 (Alfonso): 2 races; driver ID 494 (Lloyd): 2 races; driver ID
+    496 (Carlos): 11 races; driver ID 498 (Jos̩ Froil��n): 26 races; driver ID 500 (Gino): 4 races;
+    driver ID 501 (Harry): 57 races; driver ID 502 (Alan): 7 races; driver ID 505 (Chris): 4 races;
+    driver ID 506 (Bruce): 9 races; driver ID 507 (Chuck): 6 races; driver ID 508 (Lance): 4 races;
+    driver ID 509 (Jim): 10 races; driver ID 510 (Paul): 3 races; driver ID 511 (Don): 2 races; driver
+    ID 512 (Johnny): 8 races; driver ID 513 (Eddie): 9 races; driver ID 514 (Bob): 5 races; driver ID
+    516 (Bob): 5 races; driver ID 517 (Red): 2 races; driver ID 518 (Duane): 8 races; driver ID 519
+    (Bill): 3 races; driver ID 520 (Gene): 8 races; driver ID 521 (Chuck): 5 races; driver ID 522
+    (Bobby): 2 races; driver ID 523 (Shorty): 3 races; driver ID 525 (Jimmy): 9 races; driver ID 526
+    (Troy): 9 races; driver ID 527 (Eddie): 4 races; driver ID 528 (Don): 8 races; driver ID 529 (Tony):
+    11 races; driver ID 531 (Anthony): 3 races; driver ID 532 (Eddie): 4 races; driver ID 533 (Johnny):
+    6 races; driver ID 534 (Gene): 2 races; driver ID 535 (Jim): 2 races; driver ID 536 (Len): 3 races;
+    driver ID 537 (Dick): 5 races; driver ID 538 (Al): 5 races; driver ID 539 (Dempsey): 2 races; driver
+    ID 540 (Mike): 2 races; driver ID 541 (Ron): 14 races; driver ID 542 (David): 3 races; driver ID 543
+    (Giulio): 4 races; driver ID 547 (Horace): 18 races; driver ID 549 (Ivor): 6 races; driver ID 551
+    (Maria): 5 races; driver ID 553 (Andr̩): 2 races; driver ID 554 (Jean): 52 races; driver ID 555
+    (Paul): 8 races; driver ID 556 (Jimmy): 6 races; driver ID 558 (Al): 5 races; driver ID 559 (Pat): 6
+    races; driver ID 560 (Bill): 3 races; driver ID 561 (Ray): 3 races; driver ID 562 (Jack): 4 races;
+    driver ID 563 (Chuck): 4 races; driver ID 564 (Jud): 2 races; driver ID 565 (Mike): 3 races; driver
+    ID 566 (Carroll): 8 races; driver ID 567 (Fritz): 3 races; driver ID 573 (Alessandro): 2 races;
+    driver ID 577 (Luigi): 25 races; driver ID 578 (Mike): 46 races; driver ID 579 (Juan): 51 races;
+    driver ID 580 (Paco): 14 races; driver ID 581 (Peter): 34 races; driver ID 583 (Gerino): 7 races;
+    driver ID 585 (Paul): 2 races; driver ID 586 (Luigi): 9 races; driver ID 589 (Louis): 17 races;
+    driver ID 590 (Stuart): 14 races; driver ID 592 (Jimmy): 6 races; driver ID 593 (Johnnie): 9 races;
+    driver ID 594 (Johnnie): 3 races; driver ID 595 (Billy): 2 races; driver ID 596 (Ed): 5 races;
+    driver ID 597 (Pat): 5 races; driver ID 601 (Dick): 2 races; driver ID 606 (Alfonso): 5 races;
+    driver ID 607 (Cesare): 8 races; driver ID 608 (Eugenio): 14 races; driver ID 609 (Andr̩): 12 races;
+    driver ID 610 (Les): 3 races; driver ID 611 (Sam): 8 races; driver ID 612 (Andy): 7 races; driver ID
+    613 (Marshall): 3 races; driver ID 615 (Fred): 8 races; driver ID 619 (Bob): 7 races; driver ID 620
     (Umberto): 10 races; driver ID 622 (Chico): 6 races; driver ID 623 (Alberto): 2 races; driver ID 624
-    (Hernando): 8 races; driver ID 625 (��lie): 7 races; driver ID 626 (Robert): 29 races; driver ID 627
-    (Louis): 39 races; driver ID 628 (Bob): 5 races; driver ID 629 (Cliff): 3 races; driver ID 630
+    (Hernando): 7 races; driver ID 625 (��lie): 7 races; driver ID 626 (Robert): 29 races; driver ID 627
+    (Louis): 38 races; driver ID 628 (Bob): 5 races; driver ID 629 (Cliff): 3 races; driver ID 630
     (Duke): 4 races; driver ID 631 (Keith): 2 races; driver ID 632 (Paul): 11 races; driver ID 633
-    (Luigi): 35 races; driver ID 638 (Ottorino): 3 races; driver ID 640 (Toulo): 23 races; driver ID 641
-    (Piero): 18 races; driver ID 642 (Nino): 37 races; driver ID 643 (Roberto): 17 races; driver ID 644
-    (Sergio): 9 races; driver ID 645 (Clemar): 5 races; driver ID 647 (Alberto): 36 races; driver ID 648
-    (Karl): 12 races; driver ID 649 (Pablo): 2 races; driver ID 650 (Jacques): 5 races; driver ID 651
-    (Lance): 15 races; driver ID 653 (Jimmy): 6 races; driver ID 654 (Walt): 5 races; driver ID 655
+    (Luigi): 33 races; driver ID 638 (Ottorino): 3 races; driver ID 640 (Toulo): 23 races; driver ID 641
+    (Piero): 18 races; driver ID 642 (Nino): 34 races; driver ID 643 (Roberto): 17 races; driver ID 644
+    (Sergio): 8 races; driver ID 645 (Clemar): 5 races; driver ID 647 (Alberto): 32 races; driver ID 648
+    (Karl): 11 races; driver ID 649 (Pablo): 2 races; driver ID 650 (Jacques): 5 races; driver ID 651
+    (Lance): 15 races; driver ID 653 (Jimmy): 5 races; driver ID 654 (Walt): 5 races; driver ID 655
     (Cal): 3 races; driver ID 656 (Art): 4 races; driver ID 657 (Bill): 5 races; driver ID 658 (Jack): 6
-    races; driver ID 659 (Jerry): 5 races; driver ID 660 (Johnny): 25 races; driver ID 661 (Peter): 4
+    races; driver ID 659 (Jerry): 4 races; driver ID 660 (Johnny): 25 races; driver ID 661 (Peter): 4
     races; driver ID 663 (Ken): 16 races; driver ID 664 (Kenneth): 7 races; driver ID 665 (Leslie): 2
     races; driver ID 666 (Tony): 3 races; driver ID 667 (John): 2 races; driver ID 669 (Prince): 19
     races; driver ID 670 (Onofre): 12 races; driver ID 672 (Jorge): 2 races; driver ID 673 (Mike): 3
@@ -822,208 +1043,220 @@
     races; driver ID 680 (Jacques): 7 races; driver ID 681 (Georges): 2 races; driver ID 686 (Reg): 7
     races; driver ID 687 (Peter): 12 races; driver ID 688 (Eric): 5 races; driver ID 689 (Alan): 9
     races; driver ID 690 (Rodney): 2 races; driver ID 691 (Hermann): 2 races; driver ID 692 (Theo): 3
-    races; driver ID 693 (Fred): 3 races; driver ID 697 (Felice): 17 races; driver ID 699 (Duke): 3
-    races; driver ID 700 (Carl): 2 races; driver ID 701 (Bill): 2 races; driver ID 702 (Bob): 5 races;
+    races; driver ID 693 (Fred): 3 races; driver ID 697 (Felice): 16 races; driver ID 699 (Duke): 3
+    races; driver ID 700 (Carl): 2 races; driver ID 701 (Bill): 2 races; driver ID 702 (Bob): 3 races;
     driver ID 703 (Arthur): 2 races; driver ID 704 (Yves): 13 races; driver ID 705 (Tony): 2 races;
     driver ID 708 (Duncan): 5 races; driver ID 709 (Ernst): 2 races; driver ID 710 (Rudolf): 2 races;
     driver ID 712 (Willi): 2 races; driver ID 715 (G�_nther): 2 races; driver ID 717 (Hans): 4 races;
     driver ID 720 (Max): 2 races; driver ID 721 (Peter): 5 races; driver ID 722 (Piero): 3 races; driver
     ID 723 (Rudi): 7 races; driver ID 724 (Toni): 2 races; driver ID 725 (George): 2 races; driver ID
     726 (George): 3 races; driver ID 728 (Joe): 2 races; driver ID 729 (Bill): 3 races; driver ID 730
-    (George): 3 races; driver ID 731 (Henry): 3 races; driver ID 732 (Johnny): 3 races; driver ID 733
+    (George): 2 races; driver ID 731 (Henry): 3 races; driver ID 732 (Johnny): 3 races; driver ID 733
     (Chet): 2 races; driver ID 734 (Bobby): 2 races; driver ID 735 (Charles): 3 races; driver ID 736
     (Roger): 2 races; driver ID 738 (Tony): 4 races; driver ID 740 (Franco): 2 races; driver ID 741
     (Philippe): 12 races; driver ID 742 (Dennis): 2 races; driver ID 744 (Ken): 2 races; driver ID 746
     (Gino): 4 races; driver ID 747 (David): 4 races; driver ID 748 (Eitel): 3 races; driver ID 749
-    (Bill): 3 races; driver ID 756 (Paul): 3 races; driver ID 759 (Jan): 2 races; driver ID 762
-    (Franco): 5 races; driver ID 763 (Consalvo): 5 races; driver ID 764 (Guy): 3 races; driver ID 765
-    (Henri): 2 races; driver ID 766 (Lee): 2 races; driver ID 768 (Mauri): 2 races; driver ID 770
-    (Cecil): 2 races; driver ID 771 (Walt): 2 races; driver ID 772 (Mack): 2 races; driver ID 773
-    (Pierre): 6 races; driver ID 774 (Eug̬ne): 3 races; driver ID 776 (Joe): 2 races; driver ID 778
-    (Brian): 2 races; driver ID 780 (Toni): 3 races; driver ID 784 (David): 2 races; driver ID 785
-    (Geoff): 2 races; driver ID 786 (Luigi): 8 races; driver ID 787 (Cuth): 3 races; driver ID 789
-    (Eug̬ne): 2 races; driver ID 793 (Raymond): 5 races; driver ID 797 (Jackie): 2 races; driver ID 799
-    (Jimmy): 2 races; driver ID 807 (Nico): 137 races; driver ID 808 (Vitaly): 58 races; driver ID 810
-    (Lucas): 19 races; driver ID 811 (Bruno): 46 races; driver ID 812 (Karun): 11 races; driver ID 813
-    (Pastor): 96 races; driver ID 814 (Paul): 59 races; driver ID 815 (Sergio): 136 races; driver ID 816
-    (J̩r̫me): 20 races; driver ID 817 (Daniel): 129 races; driver ID 818 (Jean-��ric): 58 races; driver
-    ID 819 (Charles): 39 races; driver ID 820 (Max): 35 races; driver ID 821 (Esteban): 59 races; driver
-    ID 822 (Valtteri): 98 races; driver ID 823 (Giedo): 19 races; driver ID 824 (Jules): 34 races;
-    driver ID 825 (Kevin): 61 races; driver ID 826 (Daniil): 74 races; driver ID 828 (Marcus): 76 races;
-    driver ID 829 (Will): 19 races; driver ID 830 (Max): 60 races; driver ID 831 (Felipe): 40 races;
-    driver ID 832 (Carlos): 60 races; driver ID 833 (Roberto): 13 races; driver ID 834 (Alexander): 5
-    races; driver ID 835 (Jolyon): 37 races; driver ID 836 (Pascal): 39 races; driver ID 837 (Rio): 12
-    races; driver ID 838 (Stoffel): 21 races; driver ID 839 (Esteban): 29 races; driver ID 840 (Lance):
-    20 races; driver ID 841 (Antonio): 2 races; driver ID 842 (Pierre): 5 races; driver ID 843
-    (Brendon): 4 races.
+    (Bill): 3 races; driver ID 756 (Paul): 3 races; driver ID 762 (Franco): 5 races; driver ID 763
+    (Consalvo): 5 races; driver ID 764 (Guy): 3 races; driver ID 765 (Henri): 2 races; driver ID 766
+    (Lee): 2 races; driver ID 768 (Mauri): 2 races; driver ID 770 (Cecil): 2 races; driver ID 771
+    (Walt): 2 races; driver ID 772 (Mack): 2 races; driver ID 773 (Pierre): 6 races; driver ID 774
+    (Eug̬ne): 3 races; driver ID 776 (Joe): 2 races; driver ID 778 (Brian): 2 races; driver ID 780
+    (Toni): 3 races; driver ID 784 (David): 2 races; driver ID 785 (Geoff): 2 races; driver ID 786
+    (Luigi): 7 races; driver ID 787 (Cuth): 3 races; driver ID 789 (Eug̬ne): 2 races; driver ID 793
+    (Raymond): 5 races; driver ID 797 (Jackie): 2 races; driver ID 799 (Jimmy): 2 races; driver ID 807
+    (Nico): 137 races; driver ID 808 (Vitaly): 58 races; driver ID 810 (Lucas): 19 races; driver ID 811
+    (Bruno): 46 races; driver ID 812 (Karun): 11 races; driver ID 813 (Pastor): 96 races; driver ID 814
+    (Paul): 59 races; driver ID 815 (Sergio): 136 races; driver ID 816 (J̩r̫me): 20 races; driver ID 817
+    (Daniel): 129 races; driver ID 818 (Jean-��ric): 58 races; driver ID 819 (Charles): 39 races; driver
+    ID 820 (Max): 35 races; driver ID 821 (Esteban): 59 races; driver ID 822 (Valtteri): 98 races;
+    driver ID 823 (Giedo): 19 races; driver ID 824 (Jules): 34 races; driver ID 825 (Kevin): 61 races;
+    driver ID 826 (Daniil): 74 races; driver ID 828 (Marcus): 76 races; driver ID 829 (Will): 19 races;
+    driver ID 830 (Max): 60 races; driver ID 831 (Felipe): 40 races; driver ID 832 (Carlos): 60 races;
+    driver ID 833 (Roberto): 13 races; driver ID 834 (Alexander): 5 races; driver ID 835 (Jolyon): 37
+    races; driver ID 836 (Pascal): 39 races; driver ID 837 (Rio): 12 races; driver ID 838 (Stoffel): 21
+    races; driver ID 839 (Esteban): 29 races; driver ID 840 (Lance): 20 races; driver ID 841 (Antonio):
+    2 races; driver ID 842 (Pierre): 5 races; driver ID 843 (Brendon): 4 races.
   gold_sql: |
-    SELECT T1.driverid ,  T1.forename ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  >=  2
+    SELECT d.driverId, d.forename, COUNT(DISTINCT r.raceId) AS race_count
+    FROM drivers AS d
+    JOIN results AS r ON d.driverId = r.driverId
+    JOIN races AS rc ON r.raceId = rc.raceId
+    GROUP BY d.driverId, d.forename
+    HAVING COUNT(DISTINCT r.raceId) >= 2
+    ORDER BY d.driverId
 - name: formula_1_080
   question: "Find the driver id and number of races of all drivers who have at most participated in 30 races?"
   reference_answer: >-
-    The 642 driver ID/race counts were: driver ID 7: 27 races; driver ID 12: 28 races;
-    driver ID 19: 24 races; driver ID 26: 28 races; driver ID 28: 1 races; driver ID 29: 21 races;
-    driver ID 34: 4 races; driver ID 36: 7 races; driver ID 38: 11 races; driver ID 40: 11 races; driver
-    ID 42: 20 races; driver ID 43: 28 races; driver ID 45: 14 races; driver ID 46: 18 races; driver ID
-    47: 20 races; driver ID 51: 16 races; driver ID 52: 14 races; driver ID 53: 5 races; driver ID 54:
-    15 races; driver ID 58: 26 races; driver ID 59: 29 races; driver ID 60: 21 races; driver ID 61: 3
-    races; driver ID 62: 16 races; driver ID 66: 17 races; driver ID 72: 1 races; driver ID 73: 30
-    races; driver ID 74: 16 races; driver ID 76: 25 races; driver ID 80: 1 races; driver ID 82: 4 races;
-    driver ID 85: 28 races; driver ID 86: 10 races; driver ID 89: 18 races; driver ID 93: 7 races;
-    driver ID 96: 11 races; driver ID 97: 7 races; driver ID 98: 3 races; driver ID 101: 30 races;
-    driver ID 106: 10 races; driver ID 107: 3 races; driver ID 108: 27 races; driver ID 111: 9 races;
-    driver ID 113: 2 races; driver ID 115: 3 races; driver ID 116: 2 races; driver ID 120: 20 races;
-    driver ID 121: 13 races; driver ID 124: 1 races; driver ID 125: 6 races; driver ID 126: 2 races;
-    driver ID 128: 29 races; driver ID 130: 10 races; driver ID 132: 3 races; driver ID 134: 6 races;
-    driver ID 135: 7 races; driver ID 141: 20 races; driver ID 142: 13 races; driver ID 143: 4 races;
-    driver ID 144: 2 races; driver ID 147: 15 races; driver ID 148: 22 races; driver ID 149: 14 races;
-    driver ID 150: 2 races; driver ID 151: 15 races; driver ID 161: 10 races; driver ID 162: 17 races;
-    driver ID 164: 7 races; driver ID 165: 21 races; driver ID 167: 21 races; driver ID 168: 2 races;
-    driver ID 169: 12 races; driver ID 171: 2 races; driver ID 174: 16 races; driver ID 179: 28 races;
-    driver ID 180: 9 races; driver ID 183: 20 races; driver ID 185: 22 races; driver ID 186: 9 races;
-    driver ID 188: 23 races; driver ID 189: 8 races; driver ID 190: 19 races; driver ID 191: 5 races;
-    driver ID 193: 15 races; driver ID 195: 29 races; driver ID 196: 30 races; driver ID 198: 3 races;
-    driver ID 201: 15 races; driver ID 204: 8 races; driver ID 208: 14 races; driver ID 209: 12 races;
-    driver ID 210: 5 races; driver ID 213: 17 races; driver ID 214: 2 races; driver ID 215: 4 races;
-    driver ID 216: 13 races; driver ID 217: 11 races; driver ID 218: 1 races; driver ID 220: 2 races;
-    driver ID 225: 7 races; driver ID 226: 1 races; driver ID 227: 2 races; driver ID 228: 1 races;
-    driver ID 229: 29 races; driver ID 234: 3 races; driver ID 236: 5 races; driver ID 237: 20 races;
-    driver ID 240: 6 races; driver ID 241: 5 races; driver ID 242: 3 races; driver ID 244: 3 races;
-    driver ID 245: 6 races; driver ID 246: 15 races; driver ID 247: 5 races; driver ID 248: 1 races;
-    driver ID 249: 2 races; driver ID 251: 20 races; driver ID 253: 6 races; driver ID 254: 7 races;
-    driver ID 256: 15 races; driver ID 257: 7 races; driver ID 258: 13 races; driver ID 259: 11 races;
-    driver ID 260: 5 races; driver ID 261: 1 races; driver ID 263: 2 races; driver ID 264: 1 races;
-    driver ID 265: 16 races; driver ID 266: 1 races; driver ID 267: 12 races; driver ID 268: 1 races;
-    driver ID 269: 4 races; driver ID 270: 11 races; driver ID 271: 6 races; driver ID 272: 1 races;
-    driver ID 273: 2 races; driver ID 274: 2 races; driver ID 275: 17 races; driver ID 276: 12 races;
-    driver ID 277: 8 races; driver ID 279: 1 races; driver ID 281: 1 races; driver ID 282: 2 races;
-    driver ID 283: 8 races; driver ID 284: 4 races; driver ID 285: 3 races; driver ID 286: 1 races;
-    driver ID 287: 1 races; driver ID 288: 15 races; driver ID 291: 1 races; driver ID 292: 3 races;
-    driver ID 293: 13 races; driver ID 294: 10 races; driver ID 295: 6 races; driver ID 296: 15 races;
-    driver ID 297: 2 races; driver ID 298: 9 races; driver ID 299: 2 races; driver ID 300: 2 races;
-    driver ID 301: 1 races; driver ID 302: 2 races; driver ID 303: 1 races; driver ID 308: 4 races;
-    driver ID 310: 2 races; driver ID 311: 4 races; driver ID 312: 13 races; driver ID 313: 13 races;
-    driver ID 315: 2 races; driver ID 316: 6 races; driver ID 317: 23 races; driver ID 318: 1 races;
-    driver ID 319: 3 races; driver ID 320: 30 races; driver ID 321: 14 races; driver ID 322: 7 races;
-    driver ID 323: 1 races; driver ID 324: 3 races; driver ID 325: 1 races; driver ID 326: 2 races;
-    driver ID 329: 29 races; driver ID 330: 17 races; driver ID 331: 1 races; driver ID 332: 12 races;
-    driver ID 334: 4 races; driver ID 335: 2 races; driver ID 336: 1 races; driver ID 337: 9 races;
-    driver ID 338: 11 races; driver ID 339: 9 races; driver ID 340: 10 races; driver ID 342: 6 races;
-    driver ID 343: 3 races; driver ID 344: 2 races; driver ID 348: 1 races; driver ID 349: 1 races;
-    driver ID 350: 13 races; driver ID 351: 18 races; driver ID 352: 13 races; driver ID 353: 11 races;
-    driver ID 354: 2 races; driver ID 355: 1 races; driver ID 357: 15 races; driver ID 359: 12 races;
-    driver ID 361: 29 races; driver ID 362: 4 races; driver ID 363: 4 races; driver ID 365: 3 races;
-    driver ID 366: 1 races; driver ID 367: 1 races; driver ID 368: 6 races; driver ID 369: 2 races;
-    driver ID 370: 17 races; driver ID 371: 2 races; driver ID 372: 1 races; driver ID 375: 13 races;
-    driver ID 376: 19 races; driver ID 377: 2 races; driver ID 378: 1 races; driver ID 379: 2 races;
-    driver ID 380: 9 races; driver ID 381: 1 races; driver ID 382: 8 races; driver ID 383: 26 races;
-    driver ID 384: 1 races; driver ID 387: 7 races; driver ID 388: 10 races; driver ID 389: 13 races;
-    driver ID 390: 2 races; driver ID 391: 1 races; driver ID 392: 2 races; driver ID 393: 1 races;
-    driver ID 394: 26 races; driver ID 395: 1 races; driver ID 396: 9 races; driver ID 397: 15 races;
-    driver ID 398: 2 races; driver ID 399: 5 races; driver ID 400: 2 races; driver ID 401: 29 races;
-    driver ID 402: 3 races; driver ID 405: 11 races; driver ID 406: 3 races; driver ID 407: 2 races;
-    driver ID 408: 27 races; driver ID 409: 2 races; driver ID 410: 3 races; driver ID 411: 3 races;
-    driver ID 412: 2 races; driver ID 413: 3 races; driver ID 414: 1 races; driver ID 415: 1 races;
-    driver ID 416: 1 races; driver ID 417: 1 races; driver ID 419: 1 races; driver ID 420: 7 races;
-    driver ID 421: 1 races; driver ID 422: 1 races; driver ID 423: 5 races; driver ID 424: 4 races;
-    driver ID 425: 5 races; driver ID 426: 1 races; driver ID 428: 6 races; driver ID 429: 15 races;
-    driver ID 431: 7 races; driver ID 432: 5 races; driver ID 433: 4 races; driver ID 434: 6 races;
-    driver ID 435: 12 races; driver ID 436: 5 races; driver ID 437: 26 races; driver ID 438: 10 races;
-    driver ID 439: 5 races; driver ID 440: 12 races; driver ID 441: 4 races; driver ID 442: 2 races;
-    driver ID 443: 1 races; driver ID 444: 3 races; driver ID 445: 2 races; driver ID 446: 2 races;
-    driver ID 447: 2 races; driver ID 448: 1 races; driver ID 449: 12 races; driver ID 450: 1 races;
-    driver ID 451: 1 races; driver ID 452: 1 races; driver ID 453: 11 races; driver ID 454: 6 races;
-    driver ID 455: 13 races; driver ID 457: 1 races; driver ID 458: 1 races; driver ID 459: 9 races;
-    driver ID 460: 5 races; driver ID 461: 2 races; driver ID 462: 3 races; driver ID 463: 3 races;
-    driver ID 464: 3 races; driver ID 465: 7 races; driver ID 466: 1 races; driver ID 467: 2 races;
-    driver ID 468: 2 races; driver ID 469: 1 races; driver ID 470: 1 races; driver ID 471: 1 races;
-    driver ID 472: 1 races; driver ID 473: 1 races; driver ID 474: 1 races; driver ID 476: 28 races;
-    driver ID 477: 18 races; driver ID 478: 20 races; driver ID 480: 4 races; driver ID 481: 10 races;
-    driver ID 482: 17 races; driver ID 483: 15 races; driver ID 484: 9 races; driver ID 485: 1 races;
-    driver ID 486: 13 races; driver ID 487: 2 races; driver ID 488: 1 races; driver ID 489: 2 races;
-    driver ID 490: 1 races; driver ID 491: 2 races; driver ID 492: 1 races; driver ID 493: 1 races;
-    driver ID 494: 2 races; driver ID 495: 1 races; driver ID 496: 12 races; driver ID 497: 1 races;
-    driver ID 498: 29 races; driver ID 499: 1 races; driver ID 500: 4 races; driver ID 502: 7 races;
-    driver ID 503: 1 races; driver ID 504: 1 races; driver ID 505: 4 races; driver ID 506: 9 races;
-    driver ID 507: 6 races; driver ID 508: 4 races; driver ID 509: 12 races; driver ID 510: 3 races;
-    driver ID 511: 2 races; driver ID 512: 9 races; driver ID 513: 9 races; driver ID 514: 5 races;
-    driver ID 515: 1 races; driver ID 516: 5 races; driver ID 517: 2 races; driver ID 518: 10 races;
-    driver ID 519: 3 races; driver ID 520: 9 races; driver ID 521: 7 races; driver ID 522: 2 races;
-    driver ID 523: 3 races; driver ID 524: 1 races; driver ID 525: 9 races; driver ID 526: 9 races;
-    driver ID 527: 4 races; driver ID 528: 8 races; driver ID 529: 13 races; driver ID 530: 1 races;
-    driver ID 531: 3 races; driver ID 532: 4 races; driver ID 533: 6 races; driver ID 534: 2 races;
-    driver ID 535: 2 races; driver ID 536: 3 races; driver ID 537: 5 races; driver ID 538: 5 races;
-    driver ID 539: 2 races; driver ID 540: 2 races; driver ID 541: 15 races; driver ID 542: 3 races;
-    driver ID 543: 4 races; driver ID 544: 1 races; driver ID 545: 1 races; driver ID 546: 1 races;
-    driver ID 547: 18 races; driver ID 548: 1 races; driver ID 549: 6 races; driver ID 550: 1 races;
-    driver ID 551: 5 races; driver ID 552: 1 races; driver ID 553: 2 races; driver ID 555: 9 races;
-    driver ID 556: 7 races; driver ID 557: 1 races; driver ID 558: 5 races; driver ID 559: 6 races;
-    driver ID 560: 3 races; driver ID 561: 3 races; driver ID 562: 4 races; driver ID 563: 4 races;
-    driver ID 564: 2 races; driver ID 565: 3 races; driver ID 566: 9 races; driver ID 567: 3 races;
-    driver ID 568: 1 races; driver ID 569: 1 races; driver ID 570: 1 races; driver ID 571: 1 races;
-    driver ID 572: 1 races; driver ID 573: 2 races; driver ID 574: 1 races; driver ID 575: 1 races;
-    driver ID 576: 1 races; driver ID 577: 26 races; driver ID 580: 14 races; driver ID 582: 1 races;
-    driver ID 583: 7 races; driver ID 584: 1 races; driver ID 585: 2 races; driver ID 586: 9 races;
-    driver ID 587: 1 races; driver ID 588: 1 races; driver ID 589: 17 races; driver ID 590: 14 races;
-    driver ID 591: 1 races; driver ID 592: 6 races; driver ID 593: 10 races; driver ID 594: 3 races;
-    driver ID 595: 2 races; driver ID 596: 5 races; driver ID 597: 5 races; driver ID 598: 1 races;
-    driver ID 599: 1 races; driver ID 600: 1 races; driver ID 601: 2 races; driver ID 602: 1 races;
-    driver ID 603: 1 races; driver ID 604: 1 races; driver ID 605: 1 races; driver ID 606: 6 races;
-    driver ID 607: 9 races; driver ID 608: 17 races; driver ID 609: 12 races; driver ID 610: 3 races;
-    driver ID 611: 9 races; driver ID 612: 11 races; driver ID 613: 4 races; driver ID 614: 1 races;
-    driver ID 615: 8 races; driver ID 616: 1 races; driver ID 617: 1 races; driver ID 618: 1 races;
-    driver ID 619: 7 races; driver ID 620: 10 races; driver ID 621: 1 races; driver ID 622: 6 races;
-    driver ID 623: 2 races; driver ID 624: 8 races; driver ID 625: 7 races; driver ID 626: 29 races;
-    driver ID 628: 5 races; driver ID 629: 3 races; driver ID 630: 4 races; driver ID 631: 2 races;
-    driver ID 632: 11 races; driver ID 634: 1 races; driver ID 635: 1 races; driver ID 636: 1 races;
-    driver ID 637: 1 races; driver ID 638: 3 races; driver ID 639: 1 races; driver ID 640: 23 races;
-    driver ID 641: 18 races; driver ID 643: 17 races; driver ID 644: 9 races; driver ID 645: 5 races;
-    driver ID 646: 1 races; driver ID 648: 12 races; driver ID 649: 2 races; driver ID 650: 5 races;
-    driver ID 651: 15 races; driver ID 652: 1 races; driver ID 653: 6 races; driver ID 654: 5 races;
-    driver ID 655: 3 races; driver ID 656: 4 races; driver ID 657: 5 races; driver ID 658: 6 races;
-    driver ID 659: 5 races; driver ID 660: 25 races; driver ID 661: 4 races; driver ID 662: 1 races;
-    driver ID 663: 16 races; driver ID 664: 7 races; driver ID 665: 2 races; driver ID 666: 3 races;
-    driver ID 667: 2 races; driver ID 668: 1 races; driver ID 669: 19 races; driver ID 670: 12 races;
-    driver ID 671: 1 races; driver ID 672: 2 races; driver ID 673: 3 races; driver ID 674: 1 races;
-    driver ID 675: 4 races; driver ID 676: 1 races; driver ID 677: 4 races; driver ID 678: 1 races;
-    driver ID 679: 2 races; driver ID 680: 7 races; driver ID 681: 2 races; driver ID 682: 1 races;
-    driver ID 683: 1 races; driver ID 684: 1 races; driver ID 685: 1 races; driver ID 686: 7 races;
-    driver ID 687: 12 races; driver ID 688: 5 races; driver ID 689: 9 races; driver ID 690: 2 races;
-    driver ID 691: 2 races; driver ID 692: 3 races; driver ID 693: 3 races; driver ID 694: 1 races;
-    driver ID 695: 1 races; driver ID 696: 1 races; driver ID 697: 17 races; driver ID 698: 1 races;
-    driver ID 699: 3 races; driver ID 700: 2 races; driver ID 701: 2 races; driver ID 702: 5 races;
-    driver ID 703: 2 races; driver ID 704: 13 races; driver ID 705: 2 races; driver ID 706: 1 races;
-    driver ID 707: 1 races; driver ID 708: 5 races; driver ID 709: 2 races; driver ID 710: 2 races;
-    driver ID 711: 1 races; driver ID 712: 2 races; driver ID 713: 1 races; driver ID 714: 1 races;
-    driver ID 715: 2 races; driver ID 716: 1 races; driver ID 717: 4 races; driver ID 718: 1 races;
-    driver ID 719: 1 races; driver ID 720: 2 races; driver ID 721: 5 races; driver ID 722: 3 races;
-    driver ID 723: 7 races; driver ID 724: 2 races; driver ID 725: 2 races; driver ID 726: 3 races;
-    driver ID 727: 1 races; driver ID 728: 2 races; driver ID 729: 3 races; driver ID 730: 3 races;
-    driver ID 731: 3 races; driver ID 732: 3 races; driver ID 733: 2 races; driver ID 734: 2 races;
-    driver ID 735: 3 races; driver ID 736: 2 races; driver ID 737: 1 races; driver ID 738: 4 races;
-    driver ID 739: 1 races; driver ID 740: 2 races; driver ID 741: 12 races; driver ID 742: 2 races;
-    driver ID 743: 1 races; driver ID 744: 2 races; driver ID 745: 1 races; driver ID 746: 4 races;
-    driver ID 747: 4 races; driver ID 748: 3 races; driver ID 749: 3 races; driver ID 750: 1 races;
-    driver ID 751: 1 races; driver ID 752: 1 races; driver ID 753: 1 races; driver ID 754: 1 races;
-    driver ID 755: 1 races; driver ID 756: 3 races; driver ID 757: 1 races; driver ID 758: 1 races;
-    driver ID 759: 2 races; driver ID 760: 1 races; driver ID 761: 1 races; driver ID 762: 5 races;
-    driver ID 763: 5 races; driver ID 764: 3 races; driver ID 765: 2 races; driver ID 766: 2 races;
-    driver ID 767: 1 races; driver ID 768: 2 races; driver ID 769: 1 races; driver ID 770: 2 races;
-    driver ID 771: 2 races; driver ID 772: 2 races; driver ID 773: 6 races; driver ID 774: 3 races;
-    driver ID 775: 1 races; driver ID 776: 2 races; driver ID 777: 1 races; driver ID 778: 2 races;
-    driver ID 779: 1 races; driver ID 780: 3 races; driver ID 781: 1 races; driver ID 782: 1 races;
-    driver ID 783: 1 races; driver ID 784: 2 races; driver ID 785: 2 races; driver ID 786: 8 races;
-    driver ID 787: 3 races; driver ID 788: 1 races; driver ID 789: 2 races; driver ID 790: 1 races;
-    driver ID 791: 1 races; driver ID 792: 1 races; driver ID 793: 5 races; driver ID 794: 1 races;
-    driver ID 795: 1 races; driver ID 796: 1 races; driver ID 797: 2 races; driver ID 798: 1 races;
-    driver ID 799: 2 races; driver ID 800: 1 races; driver ID 801: 1 races; driver ID 802: 1 races;
-    driver ID 803: 1 races; driver ID 804: 1 races; driver ID 805: 1 races; driver ID 806: 1 races;
-    driver ID 810: 19 races; driver ID 812: 11 races; driver ID 816: 20 races; driver ID 823: 19 races;
-    driver ID 827: 1 races; driver ID 829: 19 races; driver ID 833: 13 races; driver ID 834: 5 races;
-    driver ID 837: 12 races; driver ID 838: 21 races; driver ID 839: 29 races; driver ID 840: 20 races;
-    driver ID 841: 2 races; driver ID 842: 5 races; driver ID 843: 4 races.
+    The 642 driver ID/race-count pairs for drivers who participated in at most 30 distinct races are:
+    driver ID 7: 27 races; driver ID 12: 28 races; driver ID 19: 24 races; driver ID 26: 28 races;
+    driver ID 28: 1 races; driver ID 29: 21 races; driver ID 34: 4 races; driver ID 36: 7 races; driver
+    ID 38: 11 races; driver ID 40: 11 races; driver ID 42: 20 races; driver ID 43: 28 races; driver ID
+    45: 14 races; driver ID 46: 18 races; driver ID 47: 20 races; driver ID 51: 16 races; driver ID 52:
+    14 races; driver ID 53: 5 races; driver ID 54: 15 races; driver ID 58: 26 races; driver ID 59: 29
+    races; driver ID 60: 21 races; driver ID 61: 3 races; driver ID 62: 16 races; driver ID 66: 17
+    races; driver ID 72: 1 races; driver ID 73: 30 races; driver ID 74: 16 races; driver ID 76: 25
+    races; driver ID 80: 1 races; driver ID 82: 4 races; driver ID 85: 28 races; driver ID 86: 10 races;
+    driver ID 89: 18 races; driver ID 93: 7 races; driver ID 96: 11 races; driver ID 97: 7 races; driver
+    ID 98: 3 races; driver ID 101: 30 races; driver ID 106: 10 races; driver ID 107: 3 races; driver ID
+    108: 27 races; driver ID 111: 9 races; driver ID 113: 2 races; driver ID 115: 3 races; driver ID
+    116: 2 races; driver ID 120: 20 races; driver ID 121: 13 races; driver ID 124: 1 races; driver ID
+    125: 6 races; driver ID 126: 2 races; driver ID 128: 29 races; driver ID 130: 10 races; driver ID
+    132: 3 races; driver ID 134: 6 races; driver ID 135: 7 races; driver ID 141: 20 races; driver ID
+    142: 13 races; driver ID 143: 4 races; driver ID 144: 2 races; driver ID 147: 15 races; driver ID
+    148: 22 races; driver ID 149: 14 races; driver ID 150: 2 races; driver ID 151: 15 races; driver ID
+    161: 10 races; driver ID 162: 17 races; driver ID 164: 7 races; driver ID 165: 21 races; driver ID
+    167: 21 races; driver ID 168: 2 races; driver ID 169: 12 races; driver ID 171: 2 races; driver ID
+    174: 16 races; driver ID 179: 28 races; driver ID 180: 9 races; driver ID 183: 20 races; driver ID
+    185: 22 races; driver ID 186: 9 races; driver ID 188: 23 races; driver ID 189: 8 races; driver ID
+    190: 19 races; driver ID 191: 5 races; driver ID 193: 15 races; driver ID 195: 29 races; driver ID
+    196: 30 races; driver ID 198: 3 races; driver ID 201: 15 races; driver ID 204: 8 races; driver ID
+    208: 14 races; driver ID 209: 12 races; driver ID 210: 5 races; driver ID 213: 17 races; driver ID
+    214: 2 races; driver ID 215: 4 races; driver ID 216: 13 races; driver ID 217: 11 races; driver ID
+    218: 1 races; driver ID 220: 2 races; driver ID 225: 7 races; driver ID 226: 1 races; driver ID 227:
+    2 races; driver ID 228: 1 races; driver ID 229: 28 races; driver ID 234: 3 races; driver ID 236: 5
+    races; driver ID 237: 20 races; driver ID 240: 6 races; driver ID 241: 5 races; driver ID 242: 3
+    races; driver ID 244: 3 races; driver ID 245: 6 races; driver ID 246: 15 races; driver ID 247: 5
+    races; driver ID 248: 1 races; driver ID 249: 2 races; driver ID 251: 20 races; driver ID 253: 6
+    races; driver ID 254: 7 races; driver ID 256: 15 races; driver ID 257: 7 races; driver ID 258: 13
+    races; driver ID 259: 11 races; driver ID 260: 5 races; driver ID 261: 1 races; driver ID 263: 2
+    races; driver ID 264: 1 races; driver ID 265: 16 races; driver ID 266: 1 races; driver ID 267: 12
+    races; driver ID 268: 1 races; driver ID 269: 4 races; driver ID 270: 11 races; driver ID 271: 6
+    races; driver ID 272: 1 races; driver ID 273: 2 races; driver ID 274: 2 races; driver ID 275: 17
+    races; driver ID 276: 12 races; driver ID 277: 8 races; driver ID 279: 1 races; driver ID 281: 1
+    races; driver ID 282: 2 races; driver ID 283: 8 races; driver ID 284: 4 races; driver ID 285: 3
+    races; driver ID 286: 1 races; driver ID 287: 1 races; driver ID 288: 15 races; driver ID 291: 1
+    races; driver ID 292: 3 races; driver ID 293: 13 races; driver ID 294: 10 races; driver ID 295: 6
+    races; driver ID 296: 15 races; driver ID 297: 2 races; driver ID 298: 9 races; driver ID 299: 2
+    races; driver ID 300: 2 races; driver ID 301: 1 races; driver ID 302: 2 races; driver ID 303: 1
+    races; driver ID 308: 4 races; driver ID 310: 2 races; driver ID 311: 4 races; driver ID 312: 13
+    races; driver ID 313: 13 races; driver ID 315: 2 races; driver ID 316: 6 races; driver ID 317: 23
+    races; driver ID 318: 1 races; driver ID 319: 3 races; driver ID 320: 30 races; driver ID 321: 14
+    races; driver ID 322: 7 races; driver ID 323: 1 races; driver ID 324: 3 races; driver ID 325: 1
+    races; driver ID 326: 2 races; driver ID 329: 29 races; driver ID 330: 17 races; driver ID 331: 1
+    races; driver ID 332: 12 races; driver ID 334: 4 races; driver ID 335: 2 races; driver ID 336: 1
+    races; driver ID 337: 9 races; driver ID 338: 11 races; driver ID 339: 9 races; driver ID 340: 10
+    races; driver ID 342: 6 races; driver ID 343: 3 races; driver ID 344: 2 races; driver ID 348: 1
+    races; driver ID 349: 1 races; driver ID 350: 13 races; driver ID 351: 18 races; driver ID 352: 13
+    races; driver ID 353: 11 races; driver ID 354: 2 races; driver ID 355: 1 races; driver ID 357: 15
+    races; driver ID 359: 12 races; driver ID 361: 29 races; driver ID 362: 4 races; driver ID 363: 4
+    races; driver ID 365: 3 races; driver ID 366: 1 races; driver ID 367: 1 races; driver ID 368: 6
+    races; driver ID 369: 2 races; driver ID 370: 17 races; driver ID 371: 2 races; driver ID 372: 1
+    races; driver ID 375: 13 races; driver ID 376: 19 races; driver ID 377: 2 races; driver ID 378: 1
+    races; driver ID 379: 2 races; driver ID 380: 9 races; driver ID 381: 1 races; driver ID 382: 8
+    races; driver ID 383: 26 races; driver ID 384: 1 races; driver ID 387: 7 races; driver ID 388: 10
+    races; driver ID 389: 13 races; driver ID 390: 2 races; driver ID 391: 1 races; driver ID 392: 2
+    races; driver ID 393: 1 races; driver ID 394: 26 races; driver ID 395: 1 races; driver ID 396: 9
+    races; driver ID 397: 15 races; driver ID 398: 2 races; driver ID 399: 5 races; driver ID 400: 2
+    races; driver ID 401: 29 races; driver ID 402: 3 races; driver ID 405: 11 races; driver ID 406: 3
+    races; driver ID 407: 2 races; driver ID 408: 27 races; driver ID 409: 2 races; driver ID 410: 3
+    races; driver ID 411: 3 races; driver ID 412: 2 races; driver ID 413: 3 races; driver ID 414: 1
+    races; driver ID 415: 1 races; driver ID 416: 1 races; driver ID 417: 1 races; driver ID 419: 1
+    races; driver ID 420: 7 races; driver ID 421: 1 races; driver ID 422: 1 races; driver ID 423: 5
+    races; driver ID 424: 4 races; driver ID 425: 5 races; driver ID 426: 1 races; driver ID 428: 6
+    races; driver ID 429: 15 races; driver ID 431: 7 races; driver ID 432: 5 races; driver ID 433: 4
+    races; driver ID 434: 6 races; driver ID 435: 12 races; driver ID 436: 5 races; driver ID 437: 26
+    races; driver ID 438: 10 races; driver ID 439: 5 races; driver ID 440: 12 races; driver ID 441: 4
+    races; driver ID 442: 2 races; driver ID 443: 1 races; driver ID 444: 3 races; driver ID 445: 2
+    races; driver ID 446: 2 races; driver ID 447: 2 races; driver ID 448: 1 races; driver ID 449: 12
+    races; driver ID 450: 1 races; driver ID 451: 1 races; driver ID 452: 1 races; driver ID 453: 11
+    races; driver ID 454: 6 races; driver ID 455: 13 races; driver ID 457: 1 races; driver ID 458: 1
+    races; driver ID 459: 9 races; driver ID 460: 5 races; driver ID 461: 2 races; driver ID 462: 3
+    races; driver ID 463: 3 races; driver ID 464: 3 races; driver ID 465: 6 races; driver ID 466: 1
+    races; driver ID 467: 2 races; driver ID 468: 2 races; driver ID 469: 1 races; driver ID 470: 1
+    races; driver ID 471: 1 races; driver ID 472: 1 races; driver ID 473: 1 races; driver ID 474: 1
+    races; driver ID 476: 28 races; driver ID 477: 18 races; driver ID 478: 20 races; driver ID 480: 4
+    races; driver ID 481: 10 races; driver ID 482: 17 races; driver ID 483: 15 races; driver ID 484: 9
+    races; driver ID 485: 1 races; driver ID 486: 13 races; driver ID 487: 2 races; driver ID 488: 1
+    races; driver ID 489: 2 races; driver ID 490: 1 races; driver ID 491: 2 races; driver ID 492: 1
+    races; driver ID 493: 1 races; driver ID 494: 2 races; driver ID 495: 1 races; driver ID 496: 11
+    races; driver ID 497: 1 races; driver ID 498: 26 races; driver ID 499: 1 races; driver ID 500: 4
+    races; driver ID 502: 7 races; driver ID 503: 1 races; driver ID 504: 1 races; driver ID 505: 4
+    races; driver ID 506: 9 races; driver ID 507: 6 races; driver ID 508: 4 races; driver ID 509: 10
+    races; driver ID 510: 3 races; driver ID 511: 2 races; driver ID 512: 8 races; driver ID 513: 9
+    races; driver ID 514: 5 races; driver ID 515: 1 races; driver ID 516: 5 races; driver ID 517: 2
+    races; driver ID 518: 8 races; driver ID 519: 3 races; driver ID 520: 8 races; driver ID 521: 5
+    races; driver ID 522: 2 races; driver ID 523: 3 races; driver ID 524: 1 races; driver ID 525: 9
+    races; driver ID 526: 9 races; driver ID 527: 4 races; driver ID 528: 8 races; driver ID 529: 11
+    races; driver ID 530: 1 races; driver ID 531: 3 races; driver ID 532: 4 races; driver ID 533: 6
+    races; driver ID 534: 2 races; driver ID 535: 2 races; driver ID 536: 3 races; driver ID 537: 5
+    races; driver ID 538: 5 races; driver ID 539: 2 races; driver ID 540: 2 races; driver ID 541: 14
+    races; driver ID 542: 3 races; driver ID 543: 4 races; driver ID 544: 1 races; driver ID 545: 1
+    races; driver ID 546: 1 races; driver ID 547: 18 races; driver ID 548: 1 races; driver ID 549: 6
+    races; driver ID 550: 1 races; driver ID 551: 5 races; driver ID 552: 1 races; driver ID 553: 2
+    races; driver ID 555: 8 races; driver ID 556: 6 races; driver ID 557: 1 races; driver ID 558: 5
+    races; driver ID 559: 6 races; driver ID 560: 3 races; driver ID 561: 3 races; driver ID 562: 4
+    races; driver ID 563: 4 races; driver ID 564: 2 races; driver ID 565: 3 races; driver ID 566: 8
+    races; driver ID 567: 3 races; driver ID 568: 1 races; driver ID 569: 1 races; driver ID 570: 1
+    races; driver ID 571: 1 races; driver ID 572: 1 races; driver ID 573: 2 races; driver ID 574: 1
+    races; driver ID 575: 1 races; driver ID 576: 1 races; driver ID 577: 25 races; driver ID 580: 14
+    races; driver ID 582: 1 races; driver ID 583: 7 races; driver ID 584: 1 races; driver ID 585: 2
+    races; driver ID 586: 9 races; driver ID 587: 1 races; driver ID 588: 1 races; driver ID 589: 17
+    races; driver ID 590: 14 races; driver ID 591: 1 races; driver ID 592: 6 races; driver ID 593: 9
+    races; driver ID 594: 3 races; driver ID 595: 2 races; driver ID 596: 5 races; driver ID 597: 5
+    races; driver ID 598: 1 races; driver ID 599: 1 races; driver ID 600: 1 races; driver ID 601: 2
+    races; driver ID 602: 1 races; driver ID 603: 1 races; driver ID 604: 1 races; driver ID 605: 1
+    races; driver ID 606: 5 races; driver ID 607: 8 races; driver ID 608: 14 races; driver ID 609: 12
+    races; driver ID 610: 3 races; driver ID 611: 8 races; driver ID 612: 7 races; driver ID 613: 3
+    races; driver ID 614: 1 races; driver ID 615: 8 races; driver ID 616: 1 races; driver ID 617: 1
+    races; driver ID 618: 1 races; driver ID 619: 7 races; driver ID 620: 10 races; driver ID 621: 1
+    races; driver ID 622: 6 races; driver ID 623: 2 races; driver ID 624: 7 races; driver ID 625: 7
+    races; driver ID 626: 29 races; driver ID 628: 5 races; driver ID 629: 3 races; driver ID 630: 4
+    races; driver ID 631: 2 races; driver ID 632: 11 races; driver ID 634: 1 races; driver ID 635: 1
+    races; driver ID 636: 1 races; driver ID 637: 1 races; driver ID 638: 3 races; driver ID 639: 1
+    races; driver ID 640: 23 races; driver ID 641: 18 races; driver ID 643: 17 races; driver ID 644: 8
+    races; driver ID 645: 5 races; driver ID 646: 1 races; driver ID 648: 11 races; driver ID 649: 2
+    races; driver ID 650: 5 races; driver ID 651: 15 races; driver ID 652: 1 races; driver ID 653: 5
+    races; driver ID 654: 5 races; driver ID 655: 3 races; driver ID 656: 4 races; driver ID 657: 5
+    races; driver ID 658: 6 races; driver ID 659: 4 races; driver ID 660: 25 races; driver ID 661: 4
+    races; driver ID 662: 1 races; driver ID 663: 16 races; driver ID 664: 7 races; driver ID 665: 2
+    races; driver ID 666: 3 races; driver ID 667: 2 races; driver ID 668: 1 races; driver ID 669: 19
+    races; driver ID 670: 12 races; driver ID 671: 1 races; driver ID 672: 2 races; driver ID 673: 3
+    races; driver ID 674: 1 races; driver ID 675: 4 races; driver ID 676: 1 races; driver ID 677: 4
+    races; driver ID 678: 1 races; driver ID 679: 2 races; driver ID 680: 7 races; driver ID 681: 2
+    races; driver ID 682: 1 races; driver ID 683: 1 races; driver ID 684: 1 races; driver ID 685: 1
+    races; driver ID 686: 7 races; driver ID 687: 12 races; driver ID 688: 5 races; driver ID 689: 9
+    races; driver ID 690: 2 races; driver ID 691: 2 races; driver ID 692: 3 races; driver ID 693: 3
+    races; driver ID 694: 1 races; driver ID 695: 1 races; driver ID 696: 1 races; driver ID 697: 16
+    races; driver ID 698: 1 races; driver ID 699: 3 races; driver ID 700: 2 races; driver ID 701: 2
+    races; driver ID 702: 3 races; driver ID 703: 2 races; driver ID 704: 13 races; driver ID 705: 2
+    races; driver ID 706: 1 races; driver ID 707: 1 races; driver ID 708: 5 races; driver ID 709: 2
+    races; driver ID 710: 2 races; driver ID 711: 1 races; driver ID 712: 2 races; driver ID 713: 1
+    races; driver ID 714: 1 races; driver ID 715: 2 races; driver ID 716: 1 races; driver ID 717: 4
+    races; driver ID 718: 1 races; driver ID 719: 1 races; driver ID 720: 2 races; driver ID 721: 5
+    races; driver ID 722: 3 races; driver ID 723: 7 races; driver ID 724: 2 races; driver ID 725: 2
+    races; driver ID 726: 3 races; driver ID 727: 1 races; driver ID 728: 2 races; driver ID 729: 3
+    races; driver ID 730: 2 races; driver ID 731: 3 races; driver ID 732: 3 races; driver ID 733: 2
+    races; driver ID 734: 2 races; driver ID 735: 3 races; driver ID 736: 2 races; driver ID 737: 1
+    races; driver ID 738: 4 races; driver ID 739: 1 races; driver ID 740: 2 races; driver ID 741: 12
+    races; driver ID 742: 2 races; driver ID 743: 1 races; driver ID 744: 2 races; driver ID 745: 1
+    races; driver ID 746: 4 races; driver ID 747: 4 races; driver ID 748: 3 races; driver ID 749: 3
+    races; driver ID 750: 1 races; driver ID 751: 1 races; driver ID 752: 1 races; driver ID 753: 1
+    races; driver ID 754: 1 races; driver ID 755: 1 races; driver ID 756: 3 races; driver ID 757: 1
+    races; driver ID 758: 1 races; driver ID 759: 1 races; driver ID 760: 1 races; driver ID 761: 1
+    races; driver ID 762: 5 races; driver ID 763: 5 races; driver ID 764: 3 races; driver ID 765: 2
+    races; driver ID 766: 2 races; driver ID 767: 1 races; driver ID 768: 2 races; driver ID 769: 1
+    races; driver ID 770: 2 races; driver ID 771: 2 races; driver ID 772: 2 races; driver ID 773: 6
+    races; driver ID 774: 3 races; driver ID 775: 1 races; driver ID 776: 2 races; driver ID 777: 1
+    races; driver ID 778: 2 races; driver ID 779: 1 races; driver ID 780: 3 races; driver ID 781: 1
+    races; driver ID 782: 1 races; driver ID 783: 1 races; driver ID 784: 2 races; driver ID 785: 2
+    races; driver ID 786: 7 races; driver ID 787: 3 races; driver ID 788: 1 races; driver ID 789: 2
+    races; driver ID 790: 1 races; driver ID 791: 1 races; driver ID 792: 1 races; driver ID 793: 5
+    races; driver ID 794: 1 races; driver ID 795: 1 races; driver ID 796: 1 races; driver ID 797: 2
+    races; driver ID 798: 1 races; driver ID 799: 2 races; driver ID 800: 1 races; driver ID 801: 1
+    races; driver ID 802: 1 races; driver ID 803: 1 races; driver ID 804: 1 races; driver ID 805: 1
+    races; driver ID 806: 1 races; driver ID 810: 19 races; driver ID 812: 11 races; driver ID 816: 20
+    races; driver ID 823: 19 races; driver ID 827: 1 races; driver ID 829: 19 races; driver ID 833: 13
+    races; driver ID 834: 5 races; driver ID 837: 12 races; driver ID 838: 21 races; driver ID 839: 29
+    races; driver ID 840: 20 races; driver ID 841: 2 races; driver ID 842: 5 races; driver ID 843: 4
+    races.
   gold_sql: |
-    SELECT T1.driverid ,  count(*) FROM drivers AS T1 JOIN results AS T2 ON T1.driverid = T2.driverid JOIN races AS T3 ON T2.raceid = T3.raceid GROUP BY T1.driverid HAVING count(*)  <=  30
+    SELECT d.driverId, COUNT(DISTINCT r.raceId) AS race_count
+    FROM drivers AS d
+    JOIN results AS r ON d.driverId = r.driverId
+    JOIN races AS rc ON r.raceId = rc.raceId
+    GROUP BY d.driverId
+    HAVING COUNT(DISTINCT r.raceId) <= 30
+    ORDER BY d.driverId
 - name: formula_1_082
   question: "Find the id and surname of the driver who participated the most number of races?"
   reference_answer: >-
