@@ -54,8 +54,7 @@ class ReactAgentTests(unittest.TestCase):
         self.assertEqual(kwargs["system_prompt"], REACT_SYSTEM_PROMPT)
         self.assertEqual(len(kwargs["middleware"]), 1)
         self.assertIsInstance(kwargs["middleware"][0], ToolCallLimitMiddleware)
-        self.assertEqual(kwargs["middleware"][0].run_limit, 5)
-
+        self.assertEqual(kwargs["middleware"][0].run_limit, 10)
 
 if __name__ == "__main__":
     unittest.main()
