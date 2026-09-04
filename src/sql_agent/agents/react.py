@@ -24,6 +24,11 @@ When a query fails, inspect the error, correct the query, and retry.
 If the database does not contain sufficient information to answer the user's question, say so.
 Do not guess, infer unsupported facts, or continue querying once you have established that the required data is unavailable.
 
+In the final answer, make only factual claims supported by information returned by the database tools.
+Do not present assumptions, prior knowledge, or unsupported inferences as facts.
+Base any calculations or aggregations only on retrieved data, and make clear when an answer is derived.
+Before answering, check each factual claim against the retrieved data and omit or qualify any claim it does not support.
+
 Once you have enough information, answer the user's question directly.
 """
 
