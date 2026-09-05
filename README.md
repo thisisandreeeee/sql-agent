@@ -90,7 +90,7 @@ latency and token usage.
 ### Drill down: Basic questions
 
 Basic cases have modest quality gains, but ReAct's mean latency increases by
-66% and mean token usage increases by 133%. Mean SQL failures fall by 78.6%.
+66% and mean token usage increases by 133%. SQL failures by ReAct reduce nearly to 0.
 
 | Metric             |          ReAct |          Graph | ReAct vs. Graph |
 | ------------------ | -------------: | -------------: | --------------: |
@@ -106,11 +106,10 @@ Basic cases have modest quality gains, but ReAct's mean latency increases by
 
 ### Drill down: Advanced questions
 
-Advanced cases are the main source of ReAct's improvement: it passes 9 more
-cases, reduces average SQL attempts from 5.11 to 4.25, and reduces cases that
-hit the query/tool limit from 17 to 6. However, advanced correctness remains
-the main weakness, with 38/100 ReAct cases still receiving a non-perfect
-correctness score.
+Advanced cases are the main source of ReAct's improvement.
+It passes 9 more cases, with ~95% of cases clearing the relevance, trajectory, and groundedness checks.
+Correctness has also improved by 4.1%, but there is still room for improvement
+with 38/100 cases receiving a non-perfect correctness score.
 
 | Metric             |          ReAct |          Graph | ReAct vs. Graph |
 | ------------------ | -------------: | -------------: | --------------: |
