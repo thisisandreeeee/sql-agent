@@ -87,9 +87,7 @@ latency and token usage.
 | Mean SQL failures      |           0.116 |           0.136 |          -14.7% |
 | Output tokens / second |         125.993 |         134.734 |           -6.5% |
 
-### Breakdown by case group
-
-#### Basic
+### Drill down: Basic questions
 
 Basic cases have modest quality gains, but ReAct's mean latency increases by
 66% and mean token usage increases by 133%. Mean SQL failures fall by 78.6%.
@@ -106,7 +104,7 @@ Basic cases have modest quality gains, but ReAct's mean latency increases by
 | Mean SQL attempts  |           2.75 |           2.84 |           -3.2% |
 | Mean SQL failures  |           0.03 |           0.14 |          -78.6% |
 
-#### Advanced
+### Drill down: Advanced questions
 
 Advanced cases are the main source of ReAct's improvement: it passes 9 more
 cases, reduces average SQL attempts from 5.11 to 4.25, and reduces cases that
@@ -126,7 +124,7 @@ correctness score.
 | Mean SQL attempts  |           4.25 |           5.11 |          -16.8% |
 | Mean SQL failures  |           0.18 |           0.17 |           +5.9% |
 
-#### Behavioural
+### Drill down: Behavioural questions
 
 Behavioural performance also improves, but scope control remains an issue:
 13 of the 40 cases that explicitly require no SQL still triggered a query in
