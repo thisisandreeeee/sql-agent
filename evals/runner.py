@@ -21,10 +21,42 @@ from evals.evaluators import (
 )
 from evals.types import EvalCase
 
+CASE_GROUPS = ("basic", "advanced", "behavioral")
 
-def main(agent_type: str = "graph") -> int:
-    with (Path(__file__).parent / "cases.yaml").open() as cases_file:
-        cases = [EvalCase.model_validate(case) for case in yaml.safe_load(cases_file)]
+
+def load_cases(path: Path | None = None, group: str | None = None) -> list[EvalCase]:
+    """Load grouped cases while keeping EvalCase's public schema unchanged."""
+    cases_path = path or Path(__file__).parent / "cases.yaml"
+    with cases_path.open(encoding="utf-8") as cases_file:
+        grouped_cases = yaml.safe_load(cases_file)
+
+    if not isinstance(grouped_cases, dict):
+        raise ValueError("cases.yaml must contain a mapping of case groups")
+
+    unknown_groups = set(grouped_cases) - set(CASE_GROUPS)
+    if unknown_groups:
+        raise ValueError(f"Unknown case group(s): {sorted(unknown_groups)}")
+
+    selected_groups = CASE_GROUPS if group is None else (group,)
+    if group is not None and group not in CASE_GROUPS:
+        raise ValueError(f"Unknown case group: {group}")
+
+    cases = []
+    for case_group in selected_groups:
+        entries = grouped_cases.get(case_group)
+        if not isinstance(entries, list):
+            raise ValueError(f"Case group {case_group!r} must be a list")
+        cases.extend(EvalCase.model_validate(entry) for entry in entries)
+
+    names = [case.name for case in cases]
+    duplicates = sorted({name for name in names if names.count(name) > 1})
+    if duplicates:
+        raise ValueError(f"Duplicate case name(s): {duplicates}")
+    return cases
+
+
+def main(agent_type: str = "graph", group: str | None = None) -> int:
+    cases = load_cases(group=group)
 
     agent = build_agent(build_model(), agent_type)
     failed = 0
@@ -199,4 +231,6 @@ def summarize(cases: list[dict]) -> dict:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--agent-type", choices=("graph", "react"), default="graph")
-    raise SystemExit(main(parser.parse_args().agent_type))
+    parser.add_argument("--group", choices=CASE_GROUPS)
+    args = parser.parse_args()
+    raise SystemExit(main(args.agent_type, args.group))
