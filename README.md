@@ -46,9 +46,15 @@ Both agents can use three tools:
 - `sql_db_schema`: inspect table definitions and up to three sample rows.
 - `sql_db_query`: execute a read-only SQL query and return its rows.
 
-## Evaluation metrics
+## Evaluation suite
 
-The evaluation suite scores each case with the applicable metrics below:
+The evaluation dataset contains 250 cases grouped into:
+
+- 100 `basic` cases for SQL questions which test simple data pulling.
+- 100 `advanced` cases for SQL questions which test analytical thinking.
+- 50 `behavioral` cases for handling of missing data, ambiguity, scope, and safety.
+
+Each case is scored based on the following metrics:
 
 - **Correctness** — compares the answer with the reference answer.
 - **Relevance** — measures whether the answer directly addresses the question.
@@ -59,49 +65,84 @@ The evaluation suite scores each case with the applicable metrics below:
 
 ## Experiment findings
 
-The fixed graph is faster and uses fewer tokens, making it cheaper under
-token-based pricing. It is strongest on straightforward data-pulling
-questions that mostly translate natural language into SQL. ReAct is more
-effective when the question requires analytical reasoning: it passed 12/14
-insight cases versus 9/14 for the graph and scored higher on insight
-correctness (0.893 versus 0.679). The graph was slightly better on data
-pulling, passing 27/43 cases versus ReAct's 26/43.
+The latest full-suite comparison uses 250 cases: 100 `basic`, 100 `advanced`, and 50 `behavioral`.
+The source artifacts are [here](results/graph_20260905T124343.428476.json) and [here](results/react_20260905T124428.987031.json).
 
 ### Overview metrics
 
-| Metric             |      ReAct |      Graph | ReAct vs. Graph |
-| ------------------ | ---------: | ---------: | --------------: |
-| Pass rate          |      41/62 |      38/62 |         +7.895% |
-| Mean latency (sec) |     11.157 |      8.821 |        +26.482% |
-| Mean total tokens  | 14,650.210 | 12,103.290 |        +21.043% |
+ReAct is the stronger overall workflow: it passes more cases and improves
+correctness, relevance, trajectory, and groundedness. The trade-off is higher
+latency and token usage.
 
-### Drill-down: data-pulling questions
+| Metric                 |           ReAct |           Graph | ReAct vs. Graph |
+| ---------------------- | --------------: | --------------: | --------------: |
+| Pass rate              | 138/250 (55.2%) | 121/250 (48.4%) |          +14.0% |
+| Correctness            |           82.4% |           77.9% |           +5.8% |
+| Relevance              |           93.8% |           91.2% |           +2.9% |
+| Trajectory             |           90.6% |           86.9% |           +4.3% |
+| Groundedness           |           94.8% |           87.6% |           +8.2% |
+| Mean latency (sec)     |          15.723 |          12.169 |          +29.2% |
+| Mean total tokens      |          22,938 |          17,644 |          +30.0% |
+| Mean SQL attempts      |           3.300 |           3.736 |          -11.7% |
+| Mean SQL failures      |           0.116 |           0.136 |          -14.7% |
+| Output tokens / second |         125.993 |         134.734 |           -6.5% |
 
-Data-pulling questions ask for explicit facts or straightforward filters,
-joins, and aggregations that can be answered by translating the request into
-SQL.
+### Breakdown by case group
 
-| Metric       | ReAct | Graph | ReAct vs. Graph |
-| ------------ | ----: | ----: | --------------: |
-| Passed       | 26/43 | 27/43 |         -3.704% |
-| Correctness  | 0.814 | 0.826 |         -1.453% |
-| Relevance    | 0.930 | 0.942 |         -1.274% |
-| Trajectory   | 0.919 | 0.919 |         -0.000% |
-| Groundedness | 0.953 | 0.942 |         +1.168% |
+#### Basic
 
-### Drill-down: insight questions
+Basic cases have modest quality gains, but ReAct's mean latency increases by
+66% and mean token usage increases by 133%. Mean SQL failures fall by 78.6%.
 
-Insight questions require additional analysis or reasoning over the data,
-such as identifying trends, comparing groups, or interpreting derived
-metrics—not just retrieving rows.
+| Metric             |          ReAct |          Graph | ReAct vs. Graph |
+| ------------------ | -------------: | -------------: | --------------: |
+| Passed             | 66/100 (66.0%) | 64/100 (64.0%) |           +3.1% |
+| Correctness        |          83.5% |          79.5% |           +5.0% |
+| Relevance          |          97.0% |          94.5% |           +2.6% |
+| Trajectory         |          95.5% |          93.0% |           +2.7% |
+| Groundedness       |          97.5% |          96.0% |           +1.6% |
+| Mean latency (sec) |         10.362 |          6.226 |          +66.4% |
+| Mean total tokens  |         23,904 |         10,258 |         +133.0% |
+| Mean SQL attempts  |           2.75 |           2.84 |           -3.2% |
+| Mean SQL failures  |           0.03 |           0.14 |          -78.6% |
 
-| Metric       | ReAct | Graph | ReAct vs. Graph |
-| ------------ | ----: | ----: | --------------: |
-| Passed       | 12/14 |  9/14 |        +33.333% |
-| Correctness  | 0.893 | 0.679 |        +31.517% |
-| Relevance    | 1.000 | 0.893 |        +11.982% |
-| Trajectory   | 1.000 | 0.893 |        +11.982% |
-| Groundedness | 1.000 | 0.929 |         +7.643% |
+#### Advanced
+
+Advanced cases are the main source of ReAct's improvement: it passes 9 more
+cases, reduces average SQL attempts from 5.11 to 4.25, and reduces cases that
+hit the query/tool limit from 17 to 6. However, advanced correctness remains
+the main weakness, with 38/100 ReAct cases still receiving a non-perfect
+correctness score.
+
+| Metric             |          ReAct |          Graph | ReAct vs. Graph |
+| ------------------ | -------------: | -------------: | --------------: |
+| Passed             | 53/100 (53.0%) | 44/100 (44.0%) |          +20.5% |
+| Correctness        |          76.5% |          73.5% |           +4.1% |
+| Relevance          |          96.5% |          93.0% |           +3.8% |
+| Trajectory         |          94.0% |          88.5% |           +6.2% |
+| Groundedness       |          95.5% |          82.0% |          +16.5% |
+| Mean latency (sec) |         25.675 |         21.060 |          +21.9% |
+| Mean total tokens  |         28,760 |         29,717 |           -3.2% |
+| Mean SQL attempts  |           4.25 |           5.11 |          -16.8% |
+| Mean SQL failures  |           0.18 |           0.17 |           +5.9% |
+
+#### Behavioural
+
+Behavioural performance also improves, but scope control remains an issue:
+13 of the 40 cases that explicitly require no SQL still triggered a query in
+the ReAct run.
+
+| Metric             |         ReAct |         Graph | ReAct vs. Graph |
+| ------------------ | ------------: | ------------: | --------------: |
+| Passed             | 19/50 (38.0%) | 13/50 (26.0%) |          +46.2% |
+| Correctness        |         92.0% |         83.7% |          +10.0% |
+| Relevance          |         82.0% |         81.0% |           +1.2% |
+| Trajectory         |         74.0% |         71.4% |           +3.6% |
+| Groundedness       |         80.4% |         76.0% |           +5.8% |
+| Mean latency (sec) |         6.543 |         6.272 |           +4.3% |
+| Mean total tokens  |         9,361 |         8,267 |          +13.2% |
+| Mean SQL attempts  |          2.50 |          2.78 |          -10.1% |
+| Mean SQL failures  |          0.16 |          0.06 |         +166.7% |
 
 ## Run, evaluate, and test
 
@@ -140,9 +181,21 @@ Run the evaluation suite for either workflow:
 ```bash
 uv run python -m evals.runner --agent-type graph
 uv run python -m evals.runner --agent-type react
+uv run python -m evals.runner --agent-type graph --group basic
+uv run python -m evals.runner --agent-type graph --group advanced
+uv run python -m evals.runner --agent-type graph --group behavioral
 ```
 
-Each evaluation writes an ignored, timestamped JSON artifact under `runs/`.
+Each evaluation writes an ignored, timestamped JSON artifact under `runs/` and
+updates it after every case. To resume an interrupted run, pass its path:
+
+```bash
+uv run python -m evals.runner --agent-type graph --group basic --resume runs/graph_20260905T120000.000000.json
+```
+
+Resume skips completed cases and retries cases that errored or failed
+evaluation.
+
 Run the local checks with:
 
 ```bash
