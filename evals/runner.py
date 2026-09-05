@@ -55,37 +55,139 @@ def load_cases(path: Path | None = None, group: str | None = None) -> list[EvalC
     return cases
 
 
-def main(agent_type: str = "graph", group: str | None = None) -> int:
+def main(
+    agent_type: str = "graph",
+    group: str | None = None,
+    resume: Path | None = None,
+) -> int:
     cases = load_cases(group=group)
 
-    agent = build_agent(build_model(), agent_type)
-    failed = 0
-    records = []
+    run_path = Path(
+        resume
+        or next_run_path(Path(__file__).resolve().parents[1] / "runs", agent_type)
+    )
+    if resume is not None:
+        loaded_run = load_run(run_path, agent_type, cases, group)
+        records_by_name = {
+            record["case"]["name"]: record for record in loaded_run["cases"]
+        }
+    else:
+        if run_path.exists():
+            raise FileExistsError(
+                f"Evaluation run already exists: {run_path}; use --resume to continue it"
+            )
+        records_by_name = {}
+
+    write_run(run_path, agent_type, group, cases, records_by_name)
+
+    pending = [
+        case
+        for case in cases
+        if case.name not in records_by_name
+        or _record_failed(records_by_name[case.name])
+    ]
+    agent = build_agent(build_model(), agent_type) if pending else None
     for case in cases:
-        record, scores, error = _run_case(case, agent)
-        records.append(record)
-        if error is not None:
-            print(f"FAIL {case.name}: {error}")
-            failed += 1
+        existing = records_by_name.get(case.name)
+        if existing is not None and not _record_failed(existing):
+            print(f"SKIP {case.name} (already complete)")
             continue
 
-        passed = all(score["score"] == 1.0 for score in scores)
-        print(f"{'PASS' if passed else 'FAIL'} {case.name}")
-        for score in scores:
-            print(f"  {score['key']}: {score['score']}")
-        if not passed:
-            print(scores)
-            failed += 1
+        record, scores, error = _run_case(case, agent)
+        records_by_name[case.name] = record
+        write_run(run_path, agent_type, group, cases, records_by_name)
+        _print_case_status(case, scores, error)
 
+    records = _ordered_records(cases, records_by_name)
+    failed = sum(_record_failed(record) for record in records)
+    print(f"Saved evaluation run to {run_path}")
+    return int(failed > 0)
+
+
+def _print_case_status(
+    case: EvalCase, scores: list[EvaluatorResult], error: Exception | None
+) -> None:
+    if error is not None:
+        print(f"FAIL {case.name}: {error}")
+        return
+
+    passed = all(score["score"] == 1.0 for score in scores)
+    print(f"{'PASS' if passed else 'FAIL'} {case.name}")
+    for score in scores:
+        print(f"  {score['key']}: {score['score']}")
+    if not passed:
+        print(scores)
+
+
+def _record_failed(record: dict) -> bool:
+    return record.get("error") is not None or not all(
+        score.get("score") == 1.0 for score in record.get("evaluations", [])
+    )
+
+
+def _ordered_records(
+    cases: list[EvalCase], records_by_name: dict[str, dict]
+) -> list[dict]:
+    return [
+        records_by_name[case.name]
+        for case in cases
+        if case.name in records_by_name
+    ]
+
+
+def write_run(
+    path: Path,
+    agent_type: str,
+    group: str | None,
+    cases: list[EvalCase],
+    records_by_name: dict[str, dict],
+) -> None:
+    """Persist the current run atomically so it is valid after every case."""
+    records = _ordered_records(cases, records_by_name)
     run = {
         "agent_type": agent_type,
+        "group": group,
         "summary": summarize(records),
         "cases": records,
     }
-    run_path = next_run_path(Path(__file__).resolve().parents[1] / "runs", agent_type)
-    run_path.write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
-    print(f"Saved evaluation run to {run_path}")
-    return int(failed > 0)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = path.with_name(f".{path.name}.tmp")
+    temporary_path.write_text(json.dumps(run, indent=2) + "\n", encoding="utf-8")
+    temporary_path.replace(path)
+
+
+def load_run(
+    path: Path, agent_type: str, cases: list[EvalCase], group: str | None
+) -> dict:
+    if not path.exists():
+        raise FileNotFoundError(f"Evaluation run does not exist: {path}")
+
+    run = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(run, dict) or not isinstance(run.get("cases"), list):
+        raise ValueError(f"Invalid evaluation run: {path}")
+    if run.get("agent_type") != agent_type:
+        raise ValueError(
+            f"Run uses agent type {run.get('agent_type')!r}, expected {agent_type!r}"
+        )
+    if "group" in run and run["group"] != group:
+        raise ValueError(f"Run uses group {run['group']!r}, expected {group!r}")
+
+    expected = {case.name: case for case in cases}
+    seen = set()
+    for record in run["cases"]:
+        if not isinstance(record, dict) or not isinstance(record.get("case"), dict):
+            raise ValueError(f"Invalid case record in evaluation run: {path}")
+        name = record["case"].get("name")
+        if name not in expected:
+            raise ValueError(f"Run contains case outside the selected suite: {name!r}")
+        if name in seen:
+            raise ValueError(f"Run contains duplicate case: {name!r}")
+        if EvalCase.model_validate(record["case"]) != expected[name]:
+            raise ValueError(
+                f"Case definition changed since the run was created: {name!r}"
+            )
+        seen.add(name)
+    return run
 
 
 def run_case(case: EvalCase, agent) -> list[EvaluatorResult]:
@@ -232,5 +334,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--agent-type", choices=("graph", "react"), default="graph")
     parser.add_argument("--group", choices=CASE_GROUPS)
+    parser.add_argument(
+        "--resume", type=Path, help="Resume an existing run at this path"
+    )
     args = parser.parse_args()
-    raise SystemExit(main(args.agent_type, args.group))
+    raise SystemExit(main(args.agent_type, args.group, resume=args.resume))

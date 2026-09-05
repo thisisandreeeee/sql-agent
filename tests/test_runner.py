@@ -1,8 +1,10 @@
+import json
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
-from evals.runner import next_run_path, persisted_result, summarize
+from evals.runner import main, next_run_path, persisted_result, summarize, write_run
 
 from evals.evaluators import (
     sql_failure_evaluator,
@@ -120,6 +122,87 @@ class SummaryTests(unittest.TestCase):
             path = next_run_path(Path(directory), "react")
 
         self.assertRegex(path.name, r"^react_\d{8}T\d{6}\.\d{6}\.json$")
+
+
+class RunnerPersistenceTests(unittest.TestCase):
+    def setUp(self):
+        self.cases = [
+            EvalCase(
+                name=name,
+                question=f"Question {name}",
+                reference_answer="Answer",
+            )
+            for name in ("case_1", "case_2", "case_3")
+        ]
+
+    @staticmethod
+    def record(case, score=1.0, error=None):
+        return {
+            "case": case.model_dump(mode="json"),
+            "result": None,
+            "evaluations": [{"key": "test", "score": score}],
+            "error": error,
+        }
+
+    def test_main_writes_after_each_case(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "run.json"
+            calls = []
+
+            def run_case(case, agent):
+                calls.append(len(json.loads(path.read_text())["cases"]))
+                return self.record(case), [{"key": "test", "score": 1.0}], None
+
+            with (
+                patch("evals.runner.load_cases", return_value=self.cases),
+                patch("evals.runner.build_model"),
+                patch("evals.runner.build_agent", return_value=object()),
+                patch("evals.runner._run_case", side_effect=run_case),
+            ):
+                with patch("evals.runner.next_run_path", return_value=path):
+                    self.assertEqual(main(), 0)
+
+            self.assertEqual(calls, [0, 1, 2])
+            self.assertEqual(len(json.loads(path.read_text())["cases"]), 3)
+
+    def test_resume_skips_successes_and_retries_failures(self):
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "run.json"
+            write_run(
+                path,
+                "graph",
+                None,
+                self.cases,
+                {
+                    "case_1": self.record(self.cases[0]),
+                    "case_2": self.record(
+                        self.cases[1],
+                        error={"type": "RuntimeError", "message": "temporary"},
+                    ),
+                    "case_3": self.record(self.cases[2], score=0.0),
+                },
+            )
+            calls = []
+
+            def run_case(case, agent):
+                calls.append(case.name)
+                return self.record(case), [{"key": "test", "score": 1.0}], None
+
+            with (
+                patch("evals.runner.load_cases", return_value=self.cases),
+                patch("evals.runner.build_model"),
+                patch("evals.runner.build_agent", return_value=object()),
+                patch("evals.runner._run_case", side_effect=run_case),
+            ):
+                self.assertEqual(main(resume=path), 0)
+
+            self.assertEqual(calls, ["case_2", "case_3"])
+            saved = json.loads(path.read_text())
+            self.assertEqual([record["case"]["name"] for record in saved["cases"]], [
+                "case_1",
+                "case_2",
+                "case_3",
+            ])
 
 
 class SqlUsageEvaluatorTests(unittest.TestCase):
